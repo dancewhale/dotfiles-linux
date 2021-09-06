@@ -1,0 +1,16 @@
+cheatpaths:
+  - name: whale
+    path: ~/Dropbox/cheatsheets
+    tags: [ personal ]
+    readonly: false
+  - name: community
+    path: /usr/share/cheat/cheatsheets/community/
+    tags: [ community ]
+    readonly: true
+
+
+formatter: terminal256
+editor: vim
+colorize: true
+style: monokai
+ 

@@ -1,0 +1,18 @@
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# mode change.
+set show-mode-in-prompt on
+
+set keymap emacs
+"\ee": vi-editing-mode
+"jk": "\eejk"
+"kj": "\eejk"
+
+set keymap vi-insert
+"\ee": emacs-editing-mode
+"jk": vi-movement-mode
+"kj": vi-movement-mode
+
+set keymap vi-command
+"\ee": emacs-editing-mode
