@@ -1,0 +1,5 @@
+* 我的doom配置文件
+** 目前包含的模块
+- rime
+- org-journal
+- zetteldeft

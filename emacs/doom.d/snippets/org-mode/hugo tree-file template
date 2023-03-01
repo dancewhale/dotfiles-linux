@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: hugo tree-file template
+# key: hugo-tree-file
+# --
+
+
+#+hugo_base_dir: ../site
+#+hugo_section: posts
+
+#+hugo_weight: auto
+#+hugo_auto_set_lastmod: t
+#+options: author:nil
+
+
+* Emacs :tag:
+All posts in here will have the category set to /emacs/.
+** TODO Writing Hugo blog in Org
+:PROPERTIES:
+:EXPORT_FILE_NAME: file-name
+:EXPORT_DATE: 2021-05-10
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER:  :author "Dancewhale"  :description "golang文档"
+:END:
+*** First heading within the post
