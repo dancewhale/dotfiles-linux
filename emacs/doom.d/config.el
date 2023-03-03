@@ -109,10 +109,6 @@
 (setq org-roam-directory roam_path)
 
 (setq org-roam-v2-ack t)
-(use-package org-roam-bibtex
-  :after org-roam
-  :config
-  (require 'org-ref))
 
 (setq  org-roam-capture-templates '(("d" "default" plain "%?"
      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
@@ -131,9 +127,7 @@
              ;; Dailies
              ("C-c n j" . org-roam-dailies-capture-today))
       :config
-      (org-roam-setup)
-      ;; If using org-roam-protocol
-      (require 'org-roam-protocol))
+      (org-roam-setup))
 ;;; fix cannot find entry with id while file exist.
 (org-id-update-id-locations (directory-files-recursively org-roam-directory ".org$\\|.org.gpg$"))
 

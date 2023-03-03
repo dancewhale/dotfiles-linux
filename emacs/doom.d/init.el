@@ -98,7 +98,6 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
        lsp
-       macos             ; MacOS-specific commands
        (magit
         +forge)            ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
@@ -113,6 +112,7 @@
 
        :os
        (tty +osc)
+       (:if IS-MAC macos)             ; MacOS-specific commands
 
        :lang
        ;;agda              ; types of types of types of types...

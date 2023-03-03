@@ -32,7 +32,6 @@
 
 (require 'cnfonts)
 (require 'ox-hugo)
-(require 'helm-easymenu)
 (cnfonts-enable)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
