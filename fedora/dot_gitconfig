@@ -3,3 +3,5 @@
 	name = dancewhale
 [core]
 	editor = vim
+[github]
+	user = dancewhale
