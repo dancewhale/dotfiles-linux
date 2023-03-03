@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: time
-# key: yt
+# key: tt
+# type: command
 # --
-预估$0m
+(insert (format-time-string "%H:%M " (current-time)))

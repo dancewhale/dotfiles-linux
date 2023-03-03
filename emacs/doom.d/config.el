@@ -16,7 +16,7 @@
 
 ;; config code
 (setq emacs_dep_path (file-truename "~/dotfiles/bin/"))
-(setq roam_path (file-truename "~/Dropbox/roam"))
+(setq roam_path (concat (file-truename "~/Dropbox/") "roam"))
 
 (when IS-MAC
   (progn
@@ -106,8 +106,6 @@
 ;;;-------------------------------------------------
 ;; roam 的配置
 ;;;-------------------------------------------------
-(setq org-roam-directory roam_path)
-
 (setq org-roam-v2-ack t)
 
 (setq  org-roam-capture-templates '(("d" "default" plain "%?"
@@ -128,8 +126,6 @@
              ("C-c n j" . org-roam-dailies-capture-today))
       :config
       (org-roam-setup))
-;;; fix cannot find entry with id while file exist.
-(org-id-update-id-locations (directory-files-recursively org-roam-directory ".org$\\|.org.gpg$"))
 
 
 ;;;-------------------------------------------------
