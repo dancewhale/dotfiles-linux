@@ -139,9 +139,14 @@
 ;;;-------------------------------------------------
 (use-package sis
   :config
+  ;; (sis-ism-lazyman-config
+  ;;  "com.apple.keylayout.US"
+  ;;  "com.sogou.inputmethod.sogou.pinyin")
   (sis-ism-lazyman-config
-   "com.apple.keylayout.US"
-   "com.sogou.inputmethod.sogou.pinyin")
+   "xkb:us::eng"
+   "libpinyin"
+   'ibus)
+
 
   ;; enable the /cursor color/ mode
   (sis-global-cursor-color-mode t)
