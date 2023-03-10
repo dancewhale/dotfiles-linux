@@ -142,10 +142,14 @@
   ;; (sis-ism-lazyman-config
   ;;  "com.apple.keylayout.US"
   ;;  "com.sogou.inputmethod.sogou.pinyin")
+  ;; (sis-ism-lazyman-config
+  ;;  "xkb:us::eng"
+  ;;  "libbopomofo"
+  ;;  'ibus)
   (sis-ism-lazyman-config
-   "xkb:us::eng"
-   "libpinyin"
-   'ibus)
+   "1"
+   "2"
+   'fcitx5)
 
 
   ;; enable the /cursor color/ mode
