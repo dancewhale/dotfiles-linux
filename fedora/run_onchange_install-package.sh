@@ -13,4 +13,7 @@ sudo yum install -y  fzf  rofi  barrier docker
 
 sudo yum install -y  gvim  emacs  net-tools
 
+# 代码相关
+sudo yum install -y nodejs golang
+
 # install vscode
