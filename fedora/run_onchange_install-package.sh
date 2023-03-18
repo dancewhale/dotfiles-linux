@@ -18,4 +18,14 @@ sudo yum install -y nodejs golang
 
 
 # install rime
-dnf install -y fcitx5-rime  fcitx5-autostart  fcitx5-chinese-addons switch-desk
+sudo dnf install -y fcitx5-rime fcitx5-table-extra fcitx5-zhuyin \
+               fcitx5-autostart  fcitx5-chinese-addons switch-desk
+
+sudo alternatives --config xinputrc
+
+
+git clone https://github.com/rime/plum.git ~/.plum
+
+pushd  ~/.plum
+
+rime_frontend=fcitx5-rime bash rime-install  iDvel/rime-ice:others/recipes/full

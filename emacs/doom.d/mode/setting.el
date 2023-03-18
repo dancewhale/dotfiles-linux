@@ -14,10 +14,22 @@
 (general-define-key
   :prefix "s-e"
   "j"   'org-starter-find-file-by-key
+  "i"   'org-roam-goto-inbox
   "d"   'notdeft
   "g"   'magit
   "s-c" 'evil-yank
   "h k" 'general-describe-keybindings)
+
+;;; 跳转roam的index文件
+(defun org-roam-goto-inbox ()
+  (interactive)
+  (evil-edit (car (org-roam-id-find "a3370c7f-db40-4461-99e8-10ad583bef61"))))
+
+;;; 设置roam相关快捷键
+( general-define-key
+  :prefix "s-e"
+  "n" 'org-narrow-to-subtree
+  "w" 'widen)
 
 (general-define-key
  :prefix "C-c"
