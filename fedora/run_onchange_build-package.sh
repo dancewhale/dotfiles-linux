@@ -10,25 +10,25 @@ sudo dnf install -y @development-tools autoconf \
   jansson jansson-devel \
   libgccjit libgccjit-devel
 
-#git clone git://git.sv.gnu.org/emacs.git  ~/emacs
-#
-#pushd ~/emacs
-#
-#./autogen.sh
-#
-#
-#
-#export CC=/usr/bin/gcc CXX=/usr/bin/gcc
-#
-#./configure \
-#    --with-native-compilation \
-#    --with-json \
-#    --with-pgtk \
-#    --with-xml2 \
-#    --with-modules \
-#    --with-mailutils
-#
-#
-#make -j5
-#
-#sudo make install
+git clone git://git.sv.gnu.org/emacs.git  ~/emacs || true
+
+pushd ~/emacs
+
+./autogen.sh
+
+
+
+export CC=/usr/bin/gcc CXX=/usr/bin/gcc
+
+./configure \
+    --with-native-compilation \
+    --with-json \
+    --with-pgtk \
+    --with-xml2 \
+    --with-modules \
+    --with-mailutils
+
+
+make -j5
+
+sudo make install

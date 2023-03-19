@@ -9,7 +9,7 @@ sudo yum install -y  ack fd-find  calibre
 
 sudo yum install -y  fzf  rofi  barrier docker
 
-sudo yum install -y  gvim  emacs  net-tools
+sudo yum install -y  vim-enhanced  net-tools
 
 # 代码相关
 sudo yum install -y nodejs golang
@@ -19,7 +19,7 @@ sudo yum install -y nodejs golang
 
 # install rime
 sudo dnf install -y fcitx5-rime fcitx5-table-extra fcitx5-zhuyin \
-               fcitx5-autostart  fcitx5-chinese-addons switch-desk
+               fcitx5-autostart  fcitx5-chinese-addons switchdesk
 
 sudo alternatives --config xinputrc
 
