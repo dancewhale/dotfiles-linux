@@ -23,7 +23,7 @@ export CC=/usr/bin/gcc CXX=/usr/bin/gcc
 ./configure \
     --with-native-compilation \
     --with-json \
-    --with-pgtk \
+#    --with-pgtk \  no wayland for clipboard share bug
     --with-xml2 \
     --with-modules \
     --with-mailutils
