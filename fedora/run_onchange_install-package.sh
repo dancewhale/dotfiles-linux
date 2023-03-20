@@ -19,8 +19,9 @@ sudo yum install -y nodejs golang
 
 # install rime
 sudo dnf install -y fcitx5-rime fcitx5-table-extra fcitx5-zhuyin \
-               switchdesk fcitx5 fcitx5-autostart fcitx5-configtool \
-	       fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-qt-module kcm-fcitx5
+                    switchdesk fcitx5 fcitx5-autostart fcitx5-configtool \
+                    fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-qt-module kcm-fcitx5 \
+                    xorg-x11-fonts-100dpi  xorg-x11-fonts-75dpi  xorg-x11-font-utils
 
 imsettings-switch fcitx5
 
@@ -33,7 +34,7 @@ QT_IM_MODULE=fcitx5
 XMODIFIERS=@im=fcitx5'| sudo tee -a /etc/environment
 
 
-git clone https://github.com/rime/plum.git ~/.plum
+git clone https://github.com/rime/plum.git ~/.plum || true
 
 pushd  ~/.plum
 
