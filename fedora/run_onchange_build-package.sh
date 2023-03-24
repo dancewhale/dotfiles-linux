@@ -1,18 +1,18 @@
 #!/bin/bash -xe
-#
-# build from source
+
+# build emacs from source
 #
 sudo dnf install -y @development-tools autoconf \
-  gtk3-devel gnutls-devel \
+  gtk3-devel gnutls-devel cmake make gcc\
   libtiff-devel giflib-devel libjpeg-devel libpng-devel libXpm-devel \
   ncurses-devel texinfo \
   libxml2-devel \
   jansson jansson-devel \
   libgccjit libgccjit-devel
 
-git clone git://git.sv.gnu.org/emacs.git  ~/emacs || true
+git clone git://git.sv.gnu.org/emacs.git  /tmp/emacs || true
 
-pushd ~/emacs
+pushd /tmp/emacs
 
 ./autogen.sh
 
@@ -32,3 +32,15 @@ export CC=/usr/bin/gcc CXX=/usr/bin/gcc
 make -j5
 
 sudo make install
+
+popd
+
+# build liberime
+#
+sudo yum install librime librime-devel
+
+git clone https://github/com/merrickluo/liberime  --depth=1 /tmp/liberime
+push /tmp/liberime
+make all
+
+sudo cp /tmp/liberime/src/*.so /usr/local/share/emacs/site-lisp/

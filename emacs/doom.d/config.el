@@ -192,3 +192,60 @@
 
 ;; 打开日志，开发者才需要
 ;; (setq lsp-bridge-enable-log t)
+
+;; chinese input  rime-liberime + ice_rime
+(use-package! liberime
+  :config
+  (setq liberime-shared-data-dir "/usr/share/rime-data/" )
+  (setq liberime-user-data-dir (file-truename "~/rime"))
+  (liberime-try-select-schema "rime_ice")
+  )
+
+(use-package! pyim
+  :init
+  (setq pyim-title "R")
+  :config
+  (global-set-key ( kbd "s-j") 'pyim-convert-string-at-point)
+  (setq pyim-dcache-auto-update nil)
+  (setq default-input-method "pyim")
+
+  (setq pyim-cloudim nil)
+
+  (setq pyim-default-scheme 'rime-quanpin)
+  (setq pyim-page-tooltip 'posframe)
+
+;; org-structure-template 和 program-mode 让 pyim 的输入法只能通过自动探针来切换中英。
+;; 要么就通过 C-\ 来开关 pyim, 探针模式在代码文件里默认只在注释项中开启中文，否则只能 s-j
+;; 强制开启中文转换。
+  (setq-default pyim-english-input-switch-functions
+                '(
+                  pyim-probe-dynamic-english
+                  ;; pyim-probe-auto-english
+                  pyim-probe-isearch-mode
+                  pyim-probe-program-mode
+                  pyim-probe-evil-normal-mode
+                  pyim-probe-org-structure-template
+                  ))
+
+  (setq-default pyim-punctunation-half-wideth-functions
+                '(pyim-probe-punctuation-line-beginning
+                  pyim-probe-punctuation-after-punctuation))
+  )
+
+;; 通过 key-chord 来绑定字符和命令
+;; 绑定 key-chord 到rime 函数
+(require 'key-chord)
+(key-chord-mode 1)
+(defun rime--enable-key-chord-fun (orig key)
+  (if (key-chord-lookup-key (vector 'key-chord key))
+      (let ((result (key-chord-input-method key)))
+        (if (eq (car result) 'key-chord)
+            result
+          (funcall orig key)))
+    (funcall orig key)))
+
+(advice-add 'pyim-input-method :around #'rime--enable-key-chord-fun)
+
+(key-chord-define-global " j" 'pyim-convert-string-at-point)
+(key-chord-define-global " k" 'pyim-convert-string-at-point)
+(key-chord-define-global "jk" 'evil-escape)

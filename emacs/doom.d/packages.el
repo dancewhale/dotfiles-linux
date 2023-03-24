@@ -43,3 +43,8 @@
 (package! yasnippet-snippets)
 
 (unpin!  bibtex-completion helm-bibtex ivy-bibtex)
+
+(unpin! (:input chinese rime childframe))
+
+
+(package! key-chord)
