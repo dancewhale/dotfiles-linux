@@ -40,7 +40,6 @@
  "d p" 'org-roam-dailies-goto-previous-note
  "d d" 'org-roam-dailies-goto-date)
 
-(global-set-key (kbd "s-j") 'sis-switch)
 
 (require 'cnfonts)
 (require 'ox-hugo)

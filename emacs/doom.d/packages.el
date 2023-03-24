@@ -3,7 +3,6 @@
 
 (package! posframe)
 
-(package! sis)
 
 (package! notdeft
   :recipe (:host github :repo "hasu/notdeft" :branch "master"))

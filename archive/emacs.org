@@ -1,0 +1,70 @@
+#+title: emacs相关配置
+
+* 系统快捷键方案
+想有一套统一的快捷键方案，结果 kde 本身就满足，目前的研究暂时没用
+#+begin_src lisp
+
+;; config.el
+
+(use-package! kbd-mode)
+
+;; packages.el
+(package! kbd-mode
+  :recipe (:host github
+           :repo "kmonad/kbd-mode"))
+
+#+end_src
+
+#+begin_src bash
+
+# build kmonad from source
+#
+sudo dnf install -y stack
+
+git clone https://github.com/kmonad/kmonad.git ~/kmonad || true
+
+pushd ~/kmonad
+
+stack haddock
+
+stack install
+
+#+end_src
+
+* 中文输入法
+** sis
+#+begin_src lisp
+;;;-------------------------------------------------
+;; sis setting in config.el
+;;;-------------------------------------------------
+(use-package sis
+  :config
+  ;; (sis-ism-lazyman-config
+  ;;  "com.apple.keylayout.US"
+  ;;  "com.sogou.inputmethod.sogou.pinyin")
+  ;; (sis-ism-lazyman-config
+  ;;  "xkb:us::eng"
+  ;;  "libbopomofo"
+  ;;  'ibus)
+  (sis-ism-lazyman-config
+   "1"
+   "2"
+   'fcitx5)
+
+
+  ;; enable the /cursor color/ mode
+  (sis-global-cursor-color-mode t)
+  ;; enable the /respect/ mode
+  (sis-global-respect-mode t)
+  ;; enable the /context/ mode for all buffers
+  (sis-global-context-mode t)
+  ;; enable the /inline english/ mode for all buffers
+  (sis-global-inline-mode t)
+)
+
+(global-set-key (kbd "s-j") 'sis-switch)
+
+;; packges.el
+(package! sis)
+
+#+end_src
