@@ -1,7 +1,7 @@
 ;;; /opt/cao-emacs/doom.d/archive/chinese.el -*- lexical-binding: t; -*-
 
 ;;---------------------------------------
-;; liberime中文输入法设置
+;; pyim  liberime中文输入法设置
 ;;---------------------------------------
 (setq rime-path (concat envpath "/libForBuild/lib"))
 (setq liberime-user-data-dir  (concat envpath "/rime/"))
@@ -31,6 +31,7 @@
 
 ;;强制转换英文为中文，与 pyim-probe-dynamic-english 配合
 (global-set-key (kbd "s-j") 'pyim-convert-string-at-point)
+
 
 
 ;;;-------------------------------------------------
