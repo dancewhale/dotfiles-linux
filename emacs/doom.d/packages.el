@@ -1,9 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; .doom.d/packages.el
 
-(package! posframe)
-
-
 (package! notdeft
   :recipe (:host github :repo "hasu/notdeft" :branch "master"))
 
@@ -42,13 +39,3 @@
 (package! yasnippet-snippets)
 
 (unpin!  bibtex-completion helm-bibtex ivy-bibtex)
-
-(unpin! (:input chinese rime childframe))
-
-
-(package! key-chord)
-
-
-(package! rime
- :recipe(:host github :repo "DogLooksGood/emacs-rime"
-         :files ("rime-predicates.el" "rime.el" "lib.c" "Makefile")))
