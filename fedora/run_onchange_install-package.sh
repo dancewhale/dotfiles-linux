@@ -21,7 +21,8 @@ sudo yum install -y nodejs golang
 sudo dnf install -y fcitx5-rime fcitx5-table-extra fcitx5-zhuyin \
                     switchdesk fcitx5 fcitx5-autostart fcitx5-configtool \
                     fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-qt-module kcm-fcitx5 \
-                    xorg-x11-fonts-100dpi  xorg-x11-fonts-75dpi  xorg-x11-font-utils
+                    xorg-x11-fonts-100dpi  xorg-x11-fonts-75dpi  xorg-x11-font-utils \
+                    librime-devel
 
 imsettings-switch fcitx5
 

@@ -28,7 +28,6 @@
 
 (package! org-sql)
 
-
 (package! org-ref)
 
 (package! cnfonts)
@@ -48,3 +47,8 @@
 
 
 (package! key-chord)
+
+
+(package! rime
+ :recipe(:host github :repo "DogLooksGood/emacs-rime"
+         :files ("rime-predicates.el" "rime.el" "lib.c" "Makefile")))

@@ -193,6 +193,10 @@
 ;; 打开日志，开发者才需要
 ;; (setq lsp-bridge-enable-log t)
 
+;; 中文输入法配置
+(setq fcitx5-rime-user-date-dir (file-truename "~/.local/share/fcitx5/rime"))
+
+
 ;; chinese input  rime-liberime + ice_rime
 (use-package! liberime
   :config
@@ -207,7 +211,7 @@
   :config
   (global-set-key ( kbd "s-j") 'pyim-convert-string-at-point)
   (setq pyim-dcache-auto-update nil)
-  (setq default-input-method "pyim")
+  ;; (setq default-input-method "pyim")
 
   (setq pyim-cloudim nil)
 
@@ -216,7 +220,7 @@
 
 ;; org-structure-template 和 program-mode 让 pyim 的输入法只能通过自动探针来切换中英。
 ;; 要么就通过 C-\ 来开关 pyim, 探针模式在代码文件里默认只在注释项中开启中文，否则只能 s-j
-;; 强制开启中文转换。
+;; ;; 强制开启中文转换。
   (setq-default pyim-english-input-switch-functions
                 '(
                   pyim-probe-dynamic-english
@@ -249,3 +253,32 @@
 (key-chord-define-global " j" 'pyim-convert-string-at-point)
 (key-chord-define-global " k" 'pyim-convert-string-at-point)
 (key-chord-define-global "jk" 'evil-escape)
+
+
+;; ----------------------------------------------------------------------------------
+;; emacs-rime 配置
+;; ----------------------------------------------------------------------------------
+(require 'rime)
+
+(setq rime-translate-keybindings
+  '("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>"
+    "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
+
+(setq rime-posframe-properties
+      (list :background-color "#333333"
+            :foreground-color "#dcdccc"
+            :internal-border-width 10))
+
+(setq default-input-method "rime"
+      rime-show-candidate 'posframe)
+
+(setq rime-user-data-dir fcitx5-rime-user-date-dir)
+
+(when IS-MAC (setq rime-librime-root
+              (file-truename "~/Dropbox/emacs/lib/librime/")))
+
+(when IS-MAC (setq rime-emacs-module-header-root
+              (file-truename "/Applications/Emacs.app/Contents/Resources/include/")))
+
+
+(advice-add 'rime-input-method :around #'rime--enable-key-chord-fun)
