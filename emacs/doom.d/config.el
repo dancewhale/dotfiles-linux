@@ -3,24 +3,11 @@
 ;; Place your private configuration here
 ;; Global Config for Mac and linux.
 ;;
-;; pre function.
-;; get os arch.
-(defun get-os-arch()
-  (let* (( cmd "printf %s \"$(uname -m)\""))
-    (setq os--arch (prog1 (shell-command-to-string cmd))))
-  (cond ((string= os--arch "x86_64") (setq os-arch "amd64"))
-        ((string= os--arch "arm64") (setq os-arch "arm64"))
-        ((string= os--arch "aarch64") (setq os-arch "arm64"))))
-
-(get-os-arch)
-
 ;; config code
-(setq emacs_dep_path (file-truename "~/dotfiles/bin/"))
 (setq roam_path (concat (file-truename "~/Dropbox/") "roam"))
 
 (when IS-MAC
   (progn
-    (setq envpath (concat emacs_dep_path "mac/" os-arch))
     (setq system_font "Kai")
     (setq org-roam-graph-viewer "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
     (message "config for darwin.")
@@ -29,7 +16,6 @@
 
 (when IS-LINUX
   (progn
-    (setq envpath (concat emacs_dep_path "linux/" os-arch))
     (setq system_font "WenQuanYi Micro Hei Mono-14")
     (setq org-roam-graph-viewer "")
     (message "config for linux.")
@@ -80,28 +66,11 @@
 (load-file (concat doom-private-dir "mode/gtd-agenda.el"))
 (load-file (concat doom-private-dir "mode/theme.el"))
 
-;; enable keyfreq
-(require 'keyfreq)
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
-
 ;; 暂时取消gpg的使用
 ;; ~/.authinfo.gpg文件使用明文
 ;; machine gitlab.kylincloud.org/api/v4 login dancewhale^forge  password  testpass
 
 (epa-file-disable)
-
-
-;;;-------------------------------------------------
-;; notdeft配置
-;;;-------------------------------------------------
-(require 'notdeft-org9)
-(setenv "XAPIAN_CJK_NGRAM" "1")
-
-(evil-set-initial-state 'notdeft-mode 'emacs)
-(setq notdeft-xapian-program (concat envpath "/notdeft-xapian"))
-(setq notdeft-allow-org-property-drawers "true")
-(setq notdeft-directories `(,roam_path))
 
 ;;;-------------------------------------------------
 ;; roam 的配置
@@ -129,12 +98,6 @@
 
 
 ;;;-------------------------------------------------
-;; org-editor启动
-;;;-------------------------------------------------
-(require 'anki-editor)
-
-
-;;;-------------------------------------------------
 ;;; org-journal的个人配置,该包主要用于工作学习日志
 ;;;-------------------------------------------------
 (require 'org-journal)
@@ -152,43 +115,3 @@
 (after! org
   (setq org-tags-column -70))
 
-
-;;;-------------------------------------------------
-;;; lsp setting
-;;;-------------------------------------------------
-(require 'lsp-bridge)
-(require 'lsp-bridge-jdtls)
-
-;; 融合 `lsp-bridge' `find-function' 以及 `dumb-jump' 的智能跳转
-(defun lsp-bridge-jump ()
-  (interactive)
-  (cond
-   ((eq major-mode 'emacs-lisp-mode)
-    (let ((symb (function-called-at-point)))
-      (when symb
-        (find-function symb))))
-   (lsp-bridge-mode
-    (lsp-bridge-find-def))
-   (t
-    (require 'dumb-jump)
-    (dumb-jump-go))))
-
-(defun lsp-bridge-jump-back ()
-  (interactive)
-  (cond
-   (lsp-bridge-mode
-    (lsp-bridge-return-from-def))
-   (t
-    (require 'dumb-jump)
-    (dumb-jump-back))))
-
-(setq lsp-bridge-default-mode-hooks
-      '(
-        python-mode-hook
-        lisp-interaction-mode-hook
-        lisp-mode-hook
-        )
-      )
-
-;; 打开日志，开发者才需要
-;; (setq lsp-bridge-enable-log t)

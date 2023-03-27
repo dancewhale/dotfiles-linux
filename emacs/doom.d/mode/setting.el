@@ -41,9 +41,6 @@
  "d d" 'org-roam-dailies-goto-date)
 
 
-(require 'cnfonts)
-(require 'ox-hugo)
-(cnfonts-enable)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  my code of chezmoi.

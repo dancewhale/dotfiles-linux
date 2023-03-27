@@ -203,4 +203,7 @@
        ;; 我自己的模块
        :chinese
        rime
+
+       :ctools
+       tools
        )
