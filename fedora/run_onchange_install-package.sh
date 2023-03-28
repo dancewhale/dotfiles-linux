@@ -34,11 +34,12 @@ GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS=@im=fcitx5'| sudo tee -a /etc/environment
 
-
+# 系统安装 rime 输入方案
 git clone https://github.com/rime/plum.git ~/.plum || true
 
 pushd  ~/.plum
 
 rime_frontend=fcitx5-rime bash rime-install  iDvel/rime-ice:others/recipes/full
 
-fcitx5-configtool
+# 安装 rime-ice 方案到本地，提供给emacs-rime
+git clone   https://github.com/iDvel/rime-ice.git  ~/.local/share/rime/ice

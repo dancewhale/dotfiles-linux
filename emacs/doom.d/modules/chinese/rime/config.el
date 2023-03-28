@@ -64,12 +64,9 @@ unwanted space when exporting org-mode to hugo markdown."
 
 (advice-add 'rime-input-method :around #'rime--enable-key-chord-fun)
 
-;;;
+;;;---------------------
 ;;; emacs-rime 中文配置
-;;;
-
-(setq fcitx5-rime-user-date-dir (file-truename "~/.local/share/fcitx5/rime"))
-
+;;;---------------------
 (use-package! rime
   :bind
   ("s-j" . #'+rime-convert-string-at-point)
@@ -89,7 +86,8 @@ unwanted space when exporting org-mode to hugo markdown."
   ;;                              (ignore-errors (rime-sync))))
   :config
   (setq default-input-method "rime"
-        rime-user-data-dir fcitx5-rime-user-date-dir
+        rime-share-data-dir (file-truename "~/.local/share/rime/ice")
+        rime-user-data-dir (file-truename "~/Dropbox/rimeSync")
         rime-show-candidate 'posframe
         rime-posframe-style 'simple
         rime-popup-style 'simple

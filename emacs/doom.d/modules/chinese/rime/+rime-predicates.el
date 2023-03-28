@@ -65,15 +65,4 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                 rime-predicate-space-after-cc-p
                 rime-predicate-after-ascii-char-p)))
 
-(add-hook! (telega-chat-mode)
-  (setq-local rime-disable-predicates
-              '(+rime-predicates-basic
-                +rime-predicate-after-special-punctuation-p
-                rime-predicate-punctuation-after-space-cc-p
-                rime-predicate-punctuation-after-ascii-p))
-  (setq-local rime-inline-predicates
-              '(rime-predicate-current-uppercase-letter-p
-                rime-predicate-space-after-cc-p
-                rime-predicate-after-ascii-char-p)))
-
 ;;; +rime-predicates.el ends here
