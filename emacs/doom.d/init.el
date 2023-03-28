@@ -214,4 +214,5 @@
        keymap
        note
        theme
+       os
        )
