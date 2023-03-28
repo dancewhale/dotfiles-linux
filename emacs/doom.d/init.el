@@ -206,4 +206,12 @@
 
        :ctools
        tools
+
+       :dancewhale
+       agenda
+       daemon
+       function
+       keymap
+       note
+       theme
        )
