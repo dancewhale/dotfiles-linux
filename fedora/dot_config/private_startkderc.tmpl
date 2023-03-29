@@ -1,0 +1,13 @@
+[General]
+{{ if eq .chezmoi.osRelease.versionID "39" -}}
+ststemdBoot=true
+{{- end }}
+{{ if eq .chezmoi.osRelease.versionID "37" -}}
+ststemdBoot=false
+{{- end }}
+
+
+{{- /*
+fedora 上的 app-vmware\x2duser@autostart.service 服务不自动启动
+systemctl --user --all status  该命令检查服务启动情况
+*/ -}}
