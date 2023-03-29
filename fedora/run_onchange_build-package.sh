@@ -35,12 +35,14 @@ sudo make install
 
 popd
 
-# build liberime
+# build librime and lua plugin
 #
-sudo yum install librime librime-devel
+sudo yum install librime librime-devel gcc-c++ boost boost-devel glog-devel gtest-devel \
+		 yaml-cpp-devel  opencc-devel marisa-devel leveldb-devel luajit luajit-devel
 
-git clone https://github/com/merrickluo/liberime  --depth=1 /tmp/liberime
-push /tmp/liberime
-make all
+git clone https://github.com/rime/librime.git -b 1.8.5  --depth=1 /tmp/librime
+push /tmp/librime
+git clone https://github.com/hchunhui/librime-lua.git  plugins/lua
+make merged-plugins
+make install
 
-sudo cp /tmp/liberime/src/*.so /usr/local/share/emacs/site-lisp/
