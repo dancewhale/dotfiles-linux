@@ -53,3 +53,26 @@
 
   )
 )
+
+
+(setq-default tab-width 2
+      indent-tabs-mode  t
+      tab-always-indent t)
+
+; Silence compiler warnings if using native compilation
+; (setq native-comp-async-report-warnings-errors nil)
+
+(setq delete-by-moving-to-trash t)
+;; Set up the visible bell
+(setq visible-bell t)
+;; Revert Dired and other buffers
+(setq global-auto-revert-non-file-buffers t)
+;; Revert buffers when the underlying file has changed
+(global-auto-revert-mode 1)
+
+;; Make sure it is all utf-8
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)

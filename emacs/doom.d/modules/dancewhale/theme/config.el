@@ -37,5 +37,39 @@
 
 ;; 使用 org-superstar package
 ;; (after! org-superstar
-;; ;;   (setq org-superstar-headline-bullets-list '( "☯" "☷" "☲" "☵")
-;; ;;         org-superstar-prettify-item-bullets t ))
+;;   (setq org-superstar-headline-bullets-list '( "☯" "☷" "☲" "☵")
+;;         org-superstar-prettify-item-bullets t ))
+
+
+;; (setq nano-font-family-monospaced "IBM Plex Mono")
+;; (setq nano-font-family-proportional "SF Pro Text")
+;;
+;; (setq nano-font-size 14)
+;; (load-theme 'nano-dark t)
+
+
+(require 'nano-layout)
+(defun nano-theme-set-spaceduck ()
+  (setq frame-background-mode 'dark)
+  (setq nano-color-foreground "#ecf0c1")
+  (setq nano-color-background "#0f111b")
+  (setq nano-color-highlight  "#1b1c36")
+  (setq nano-color-critical   "#e33400")
+  (setq nano-color-salient    "#00a4cc")
+  (setq nano-color-strong     "#e39400")
+  (setq nano-color-popout     "#f2ce00")
+  (setq nano-color-subtle     "#7a5ccc")
+  (setq nano-color-faded      "#b3a1e6"))
+(nano-theme-set-spaceduck)
+;;(require 'nano-theme-dark)
+
+(require 'nano-base-colors)
+(require 'nano-faces)
+(nano-faces)
+(require 'nano-theme)
+(nano-theme)
+(require 'nano-help)
+(require 'nano-modeline)
+(require 'nano-defaults)
+(require 'nano-colors)
+(require 'nano-writer)

@@ -205,7 +205,8 @@
        ;; pyim             ; 该输入法计划使用lisp原生输入法，但还没完工，目前使用rime。
        rime
        tools
-       agenda
+       ;; agenda
+       gtd
        daemon
        function
        keymap

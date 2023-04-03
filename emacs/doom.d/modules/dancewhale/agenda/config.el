@@ -47,10 +47,6 @@
                             "* TODO  %? ")
 
 
-(general-define-key
-  :prefix "s-e"
-  "j"   'org-starter-find-file-by-key)
-
 ;;;----------------------------------------------------------
 ;;; org-ql的过滤
 ;;;----------------------------------------------------------
@@ -102,13 +98,12 @@
            (org-agenda-error)))
      (buffer (marker-buffer hdmarker))
      (pos (marker-position hdmarker))
-     (inhibit-read-only t)
-     newhead)
+     (inhibit-read-only t))
     (org-with-remote-undo buffer
        (with-current-buffer buffer
           (widen)
           (goto-char pos)
-          (org-show-context 'agenda)
+          (org-fold-show-context 'agenda)
           (org-set-property prop val)))))
 
 (defun cao-print-major-mode()
@@ -117,9 +112,11 @@
 
 ;;; setting keyshort
 (general-define-key
-  :prefix "s-e"
-  "a a"   'cao-gtd-filter-assginee
-  "a s"   'cao-gtd-set-assginee
-  "a r"   'org-refile)
+ :prefix "s-e"
+
+ "a a"   'cao-gtd-filter-assginee
+ "a s"   'cao-gtd-set-assginee
+ "a r"   'org-refile
+ "j"   'org-starter-find-file-by-key)
 
 ;;; gtd-agenda.el
