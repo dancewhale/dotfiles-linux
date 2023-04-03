@@ -201,13 +201,10 @@
        (default +bindings )
 
        ;; 我自己的模块
-       :chinese
-       rime
-
-       :ctools
-       tools
-
        :dancewhale
+       ;; pyim             ; 该输入法计划使用lisp原生输入法，但还没完工，目前使用rime。
+       rime
+       tools
        agenda
        daemon
        function

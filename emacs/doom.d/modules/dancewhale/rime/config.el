@@ -95,7 +95,7 @@ unwanted space when exporting org-mode to hugo markdown."
         rime-inline-ascii-trigger 'shift-l)
 
   (setq rime-translate-keybindings
-        '("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>"
+        '("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>" "C-<tab>"
           "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
 
   (add-hook! (org-mode
