@@ -86,21 +86,21 @@ unwanted space when exporting org-mode to hugo markdown."
   ;;                              (ignore-errors (rime-sync))))
   :config
   (setq default-input-method "rime"
-        rime-share-data-dir (file-truename "~/.local/share/rime/ice")
-        rime-user-data-dir (file-truename "~/Dropbox/rimeSync")
-        rime-show-candidate 'posframe
-        rime-posframe-style 'simple
-        rime-popup-style 'simple
-        rime-sidewindow-style 'simple
-        rime-inline-ascii-trigger 'shift-l)
+	rime-share-data-dir (file-truename "~/.local/share/rime/ice")
+	rime-user-data-dir (file-truename "~/Dropbox/rimeSync")
+	rime-show-candidate 'posframe
+	rime-posframe-style 'simple
+	rime-popup-style 'simple
+	rime-sidewindow-style 'simple
+	rime-inline-ascii-trigger 'shift-l)
 
   (setq rime-translate-keybindings
-        '("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>" "C-<tab>"
-          "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
+	'("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>" "C-<tab>" "C-d"
+	  "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>" "C-e" "C-a"))
 
   (add-hook! (org-mode
-              markdown-mode
-              beancount-mode)
+	      markdown-mode
+	      beancount-mode)
     (activate-input-method default-input-method))
 
   (defun +rime-force-enable ()
@@ -111,11 +111,11 @@ currently in the `evil' non-editable state, then switch to
     (interactive)
     (let ((input-method "rime"))
       (unless (string= current-input-method input-method)
-        (activate-input-method input-method))
+	(activate-input-method input-method))
       (when (rime-predicate-evil-mode-p)
-        (if (= (1+ (point)) (line-end-position))
-            (evil-append 1)
-          (evil-insert 1)))
+	(if (= (1+ (point)) (line-end-position))
+	    (evil-append 1)
+	  (evil-insert 1)))
       (rime-force-enable)))
 
   (defun +rime-convert-string-at-point ()
@@ -131,18 +131,18 @@ input scheme to convert to Chinese."
                        (region-beginning) (region-end))
                     (buffer-substring-no-properties
                      (point) (max (line-beginning-position) (- (point) 80)))))
-          code
-          length)
+	  code
+	  length)
       (cond ((string-match "\\([a-z]+\\|[[:punct:]]\\)[[:blank:]]*$" string)
              (setq code (replace-regexp-in-string
-                         "^[-']" ""
-                         (match-string 0 string)))
+			 "^[-']" ""
+			 (match-string 0 string)))
              (setq length (length code))
              (setq code (replace-regexp-in-string " +" "" code))
              (if mark-active
-                 (delete-region (region-beginning) (region-end))
+		 (delete-region (region-beginning) (region-end))
                (when (> length 0)
-                 (delete-char (- 0 length))))
+		 (delete-char (- 0 length))))
              (when (> length 0)
                (setq unread-command-events
                      (append (listify-key-sequence code)

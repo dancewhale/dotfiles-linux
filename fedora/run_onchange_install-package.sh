@@ -2,7 +2,7 @@
 
 sudo yum install -y cargo gcc make
 
-which cargo && cargo install grex
+which cargo && cargo install grex tree-sitter-cli
 
 sudo yum install -y  jq tokei  bat exa zoxide ripgrep   ack  the_silver_searcher
 sudo yum install -y  ack fd-find  calibre

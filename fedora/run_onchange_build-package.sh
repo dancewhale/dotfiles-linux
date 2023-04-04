@@ -6,7 +6,7 @@ sudo dnf install -y @development-tools autoconf \
   gtk3-devel gnutls-devel cmake make gcc\
   libtiff-devel giflib-devel libjpeg-devel libpng-devel libXpm-devel \
   ncurses-devel texinfo \
-  libxml2-devel \
+  libxml2-devel librsvg2-devel \
   jansson jansson-devel \
   libgccjit libgccjit-devel
 
@@ -26,7 +26,8 @@ export CC=/usr/bin/gcc CXX=/usr/bin/gcc
     --with-json \
     --with-xml2 \
     --with-modules \
-    --with-mailutils
+    --with-mailutils \
+    --with-rsvg
 
 
 make -j5

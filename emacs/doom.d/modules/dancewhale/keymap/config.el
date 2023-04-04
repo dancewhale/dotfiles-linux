@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/mode/setting.el -*- lexical-binding: t; -*-
 
-(require 'forge)
-(add-to-list 'forge-alist '("gitlab.kylincloud.org" "gitlab.kylincloud.org/api/v4" "gitlab.kylincloud.org" forge-gitlab-repository))
+;; (require 'forge)
+;; (add-to-list 'forge-alist '("gitlab.kylincloud.org" "gitlab.kylincloud.org/api/v4" "gitlab.kylincloud.org" forge-gitlab-repository))
 
 (setq evil-normal-state-cursor '(box "light blue")
       evil-insert-state-cursor '(bar "medium sea green")
@@ -53,13 +53,13 @@
 ;;;-------------------------------------------------
 ;; forge配置快捷键
 ;;;-------------------------------------------------
-(general-define-key
-  :prefix "s-e"
-  "f t"   'forge-toggle-closed-visibility
-  "f e"   'magit-edit-thing
-  "f c"   'forge-create-issue
-  "f r"   'forge-reset-database
-  "f p"   'forge-pull)
+;; (general-define-key
+;;   :prefix "s-e"
+;;   "f t"   'forge-toggle-closed-visibility
+;;   "f e"   'magit-edit-thing
+;;   "f c"   'forge-create-issue
+;;   "f r"   'forge-reset-database
+;;   "f p"   'forge-pull)
 
 
 ;;;-------------------------------------------------

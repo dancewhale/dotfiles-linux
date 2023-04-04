@@ -42,7 +42,7 @@
   (define-key global-map "\C-t" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
 
-  (setq org-agenda-files (directory-files-recursively "~/Dropbox/org/new/" "\\.org$"))
+  (setq org-agenda-files (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$"))
 
   (setq org-agenda-skip-deadline-if-done t)
   ;; (setq org-agenda-skip-scheduled-if-done t)
@@ -54,12 +54,11 @@
   (setq org-agenda-todo-ignore-with-date 'all)
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
-  (setq org-todo-keywords '((type "TODO(t@/!)" "WIP (w@/!)" "FUP (@/!)" "GAVE(g@/!)" "|" "DONE(d@/!)" "KILL(k@/!)")))
   (setq org-log-into-drawer t)
   (setq org-log-done t)
   (setq org-log-reschedule t)
   (setq org-log-redeadline t)
-  (setq org-enable-priority-commands nil)
+  (setq org-enable-priority-commands t)
 
   (setq org-agenda-deadline-leaders '("DUE:       " "In %3d d.: " "%2d d. ago: "))
   (setq org-agenda-scheduled-leaders '("DO:        " "Sched.%2dx: "))
@@ -67,19 +66,8 @@
   ;; prevent demoting heading also shifting text inside sections
   (setq org-adapt-indentation nil)
 
-  ; ;; Org-gcal one way sync from gmail cal into emacs
-  ; (use-package org-gcal
-  ; :config
-  ; (setq org-gcal-client-id " NEED TO PUT IN YOUR OWN ID HERE "
-  ;  org-gcal-client-secret " NEED TO PUT IN YOUR OWN ID HERE "
-  ;  org-gcal-file-alist '( (" you @ home mail.com" . "~/Dropbox/org/new/logs/calme.org")
-  ; (" you at work .com " . "~/Dropbox/org/new/dailies/calwork.org")
-  ;                        )))
-  ; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-fetch) ))
-  ; (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
-
   ; Org Capture Inbox and refiling to Deft files
-  (setq org-directory (expand-file-name "~/Dropbox/org/new/"))
+  (setq org-directory (expand-file-name "~/Dropbox/roam/"))
   (setq org-default-notes-file (concat org-directory "/inbox.org"))
   (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
   (setq org-refile-use-outline-path 'file)              ; Show full paths for refiling
@@ -92,7 +80,7 @@
 
 ;; ========== Text mode config ===========
 ; wrap at 80
-(add-hook 'text-mode-hook (lambda() (turn-on-auto-fill) (set-fill-column 80)))
+;; (add-hook 'text-mode-hook (lambda() (turn-on-auto-fill) (set-fill-column 80)))
 (setq ispell-extra-args '("--lang=en_CA"))
 
 (with-eval-after-load 'org-faces
@@ -128,6 +116,7 @@
   ;; Get rid of the background on column views
   (set-face-attribute 'org-column nil :foreground nil :background "#0F111B" :inherit 'fixed-pitch)
   (set-face-attribute 'org-column-title nil :background nil)
+  (setq org-todo-keyword-faces '(("DONE" :foreground "green" weight bold) ("STRT" :foreground "pink" :weight bold)))
   )
 
 (add-hook 'org-mode-hook
@@ -140,28 +129,9 @@
 	("r" "Resonance Cal" tags "Type={.}"
 	 ((org-agenda-files
 	   (directory-files-recursively
-	    "~/Dropbox/org/new/refs/rez" "\\.org$"))
+	    "~/Dropbox/roam/refs/rez" "\\.org$"))
 	  (org-overriding-columns-format
 	   "%35Item %Type %Start %Fin %Rating")
-	  (org-agenda-cmp-user-defined
-	   (cmp-date-property-stamp "Start"))
-	  (org-agenda-sorting-strategy
-	   '(user-defined-down))
-	  (org-agenda-overriding-header "C-u r to re-run Type={.}")
-	  (org-agenda-mode-hook
-	   (lambda ()
-	     (visual-line-mode -1)
-	     (setq truncate-lines 1)
-	     (setq display-line-numbers-offset -1)
-	     (display-line-numbers-mode 1)))
-	  (org-agenda-view-columns-initially t)))
-
-	("e" "Experiments" tags "Type={.}"
-	 ((org-agenda-files
-	   (directory-files-recursively
-	    "~/Dropbox/org/new/areas/exps" "\\.org$"))
-	  (org-overriding-columns-format
-	   "%35Item %Start %Fin %Status %Outcome")
 	  (org-agenda-cmp-user-defined
 	   (cmp-date-property-stamp "Start"))
 	  (org-agenda-sorting-strategy

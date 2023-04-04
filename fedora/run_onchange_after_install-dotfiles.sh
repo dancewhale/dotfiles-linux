@@ -7,3 +7,15 @@ sudo sed -i 's#/usr/bin/vmware-user-suid-wrapper#/usr/local/bin/vmware-user-auto
                 /etc/xdg/autostart/vmware-user.desktop
 
 systemctl daemon-reload
+
+# 安装k8s 相关
+
+groups |grep docker || sudo gpasswd -a $USER docker
+
+newgrp docker
+
+sudo dnf install  -y kubernetes-client
+
+
+
+# 安装lsp 相关 golang

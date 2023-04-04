@@ -27,9 +27,9 @@
        :ui
        deft                             ; notational velocity for Emacs
        (emoji
-        +ascii
-        +github
-        +unicode)
+	+ascii
+	+github
+	+unicode)
        doom                   ; what makes DOOM look the way it does
        doom-dashboard         ; a nifty splash screen for Emacs
        doom-quit              ; DOOM quit-message prompts when you quit Emacs
@@ -54,11 +54,11 @@
 
        :editor
        (evil
-        +everywhere
-        +evil-escape
-        +yasnippet
-        +auto-yasnippet
-        +doom-snippets)                 ; come to the dark side, we have cookies
+	+everywhere
+	+evil-escape
+	+yasnippet
+	+auto-yasnippet
+	+doom-snippets)                 ; come to the dark side, we have cookies
        file-templates                   ; auto-snippets for empty files
        fold                             ; (nigh) universal code folding
        (format +onsave)                 ; automated prettiness
@@ -90,6 +90,7 @@
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
+       tree-sitter
        ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
@@ -100,10 +101,9 @@
        ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup                  ; helps you navigate your code and documentation
-        +docsets)               ; ...or in Dash docsets locally
-       lsp
-       (magit
-        +forge)                 ; a git porcelain for Emacs
+	+docsets)               ; ...or in Dash docsets locally
+       (lsp)
+       (magit)
        make                     ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements
@@ -135,8 +135,9 @@
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
-       ;;fsharp           ; ML stands for Microsoft's Language
-       go   ; the hipster dialect
+       ;;fsharp            ; ML stands for Microsoft's Language
+       (go +lsp
+	+tree-sitter)      ; the hipster dialect
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
@@ -206,11 +207,13 @@
        rime
        tools
        agenda
-       ;; gtd
+       gtd
        daemon
+       editor
        function
        keymap
        note
        theme
        os
+       lang
        )

@@ -12,12 +12,6 @@
 (package! notdeft
   :recipe (:host github :repo "hasu/notdeft" :branch "master"))
 
-
-(package! lsp-bridge
-  :recipe (:host github :repo "manateelazycat/lsp-bridge" :branch "master"
-           :files ("acm" "core" "langserver" "multiserver" "test" "*.py" "*.el")))
-
-
 (package! keyfreq)
 
 
