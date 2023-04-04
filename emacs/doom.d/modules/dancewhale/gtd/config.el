@@ -231,7 +231,7 @@
 If a is before b, return -1. If a is after b, return 1. If they
 are equal return nil."
 ;; source: https://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda/26369#26369
-(lexical-let ((prop prop))
+(let ((prop prop))
 	     #'(lambda (a b)
 		 (let* ((a-pos (get-text-property 0 'org-marker a))
 			(b-pos (get-text-property 0 'org-marker b))
