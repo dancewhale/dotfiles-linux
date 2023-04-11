@@ -43,3 +43,8 @@ rime_frontend=fcitx5-rime bash rime-install  iDvel/rime-ice:others/recipes/full
 
 # 安装 rime-ice 方案到本地，提供给emacs-rime
 git clone   https://github.com/iDvel/rime-ice.git  ~/.local/share/rime/ice
+
+
+
+# 安装seafile
+sudo dnf install -y seafile-client
