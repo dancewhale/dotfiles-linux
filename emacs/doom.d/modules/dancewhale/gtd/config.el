@@ -42,7 +42,9 @@
   (define-key global-map "\C-t" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
 
-  (setq org-agenda-files (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$"))
+  (setq dailiy-agenda-view-search-file  (format-time-string "%Y.*\\.org"))
+  (setq org-agenda-files (append (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$")
+				 (directory-files "~/Dropbox/roam/daily" "obsolute" dailiy-agenda-view-search-file)))
 
   (setq org-agenda-skip-deadline-if-done t)
   ;; (setq org-agenda-skip-scheduled-if-done t)

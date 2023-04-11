@@ -28,11 +28,7 @@
     ("resources.org"          :agenda t  :key "r" :refile (:maxlevel . 1))
     ))
 
-(setq org-agenda-files nil)
-
 (setq org-agenda-entry-text-maxlines 3)
-
-(after! org (setq org-capture-templates nil))
 
 (org-starter-def-capture "c" "Capture what you want." entry
 			 (file "inbox.org" ) "*  %? ")

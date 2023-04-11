@@ -15,44 +15,34 @@
 
 
 (setq org-roam-dailies-capture-templates
-'(("d" "default" entry
-   "* %?" :target (file+head "%<%Y-%m-%d>.org"
-			     "#+title: %<%Y-%m-%d %a>
-#+CREATED: %<%Y-%m-%d %a>
-#+MODIFIED:
-*  今日目标
-The one thing
-* 日志
-* 想法 "))))
-
+      '(("d" "default" entry "* %T %?" :target  (file+datetree "%<%Y-%m>.org" day))))
 
 
 (setq org-roam-capture-templates
       `(("d" "default" plain "%?"
-	 :target (file+head "${slug}.org"  "#+TITLE: ${title}
-#+CREATED: %u
-#+MODIFIED:
-* ${title}
-"):unnarrowed t)
+	 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"  "#+TITLE: ${title}
+#+CREATED: %u\n#+MODIFIED:\n#+FILETAGS:\n* ${title}"):unnarrowed t)
 	("r" "res" plain "%?"
-	 :target (file+head  ,(concat roam_path "/res/${slug}.org")
+	 :target (file+head  ,(concat roam_path "/res/%<%Y%m%d%H%M%S>-${slug}.org")
 			     "#+TITLE: ${title}
 #+CREATED: %u
 #+MODIFIED:
+#+FILETAGS:
 * ${title}
 :PROPERTIES:
 :Type: Res
 :Tag:
 :END:
-** Goal:  ${title}") :unnarrowed t)
+**  ") :unnarrowed t)
 	("p" "Project" plain "%?"
-	 :target (file+head  ,(concat roam_path "/project/${slug}.org")
-"#+TITLE: ${title}
+	 :target (file+head  ,(concat roam_path "/project/%<%Y%m%d%H%M%S>-${slug}.org")
+			     "#+TITLE: ${title}
 #+CREATED: %u
 #+MODIFIED:
+#+FILETAGS:
 * ${title}
 :PROPERTIES:
 :Type: Project
 :Tag:
 :END:
-** Goal: ${title}") :unnarrowed t)))
+**  ") :unnarrowed t)))

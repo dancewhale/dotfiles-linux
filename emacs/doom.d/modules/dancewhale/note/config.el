@@ -8,11 +8,6 @@
 ;;;-------------------------------------------------
 (setq org-roam-v2-ack t)
 
-(setq  org-roam-capture-templates '(("d" "default" plain "%?"
-				     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-							"#+title: ${title}\n#+filetags: ")
-				     :unnarrowed t)))
-
 
 (load! "org-roam-capture-templates.el")
 
@@ -33,7 +28,7 @@
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n c" . org-roam-capture)
 	 ;; Dailies
-	 ("C-c n j" . org-roam-dailies-capture-today))
+	 ("C-c d c" . org-roam-dailies-capture-today))
   :config
   (org-roam-db-autosync-mode)
   )
