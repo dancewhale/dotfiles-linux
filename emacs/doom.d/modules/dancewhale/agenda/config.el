@@ -31,7 +31,7 @@
 (setq org-agenda-entry-text-maxlines 3)
 
 (org-starter-def-capture "c" "Capture what you want." entry
-			 (file "inbox.org" ) "*  %? ")
+			 (file+headline "inbox.org"  "inbox") "*  %? ")
 
 
 ;;;----------------------------------------------------------
@@ -106,5 +106,16 @@
  "a r"   'org-refile
  "j"   'org-starter-find-file-by-key)
 
+
+;; Fix: org-capture-mode disable after agenda view in org-capture
+(after! org
+  (defadvice! dan/+org--restart-mode-h-careful-restart (fn &rest args)
+    :around #'+org--restart-mode-h
+    (let ((old-org-capture-current-plist (and (bound-and-true-p org-capture-mode)
+					      (bound-and-true-p org-capture-current-plist))))
+      (apply fn args)
+      (when old-org-capture-current-plist
+	(setq-local org-capture-current-plist old-org-capture-current-plist)
+	(org-capture-mode +1)))))
 
 ;;; gtd-agenda.el
