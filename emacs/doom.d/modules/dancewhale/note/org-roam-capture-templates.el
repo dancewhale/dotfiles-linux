@@ -45,4 +45,27 @@
 :Type: Project
 :Tag:
 :END:
+**  ") :unnarrowed t)
+ 	("b" "book" plain "%?"
+	 :target (file+head  ,(concat roam_path "/res/book/book-${slug}.org")
+			     "#+TITLE: ${title}
+#+CREATED: %u
+#+MODIFIED:
+* ${title}
+:PROPERTIES:
+:Tag:
+:Type: book
+:Start:
+:Fin:
+:Killed:
+:Rating:
+:Digested:
+:Creator:
+:URL:
+:END:
+** Actions
+** Key Ideas
+** Review
+** Quotes
+** Notes
 **  ") :unnarrowed t)))

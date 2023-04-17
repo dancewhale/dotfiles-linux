@@ -2,15 +2,17 @@
 
 ;; ========== Org mode ==========
 
+(setq dailiy-agenda-view-search-file  (format-time-string "%Y.*\\.org"))
+(setq org-agenda-files (append (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$")
+ 				 (directory-files "~/Dropbox/roam/daily" "obsolute" dailiy-agenda-view-search-file)))
+
 (use-package org
   :ensure org-contrib
   :defer t
   :hook
-  (org-mode . flyspell-mode)
   (before-save . zp/org-set-last-modified)
   :config
   (setq auto-save-default nil)
-  (setq variable-pitch-mode 1)
   (setq auto-fill-mode 0)
   (setq visual-line-mode 1)
   (setq
@@ -42,9 +44,6 @@
   (define-key global-map "\C-t" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
 
-  (setq dailiy-agenda-view-search-file  (format-time-string "%Y.*\\.org"))
-  (setq org-agenda-files (append (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$")
-				 (directory-files "~/Dropbox/roam/daily" "obsolute" dailiy-agenda-view-search-file)))
 
   (setq org-agenda-skip-deadline-if-done t)
   ;; (setq org-agenda-skip-scheduled-if-done t)
@@ -77,14 +76,11 @@
       '((nil :maxlevel . 3)
 	(org-agenda-files :maxlevel . 3)))
 
-) ; End of org-mode use-package block
+)
+					; End of org-mode use-package block
 
 
 ;; ========== Text mode config ===========
-; wrap at 80
-;; (add-hook 'text-mode-hook (lambda() (turn-on-auto-fill) (set-fill-column 80)))
-(setq ispell-extra-args '("--lang=en_CA"))
-
 (with-eval-after-load 'org-faces
   (require 'org-indent)
   ;; set basic title font
@@ -93,7 +89,7 @@
   (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-4 nil :height 1.0)
-  (set-face-attribute 'org-level-3 nil :height 1.0 :weight 'bold)
+  (set-face-attribute 'org-level-3 nil :height 1.0)
   (set-face-attribute 'org-level-2 nil :height 1.1)
   (set-face-attribute 'org-level-1 nil :height 1.2)
   ; (setq org-cycle-level-faces nil)
@@ -118,20 +114,19 @@
   ;; Get rid of the background on column views
   (set-face-attribute 'org-column nil :foreground nil :background "#0F111B" :inherit 'fixed-pitch)
   (set-face-attribute 'org-column-title nil :background nil)
-  (setq org-todo-keyword-faces '(("DONE" :foreground "green" weight bold) ("STRT" :foreground "pink" :weight bold)))
+  (setq org-todo-keyword-faces '(("DONE" :foreground "green") ("STRT" :foreground "pink")))
   )
 
 (add-hook 'org-mode-hook
  (lambda ()
-   (variable-pitch-mode 1)
     visual-line-mode))
 
 (setq org-agenda-custom-commands
       '(
-	("r" "Resonance Cal" tags "Type={.}"
+	("r" "Book " tags "Type={.}"
 	 ((org-agenda-files
 	   (directory-files-recursively
-	    "~/Dropbox/roam/refs/rez" "\\.org$"))
+	    "~/Dropbox/roam/res/book" "\\.org$"))
 	  (org-overriding-columns-format
 	   "%35Item %Type %Start %Fin %Rating")
 	  (org-agenda-cmp-user-defined
@@ -146,57 +141,57 @@
 	     (setq display-line-numbers-offset -1)
 	     (display-line-numbers-mode 1)))
 	  (org-agenda-view-columns-initially t)))
-
-	;; org-super-agenda super view
+	("t" "TODO view"
+	 (( todo "" ( (org-agenda-span 1)
+		     ( org-super-agenda-groups
+		       '(
+			 (:auto-group t)))))))
 	("u" "Super view"
 	 ((agenda "" ( (org-agenda-span 1)
 		       (org-super-agenda-groups
 			'(
 			  (:name "Inbox"
-			   :tag "inbox")
+			   :file-path ".*inbox.org")
+			  (:name "test"
+				 :todo "TODO")
 			  (:name "Today"
 			   :tag ("bday" "ann" "hols" "cal" "today")
 			   :time-grid t
 			   :todo ("WIP")
 			   :deadline today
 			   :scheduled today)
-			  (:name "Inbox"
-			   :tag "inbox")
 			  (:name "Overdue"
 			   :deadline past)
 			  (:name "Reschedule"
 			   :scheduled past)
 			  (:name "Perso"
 			   :tag "perso")
-			  (:name "Due Soon"
-			   :deadline future
-			   :scheduled future)
+			  (:name "Due Soon")
 			  ))))
 	  (tags (concat "w" (format-time-string "%V")) ((org-agenda-overriding-header  (concat "--\nToDos Week " (format-time-string "%V")))
-							(org-super-agenda-groups
-							 '((:discard (:deadline t))
-							   (:discard (:scheduled t))
-							   (:discard (:todo ("DONE")))
-							   (:name "Ticklers"
-							    :tag "someday")
-							   (:name "Perso"
-							    :and (:tag "perso" :not (:tag "someday")))
-							   (:name "Work"
-							    :and (:tag "work" :not (:tag "someday")))
-							   (:name "Uni"
-							    :and (:tag "uni" :not (:tag "someday")))
-							   (:name "Ping"
-							    :tag "crm")
-							   ))))
-	  ))))
+	  						(org-super-agenda-groups
+	  						 '((:discard (:deadline t))
+	  						   (:discard (:scheduled t))
+	  						   (:discard (:todo ("DONE")))
+	  						   (:name "Ticklers"
+	  						    :tag "someday")
+	  						   (:name "Perso"
+	  						    :and (:tag "perso" :not (:tag "someday")))
+	  						   (:name "Work"
+	  						    :and (:tag "work" :not (:tag "someday")))
+	  						   (:name "Uni"
+	  						    :and (:tag "uni" :not (:tag "someday")))
+	  						   ))))
+	  ))
+	))
+
+
 
 (use-package org-super-agenda
   :defer t
   :config
   (org-agenda nil "u")
   )
-
-(org-super-agenda-mode t)
 
 (defun cmp-date-property-stamp (prop)
 "Compare two `org-mode' agenda entries, `A' and `B', by some date property.
@@ -216,15 +211,11 @@ are equal return nil."
 		   ))))
 
 
-;; ============= Org pretty table ====================
-(add-hook 'org-mode-hook (lambda () (org-pretty-table-mode)))
-
-
 ;;--------------------------
 ;; Handling file properties for ‘CREATED’ & ‘LAST_MODIFIED’
 ;;--------------------------
 
-  (defun zp/org-find-time-file-property (property &optional anywhere)
+(defun zp/org-find-time-file-property (property &optional anywhere)
     "Return the position of the time file PROPERTY if it exists.
 When ANYWHERE is non-nil, search beyond the preamble."
     (save-excursion
@@ -237,7 +228,7 @@ When ANYWHERE is non-nil, search beyond the preamble."
 				 t)
 	  (point)))))
 
-  (defun zp/org-has-time-file-property-p (property &optional anywhere)
+(defun zp/org-has-time-file-property-p (property &optional anywhere)
     "Return the position of time file PROPERTY if it is defined.
 As a special case, return -1 if the time file PROPERTY exists but
 is not defined."
@@ -250,7 +241,7 @@ is not defined."
 	    pos
 	  -1))))
 
-  (defun zp/org-set-time-file-property (property &optional anywhere pos)
+(defun zp/org-set-time-file-property (property &optional anywhere pos)
     "Set the time file PROPERTY in the preamble.
 When ANYWHERE is non-nil, search beyond the preamble.
 If the position of the file PROPERTY has already been computed,
@@ -266,7 +257,7 @@ it can be passed in POS."
 	(let* ((now (format-time-string "[%Y-%m-%d %a %H:%M]")))
 	  (insert now)))))
 
-  (defun zp/org-set-last-modified ()
+(defun zp/org-set-last-modified ()
     "Update the LAST_MODIFIED file property in the preamble."
     (when (derived-mode-p 'org-mode)
       (zp/org-set-time-file-property "MODIFIED")))

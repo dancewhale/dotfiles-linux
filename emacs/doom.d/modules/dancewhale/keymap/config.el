@@ -74,3 +74,11 @@
 ;; system setting
 ;;;-------------------------------------------------
 (setq exec-path  (append (list "/opt/homebrew/bin") exec-path))
+
+
+;;;-------------------------------------------------
+;; projectile setting
+;;;-------------------------------------------------
+
+(evil-define-key 'normal  'global (kbd "SPC p j r") 'projectile-dired)
+(evil-define-key 'normal  'global (kbd "SPC o o") 'treemacs-select-window)

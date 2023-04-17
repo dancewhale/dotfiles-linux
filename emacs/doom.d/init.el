@@ -42,15 +42,15 @@
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints                    ; highlight the region an operation acts on
        (popup +defaults)          ; tame sudden yet inevitable temporary windows
-       ;;pretty-code       ; replace bits of code with pretty symbols
+       ligatures           ; replace bits of code with pretty symbols
        ;;tabs              ; an tab bar for Emacs
-       ;;treemacs          ; a project drawer, like neotree but cooler
-       ;;unicode           ; extended unicode support for various languages
+       treemacs          ; a project drawer, like neotree but cooler
+       ;;unicode           ;会引入报错，除非必须否则不引入 extended unicode support for various languages
        vc-gutter        ; vcs diff in the fringe
        vi-tilde-fringe  ; fringe tildes to mark beyond EOB
        window-select    ; visually switch windows
        workspaces       ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing
 
        :editor
        (evil
@@ -156,21 +156,21 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org          ; organize your plain life in plain text
-        +journal     ; org-journal record your life
-        +dragndrop   ; drag & drop files/images into org buffers
-        +roam2       ; roam package for note manager.
-        +hugo        ; use Emacs for hugo blogging
-        +ipython     ; ipython/jupyter support for babel
-        +pandoc      ; export-with-pandoc support
-        +pomodoro    ; be fruitful with the tomato technique
-        +present)    ; using org-mode for presentations
+	+journal     ; org-journal record your life
+	+dragndrop   ; drag & drop files/images into org buffers
+	+roam2       ; roam package for note manager.
+	+hugo        ; use Emacs for hugo blogging
+	+ipython     ; ipython/jupyter support for babel
+	+pandoc      ; export-with-pandoc support
+	+pomodoro    ; be fruitful with the tomato technique
+	+present)    ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python
-        +pyright
-        +lsp)              ; beautiful is better than ugly
+	+pyright
+	+lsp)              ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
