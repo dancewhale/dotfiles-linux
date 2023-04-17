@@ -38,11 +38,9 @@
 
 (setq lsp-bridge-default-mode-hooks
       '(
-	python-mode-hook
-	lisp-interaction-mode-hook
-	lisp-mode-hook
-	)
-      )
+        python-mode-hook
+        lisp-interaction-mode-hook
+        lisp-mode-hook))
 
 
 ;;; dap-mode

@@ -5,5 +5,3 @@
 
 (package! org-sidebar)
 
-
-;(package! doom-snippets :ignore t)

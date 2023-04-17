@@ -55,10 +55,8 @@
        :editor
        (evil
 	+everywhere
-	+evil-escape
-	+yasnippet
-	+auto-yasnippet
-	+doom-snippets)                 ; come to the dark side, we have cookies
+	+evil-escape)
+       snippets
        file-templates                   ; auto-snippets for empty files
        fold                             ; (nigh) universal code folding
        (format +onsave)                 ; automated prettiness
