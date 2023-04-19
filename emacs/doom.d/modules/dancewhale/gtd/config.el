@@ -15,28 +15,6 @@
   :defer t
   :hook
   (before-save . zp/org-set-last-modified)
-  :config
-  (setq auto-save-default nil)
-  (setq auto-fill-mode 0)
-  (setq visual-line-mode 1)
-  (setq
-      org-startup-indented t
-      org-enforce-todo-dependencies nil
-      org-pretty-entities t
-      org-use-sub-superscripts "{}"
-      org-hide-emphasis-markers t
-      org-hide-leading-stars t
-      ;; show actual italicized text instead of /italicized text/
-      ; org-odd-levels-only t
-      org-agenda-block-separator ""
-      org-fontify-whole-heading-line t
-      org-fontify-done-headline t
-      org-fontify-quote-and-verse-blocks t
-      org-startup-with-inline-images t
-      org-image-actual-width '(600)
-      org-return-follows-link t
-      org-ellipsis "  ▼"
-      )
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (add-to-list 'auto-mode-alist '("\\.org_archive$" . org-mode))
