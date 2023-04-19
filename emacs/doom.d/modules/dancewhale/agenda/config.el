@@ -31,7 +31,7 @@
 (setq org-agenda-entry-text-maxlines 3)
 
 (org-starter-def-capture "c" "Capture what you want." entry
-			 (file+headline "inbox.org"  "inbox") "*  %? ")
+			 (file+headline "inbox.org"  "inbox") "* TODO %? ")
 
 
 ;;;----------------------------------------------------------
@@ -98,13 +98,13 @@
     (print major-mode))
 
 ;;; setting keyshort
-(general-define-key
- :prefix "s-e"
+;; (general-define-key
+;;  :prefix "s-e"
 
- "a a"   'cao-gtd-filter-assginee
- "a s"   'cao-gtd-set-assginee
- "a r"   'org-refile
- "j"   'org-starter-find-file-by-key)
+;;  "a a"   'cao-gtd-filter-assginee
+;;  "a s"   'cao-gtd-set-assginee
+;;  "a r"   'org-refile
+;;  "j"   'org-starter-find-file-by-key)
 
 
 ;; Fix: org-capture-mode disable after agenda view in org-capture

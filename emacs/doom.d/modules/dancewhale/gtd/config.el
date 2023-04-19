@@ -26,11 +26,11 @@
   (define-key global-map "\C-t" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
 
-
-  (setq org-agenda-skip-deadline-if-done t)
-  ;; (setq org-agenda-skip-scheduled-if-done t)
+  (setq calendar-week-start-day 1)
   (setq org-deadline-warning-days 5)
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 0)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-scheduled-if-done t)
 
   (setq org-agenda-todo-ignore-scheduled 'all)
   (setq org-agenda-todo-ignore-deadlines 'all)
@@ -85,47 +85,66 @@
 	     (setq display-line-numbers-offset -1)
 	     (display-line-numbers-mode 1)))
 	  (org-agenda-view-columns-initially t)))
-	("t" "TODO view"
-	 (( todo "" ( (org-agenda-span 1)
-		     ( org-super-agenda-groups
+	("w" "Week log view"
+	 ((agenda "" ((org-agenda-span 1)
+		      (org-agenda-span 'week)
+		      (org-agenda-span 7)
+		      (org-agenda-start-on-weekday 1)
+		      (org-agenda-start-day "0d")
+		      (org-super-agenda-groups
 		       '(
-			 (:auto-group t)))))))
-	("u" "Super view"
-	 ((agenda "" ( (org-agenda-span 1)
-		       (org-super-agenda-groups
-			'(
-			  (:name "Inbox"
-			   :file-path ".*inbox.org")
-			  (:name "test"
-				 :todo "TODO")
-			  (:name "Today"
-			   :tag ("bday" "ann" "hols" "cal" "today")
-			   :time-grid t
-			   :todo ("WIP")
-			   :deadline today
-			   :scheduled today)
-			  (:name "Overdue"
-			   :deadline past)
-			  (:name "Reschedule"
-			   :scheduled past)
-			  (:name "Perso"
-			   :tag "perso")
-			  (:name "Due Soon")
-			  ))))
-	  (tags (concat "w" (format-time-string "%V")) ((org-agenda-overriding-header  (concat "--\nToDos Week " (format-time-string "%V")))
-	  						(org-super-agenda-groups
-	  						 '((:discard (:deadline t))
-	  						   (:discard (:scheduled t))
-	  						   (:discard (:todo ("DONE")))
-	  						   (:name "Ticklers"
-	  						    :tag "someday")
-	  						   (:name "Perso"
-	  						    :and (:tag "perso" :not (:tag "someday")))
-	  						   (:name "Work"
-	  						    :and (:tag "work" :not (:tag "someday")))
-	  						   (:name "Uni"
-	  						    :and (:tag "uni" :not (:tag "someday")))
-	  						   ))))
-	  ))
+			 (:name "Today"
+			  :deadline today  :scheduled today :time-grid t)
+			 (:discard (:anything t))
+			 ))))))
 	))
 
+
+
+
+(setq org-ql-views  '(
+		      ("Overview: Task make plan" :buffers-files org-agenda-files
+		       :title "Make plan for all task, use refile and tools."
+		       :query (and (not  (done) ) (todo))
+		       :sort (todo priority date)
+		       :super-groups
+		       ((:name "Inbox: To Refile" :file-path "inbox.org")
+			(:name "Overdue" :deadline past)
+			(:name "Today" :deadline today :scheduled today)
+			(:name "Reschedule" :scheduled past)
+			(:name "Due Soon" :deadline future :scheduled future)
+			(:name "Project" :file-path "projects.org")
+			(:name "Area" :file-path "areas.org")
+			(:name "Resource" :file-path "resources.org")))
+		      ("Overview: Task need todo." :buffers-files org-agenda-files
+		       :title "Agenda-like Task need todo task"
+		       :query (and (not (done))
+				   (todo)
+				   (not (or (path "resources.org") (path "inbox.org"))))
+		       :sort (todo priority date)
+		       :super-groups
+		       ((:name "Overdue" :deadline past)
+			(:name "Today"
+			 :and (:not (:todo "HOLD") :deadline today)
+			 :and (:not (:todo "HOLD") :scheduled today))
+			(:name "Reschedule" :scheduled past)
+			(:name "Due Soon"   :deadline future :scheduled future  :todo "HOLD")
+			(:name "Project"    :file-path "projects.org")
+			(:name "Area"       :file-path "areas.org")))
+		      ("Overview: STAR tasks" :buffers-files org-agenda-files
+		       :query (todo "STAR")
+		       :sort (date priority)
+		       :super-groups org-super-agenda-groups
+		       :title "Overview: NEXT tasks")
+		      ("Calendar: This Week" :buffers-files org-agenda-files
+		       :query (and (ts :from -7 :to today) (not (todo "TODO")))
+		       :title "Week log"
+		       :super-groups  ((:auto-ts t))
+		       :sort (date closed priority))))
+
+(general-define-key
+ :prefix "s-e"
+ "a a"   'org-ql-view
+ "a r"   'org-agenda-refile
+ "o r"   'org-starter-refile-by-key
+ "j"     'org-starter-find-file-by-key)
