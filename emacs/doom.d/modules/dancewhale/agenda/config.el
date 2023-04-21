@@ -37,6 +37,59 @@
 ;;;----------------------------------------------------------
 ;;; org-ql的过滤
 ;;;----------------------------------------------------------
+(setq org-ql-views  '(
+		      ("Overview: Task need todo." :buffers-files org-agenda-files
+		       :title "Agenda-like Task need todo task"
+		       :query (or (and (not (done))
+				       (todo "TODO" "STRT")
+				       (not (or (path "resources.org") (path "inbox.org"))))
+				  (todo "STRT"))
+		       :sort (todo priority date)
+		       :super-groups
+		       ((:name "Overdue"
+			 :and (:not (:todo "HOLD") :deadline past))
+			(:name "Running"
+			 :todo "STRT")
+			(:name "Today"
+			 :and (:not (:todo "HOLD") :deadline today)
+			 :and (:not (:todo "HOLD") :scheduled today)
+			 :todo "STRT")
+			(:name "Reschedule"
+			 :and (:not (:todo "HOLD" :tag "everyday") :scheduled past))
+			(:name "Due Soon"
+			 :and (:not (:todo "HOLD" :tag "everyday") :deadline future)
+			 :and (:not (:todo "HOLD" :tag "everyday") :scheduled future))
+			(:name "Project"    :file-path "projects.org")
+			(:name "Area"       :file-path "areas.org")))
+
+		      ("Overview: Task make plan" :buffers-files org-agenda-files
+		       :title "Make plan for all task, use refile and tools."
+		       :query (and (not  (done) ) (todo "TODO" "STRT"))
+		       :sort (todo priority date)
+		       :super-groups
+		       ((:name "Inbox: To Refile" :file-path "inbox.org")
+			(:name "Overdue" :deadline past)
+			(:name "Today" :deadline today :scheduled today :todo "STRT")
+			(:name "Reschedule" :scheduled past)
+			(:name "Due Soon" :deadline future :scheduled future)
+			(:name "Project" :file-path "projects.org")
+			(:name "Area" :file-path "areas.org")
+			(:name "Resource" :file-path "resources.org")))
+
+		      ("Overview: STAR tasks" :buffers-files org-agenda-files
+		       :title "Overview: NEXT tasks"
+		       :query (todo "STRT")
+		       :sort (date priority)
+		       :super-groups org-super-agenda-groups)
+
+		      ("Calendar: This Week" :buffers-files org-agenda-files
+		       :query (and (ts :from -7 :to today) (not (todo "TODO")))
+		       :title "Week log"
+		       :super-groups  ((:auto-ts t))
+		       :sort (date closed priority))
+		      ))
+
+
 ;;设置显示在side-window中
 (setq org-ql-view-display-buffer-action nil)
 (setq cao-gtd-assginee-list '("caoyuanzhi" "lizhun" "qinguangrui"

@@ -22,47 +22,6 @@
  '(org-journal-date-prefix "#+title: " nil nil "Customized with use-package org-journal")
  '(org-journal-dir "~/Dropbox/roam/" nil nil "Customized with use-package org-journal")
  '(org-journal-file-format "%Y-%m-%d.org" nil nil "Customized with use-package org-journal")
- '(org-ql-views
-   '(("Overview: Agenda-like Today" :buffers-files org-agenda-files :query
-      (and
-       (not
-        (done))
-       (or
-        (habit)
-        (deadline auto)
-        (scheduled :to today)
-        (ts-active :on today)))
-      :title "Agenda-like Today" :sort
-      (date priority todo)
-      :super-groups org-super-agenda-groups)
-     ("Work task: GROUPS work task." :buffers-files org-agenda-files :query
-      (and
-       (todo "NEXT" "TODO" "STARTED" "PROJ")
-       (path "work.org")
-       (not
-        (scheduled :from 3)))
-      :title "Overview: PROJECT releate group task" :sort
-      (priority date)
-      :super-groups
-      ((:auto-parent t)))
-     ("Myself task" :buffers-files org-agenda-files :query
-      (and
-       (todo "NEXT" "TODO" "STARTED" "PROJ")
-       (path "myself.org"))
-      :title "Task of myself." :sort
-      (priority date)
-      :super-groups
-      ((:auto-parent t)))
-     ("Review: Recently timestamped" . org-ql-view-recent-items)
-     ("Project: Project tasks" :buffers-files org-agenda-files :query
-      (or
-       (ancestors
-        (todo "PROJ"))
-       (todo "PROJ"))
-      :title "Assign: Project task." :sort
-      (date priority todo)
-      :super-groups
-      ((:auto-parent t)))))
  '(package-selected-packages '(sis peep-dired docker))
  '(pdf-view-midnight-colors (cons "#f8f8f2" "#282a36"))
  '(rustic-ansi-faces

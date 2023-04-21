@@ -37,6 +37,7 @@
   (setq org-agenda-todo-ignore-with-date 'all)
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
+  (setq org-agenda-show-future-repeats nil)
   (setq org-log-into-drawer t)
   (setq org-log-reschedule t)
   (setq org-log-redeadline t)
@@ -94,7 +95,7 @@
 		      (org-agenda-start-day "0d")
 		      (org-super-agenda-groups
 		       '(
-			 (:name "Time grid Log"
+			 (:name none
 			  :deadline today  :scheduled today :time-grid t)
 			 (:discard (:anything t))
 			 ))))))
@@ -105,63 +106,13 @@
 		      (org-agenda-show-log 1)
 		      (org-super-agenda-groups
 		       '(
-			 (:name "Today grid Log"
+			 (:name none
 			  :deadline today  :scheduled today :time-grid t)
 			 (:discard (:anything t))
 			 ))))))
 
 	))
 
-
-
-
-(setq org-ql-views  '(
-		      ("Overview: Task need todo." :buffers-files org-agenda-files
-		       :title "Agenda-like Task need todo task"
-		       :query (and (not (done))
-				   (todo)
-				   (not (or (path "resources.org") (path "inbox.org"))))
-		       :sort (todo priority date)
-		       :super-groups
-		       ((:name "Overdue"
-			 :and (:not (:todo "HOLD") :deadline past))
-			(:name "Today"
-			 :and (:not (:todo "HOLD") :deadline today)
-			 :and (:not (:todo "HOLD") :scheduled today))
-			(:name "Reschedule"
-			 :and (:not (:todo "HOLD" :tag "everyday") :scheduled past))
-			(:name "Due Soon"
-			 :and (:not (:todo "HOLD" :tag "everyday") :deadline future)
-			 :and (:not (:todo "HOLD" :tag "everyday") :scheduled future))
-			(:name "Project"    :file-path "projects.org")
-			(:name "Area"       :file-path "areas.org")))
-
-		      ("Overview: Task make plan" :buffers-files org-agenda-files
-		       :title "Make plan for all task, use refile and tools."
-		       :query (and (not  (done) ) (todo))
-		       :sort (todo priority date)
-		       :super-groups
-		       ((:name "Inbox: To Refile" :file-path "inbox.org")
-			(:name "Overdue" :deadline past)
-			(:name "Today" :deadline today :scheduled today)
-			(:name "Reschedule" :scheduled past)
-			(:name "Due Soon" :deadline future :scheduled future)
-			(:name "Project" :file-path "projects.org")
-			(:name "Area" :file-path "areas.org")
-			(:name "Resource" :file-path "resources.org")))
-
-		      ("Overview: STAR tasks" :buffers-files org-agenda-files
-		       :title "Overview: NEXT tasks"
-		       :query (todo "STAT")
-		       :sort (date priority)
-		       :super-groups org-super-agenda-groups)
-
-		      ("Calendar: This Week" :buffers-files org-agenda-files
-		       :query (and (ts :from -7 :to today) (not (todo "TODO")))
-		       :title "Week log"
-		       :super-groups  ((:auto-ts t))
-		       :sort (date closed priority))
-		      ))
 
 (general-define-key
  :prefix "s-e"
@@ -180,6 +131,8 @@
 (define-key org-agenda-mode-map "n" 'org-agenda-goto-date)
 (define-key org-agenda-mode-map "p" 'org-agenda-capture)
 
+;; 解决按键映射问题
+(setq org-super-agenda-header-map (make-sparse-keymap))
 
 ;; 在recent file mode 中使用Vim 按键
 (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
