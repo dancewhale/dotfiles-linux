@@ -134,3 +134,6 @@
     org-return-follows-link t
     org-ellipsis "  ▼"
     )
+
+;; DONE任务划横线
+(set-face-attribute 'org-headline-done nil :strike-through t)
