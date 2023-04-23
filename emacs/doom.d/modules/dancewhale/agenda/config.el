@@ -13,6 +13,12 @@
 				 ((agenda "" ((org-agenda-span 1))) (todo "NEXT"))))))
 
 
+(use-package org-clock-convenience
+  :ensure t
+  :bind (:map org-agenda-mode-map
+   	   ("<S-up>" . org-clock-convenience-timestamp-up)
+   	   ("<S-down>" . org-clock-convenience-timestamp-down)))
+
 (setq org-agenda-follow-indirect t)
 
 ;;;-------------------------------------------------

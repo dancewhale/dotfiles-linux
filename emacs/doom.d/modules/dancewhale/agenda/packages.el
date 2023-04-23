@@ -6,3 +6,5 @@
 (package! org-super-agenda)
 
 (package! org-sql)
+
+(package! org-clock-convenience)

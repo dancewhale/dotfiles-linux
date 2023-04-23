@@ -28,13 +28,7 @@
 
   (setq calendar-week-start-day 1)
   (setq org-deadline-warning-days 5)
-  (setq org-agenda-skip-deadline-prewarning-if-scheduled 0)
-  (setq org-agenda-skip-deadline-if-done t)
-  (setq org-agenda-skip-scheduled-if-done t)
 
-  (setq org-agenda-todo-ignore-scheduled 'all)
-  (setq org-agenda-todo-ignore-deadlines 'all)
-  (setq org-agenda-todo-ignore-with-date 'all)
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
   (setq org-agenda-show-future-repeats nil)
@@ -96,7 +90,7 @@
 		      (org-super-agenda-groups
 		       '(
 			 (:name none
-			  :deadline today  :scheduled today :time-grid t)
+			  :time-grid t :log closed :log clock)
 			 (:discard (:anything t))
 			 ))))))
 	("d" "Daily log view"
@@ -107,7 +101,7 @@
 		      (org-super-agenda-groups
 		       '(
 			 (:name none
-			  :deadline today  :scheduled today :time-grid t)
+			  :time-grid t :log closed :log clock)
 			 (:discard (:anything t))
 			 ))))))
 
