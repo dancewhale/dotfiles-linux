@@ -1,10 +1,18 @@
 #!/bin/bash
 
-pushd ~
-sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
-popd
+ARCH=$(uname -m)
 
-sudo grep "fuse" /etc/fstab || echo ".host:/  /mnt/  fuse.vmhgfs-fuse  defaults,allow_other  0  0" | sudo tee -a /etc/fstab
+if [ $ARCH = "aarch64" ]; then
+	export ARCH=arm64
+elif [ $ARCH = "x86_64" ]; then
+	export ARCH=amd64
+fi
+
+sudo wget http://67.230.186.218/chezmoi_2.33.3_linux_${ARCH}/chezmoi -P /usr/local/bin/
+
+sudo wget http://67.230.186.218/clash-linux-${ARCH}-2023.04.16 -O /usr/local/bin/clash
+
+sudo chmod +x /usr/local/bin/*
 
 pushd ~/.local/share/chezmoi && git submodule update --init
 

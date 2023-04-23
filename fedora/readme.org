@@ -8,6 +8,7 @@
 
 * fedora 安装seafile
 seaf-cli init -d ~/.config
+seaf-cli start
 seaf-cli download -l "3440279a-fd36-4e94-bc0e-d3da402a1e58"  -s "http://file.主域名:2080" -d ~/  -u "我的邮箱"
 
 seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58"  -s "http://file.主域名:2080" -d ~/Dropbox  -u "我的邮箱"
