@@ -6,7 +6,7 @@ sudo cp ~/.config/clash/clash.service /usr/lib/systemd/system/
 
 # 首先初始化clash
 sudo cp -r ~/.config/clash/* /etc/clash
-chown -R clash:clash /etc/clash
+sudo chown -R clash:clash /etc/clash
 
 sudo systemctl daemon-reload
 
