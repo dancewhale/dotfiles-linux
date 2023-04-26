@@ -10,4 +10,4 @@ bw --help || sudo npm install --unsafe-perm -g @bitwarden/cli
 
 sudo chmod +x /usr/local/bin/bw
 
-bw login
+bw login || true
