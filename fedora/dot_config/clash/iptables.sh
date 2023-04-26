@@ -30,7 +30,10 @@ iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 666
 
 # 转发所有 DNS 查询到 1053 端口
 # 此操作会导致所有 DNS 请求全部返回虚假 IP(fake ip 198.18.0.1/16)
+# 外部53流量
 iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053
+# 本机53流量
+iptables -t nat -I OUTPUT -p udp --dport 53 -j REDIRECT --to 1053
 
 # 如果想要 dig 等命令可用, 可以只处理 DNS SERVER 设置为当前内网的 DNS 请求
 #iptables -t nat -I PREROUTING -p udp --dport 53 -d 192.168.0.0/16 -j REDIRECT --to 1053
