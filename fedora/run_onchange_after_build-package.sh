@@ -41,4 +41,4 @@ git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime
 pushd /tmp/librime
 git clone https://github.com/hchunhui/librime-lua.git --depth 1 plugins/lua
 make merged-plugins
-make install
+sudo make install
