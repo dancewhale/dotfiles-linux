@@ -3,7 +3,7 @@
 
 (package! rime
  :recipe(:host github :repo "DogLooksGood/emacs-rime"
-         :files ("rime-predicates.el" "rime.el" "lib.c" "Makefile")))
+         :files ("librime-emacs.so" "rime-predicates.el" "rime.el" "lib.c" "Makefile")))
 
 (package! key-chord)
 

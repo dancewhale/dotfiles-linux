@@ -9,7 +9,7 @@ sudo dnf install -y @development-tools autoconf \
   jansson jansson-devel \
   libgccjit libgccjit-devel
 
-git clone git://git.sv.gnu.org/emacs.git /tmp/emacs || true
+git clone git://git.sv.gnu.org/emacs.git /tmp/emacs -b emacs-28.2 --depth 1 || true
 
 pushd /tmp/emacs
 
@@ -39,6 +39,6 @@ sudo yum install librime librime-devel gcc-c++ boost boost-devel glog-devel gtes
 
 git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime
 pushd /tmp/librime
-git clone https://github.com/hchunhui/librime-lua.git plugins/lua
+git clone https://github.com/hchunhui/librime-lua.git --depth 1 plugins/lua
 make merged-plugins
 make install
