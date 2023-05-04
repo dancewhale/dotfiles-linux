@@ -14,8 +14,8 @@ sudo wget http://67.230.186.218/clash-linux-${ARCH}-2023.04.16 -O /usr/local/bin
 
 sudo chmod +x /usr/local/bin/*
 
-pushd ~/.local/share/chezmoi && git submodule update --init
-
 chezmoi init
 
 chezmoi apply
+
+pushd ~/.local/share/chezmoi && git submodule update --init
