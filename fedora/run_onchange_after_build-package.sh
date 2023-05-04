@@ -37,8 +37,10 @@ popd
 sudo yum install librime librime-devel gcc-c++ boost boost-devel glog-devel gtest-devel \
   yaml-cpp-devel opencc-devel marisa-devel leveldb-devel luajit luajit-devel
 
-git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime
+git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime  || true
 pushd /tmp/librime
-git clone https://github.com/hchunhui/librime-lua.git --depth 1 plugins/lua
-make merged-plugins
+git clone https://github.com/hchunhui/librime-lua.git --depth 1 plugins/lua  || true
+make clean
+make -j4
+make -j4 merged-plugins
 sudo make install

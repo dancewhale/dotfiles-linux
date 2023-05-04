@@ -15,7 +15,25 @@ sudo yum install -y fzf rofi barrier docker
 sudo yum install -y vim-enhanced net-tools
 
 # 代码相关
+# shell
+sudo yum install -y shfmt shellcheck
+# lisp
+sudo yum install -y sbcl
+# golang
 sudo yum install -y golang
+
+go install github.com/acroca/go-symbols@latest
+go install github.com/cweill/gotests/gotests@latest
+go install github.com/fatih/gomodifytags@main
+go install github.com/josharian/impl@latest
+go install github.com/ramya-rao-a/go-outline@latest
+go install github.com/rogpeppe/godef@latest
+go install github.com/sqs/goreturns@latest
+go install github.com/x-motemen/gore/cmd/gore@latest
+go install golang.org/x/lint/golint@latest
+go install golang.org/x/tools/cmd/gorename@latest
+go install golang.org/x/tools/cmd/guru@latest
+go install golang.org/x/tools/gopls@latest
 
 # install rime
 sudo dnf install -y fcitx5-rime fcitx5-table-extra fcitx5-zhuyin \
@@ -50,7 +68,3 @@ sudo dnf install -y seafile-client
 systemctl --user daemon-reload
 systemctl --user enable seafile
 systemctl --user start seafile
-
-# 安装网络
-sudo dnf install clash
-systemctl enable clash@service
