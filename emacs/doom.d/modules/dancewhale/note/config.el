@@ -8,6 +8,7 @@
 ;;;-------------------------------------------------
 (setq org-roam-v2-ack t)
 
+(setq org-roam-db-location (file-truename "~/Dropbox/roam/.org-roam.db"))
 
 (load! "org-roam-capture-templates.el")
 
