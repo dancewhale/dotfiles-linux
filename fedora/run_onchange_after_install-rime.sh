@@ -9,6 +9,7 @@ git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime ||
 
 pushd /tmp/librime
 
+make clean
 git clone https://github.com/hchunhui/librime-lua.git --depth 1 plugins/lua || true
 make -j4
 make -j4 merged-plugins
@@ -39,4 +40,4 @@ pushd ~/.plum
 rime_frontend=fcitx5-rime bash rime-install iDvel/rime-ice:others/recipes/full
 
 # 安装 rime-ice 方案到本地，提供给emacs-rime
-git clone https://github.com/iDvel/rime-ice.git ~/.local/share/rime/ice
+git clone https://github.com/iDvel/rime-ice.git ~/.local/share/rime/ice || true
