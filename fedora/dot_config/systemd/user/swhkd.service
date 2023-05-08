@@ -1,0 +1,15 @@
+[Unit]
+Description=swhks client daemon.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=pkexec /usr/bin/swhkd -c %h/.config/swhkd/swhkdrc
+WorkingDirectory=%h/.config/swhkd
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
