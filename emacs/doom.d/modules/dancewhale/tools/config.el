@@ -6,8 +6,8 @@
   (let* (( cmd "printf %s \"$(uname -m)\""))
     (setq os--arch (prog1 (shell-command-to-string cmd))))
   (cond ((string= os--arch "x86_64") (setq os-arch "amd64"))
-        ((string= os--arch "arm64") (setq os-arch "arm64"))
-        ((string= os--arch "aarch64") (setq os-arch "arm64"))))
+	((string= os--arch "arm64") (setq os-arch "arm64"))
+	((string= os--arch "aarch64") (setq os-arch "arm64"))))
 
 (get-os-arch)
 

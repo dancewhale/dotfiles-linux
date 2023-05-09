@@ -7,10 +7,13 @@
 
 (when IS-MAC
   (progn  (setq rime-librime-root
-                (file-truename "~/Dropbox/emacs/lib/librime/"))
-          (setq rime-emacs-module-header-root
-                (file-truename "/Applications/Emacs.app/Contents/Resources/include/"))
-          ))
+		(file-truename "~/Dropbox/emacs/lib/librime/"))
+	  (setq rime-emacs-module-header-root
+		(file-truename "/Applications/Emacs.app/Contents/Resources/include/"))
+	  ))
+
+
+(load! "+rime-predicates")
 
 ;;
 ;;; Hack
@@ -28,20 +31,20 @@ unwanted space when exporting org-mode to hugo markdown."
 (defun ++chinese--org-paragraph (args)
   (cl-destructuring-bind (paragraph content info) args
     (let* ((origin-contents
-            (replace-regexp-in-string
-             "<[Bb][Rr][[:blank:]]*/>"
-             ""
-             content))
-           (origin-contents
-            (replace-regexp-in-string
-             "\\([[:multibyte:]]\\)[[:blank:]]*\n[[:blank:]]*\\([[:multibyte:]]\\)"
-             "\\1\\2"
-             origin-contents))
-           (fixed-contents
-            (replace-regexp-in-string
-             "\\([^[:blank:]]\\)[[:blank:]]*\n[[:blank:]]*\\([^[:blank:]]\\)"
-             "\\1 \\2"
-             origin-contents)))
+	    (replace-regexp-in-string
+	     "<[Bb][Rr][[:blank:]]*/>"
+	     ""
+	     content))
+	   (origin-contents
+	    (replace-regexp-in-string
+	     "\\([[:multibyte:]]\\)[[:blank:]]*\n[[:blank:]]*\\([[:multibyte:]]\\)"
+	     "\\1\\2"
+	     origin-contents))
+	   (fixed-contents
+	    (replace-regexp-in-string
+	     "\\([^[:blank:]]\\)[[:blank:]]*\n[[:blank:]]*\\([^[:blank:]]\\)"
+	     "\\1 \\2"
+	     origin-contents)))
       (list paragraph fixed-contents info))))
 
 
@@ -55,9 +58,9 @@ unwanted space when exporting org-mode to hugo markdown."
 (defun rime--enable-key-chord-fun (orig key)
   (if (key-chord-lookup-key (vector 'key-chord key))
       (let ((result (key-chord-input-method key)))
-        (if (eq (car result) 'key-chord)
-            result
-          (funcall orig key)))
+	(if (eq (car result) 'key-chord)
+	    result
+	  (funcall orig key)))
     (funcall orig key)))
 
 (key-chord-define-global "jk" 'evil-escape)
@@ -71,16 +74,16 @@ unwanted space when exporting org-mode to hugo markdown."
   :bind
   ("s-j" . #'+rime-convert-string-at-point)
   (:map rime-active-mode-map
-   ("C-s-S-j" . #'rime-inline-ascii)
-   ("C-M-S-s-j" . #'rime-inline-ascii))
+	("C-s-S-j" . #'rime-inline-ascii)
+	("C-M-S-s-j" . #'rime-inline-ascii))
   (:map rime-mode-map
-   ("C-M-S-s-j" . #'rime-force-enable)
-   ("C-." . #'rime-send-keybinding)
-   ("S-SPC" . #'rime-send-keybinding)
-   ("S-<delete>" . #'rime-send-keybinding)
-   ("C-`" . #'rime-send-keybinding)
-   ("C-~" . #'rime-send-keybinding)
-   ("C-S-`" . #'rime-send-keybinding))
+	("C-M-S-s-j" . #'rime-force-enable)
+	("C-." . #'rime-send-keybinding)
+	("S-SPC" . #'rime-send-keybinding)
+	("S-<delete>" . #'rime-send-keybinding)
+	("C-`" . #'rime-send-keybinding)
+	("C-~" . #'rime-send-keybinding)
+	("C-S-`" . #'rime-send-keybinding))
   ;; :hook
   ;; ((after-init kill-emacs) . (lambda ()
   ;;                              (ignore-errors (rime-sync))))
@@ -127,27 +130,27 @@ input scheme to convert to Chinese."
     (interactive)
     (+rime-force-enable)
     (let ((string (if mark-active
-                      (buffer-substring-no-properties
-                       (region-beginning) (region-end))
-                    (buffer-substring-no-properties
-                     (point) (max (line-beginning-position) (- (point) 80)))))
+		      (buffer-substring-no-properties
+		       (region-beginning) (region-end))
+		    (buffer-substring-no-properties
+		     (point) (max (line-beginning-position) (- (point) 80)))))
 	  code
 	  length)
       (cond ((string-match "\\([a-z]+\\|[[:punct:]]\\)[[:blank:]]*$" string)
-             (setq code (replace-regexp-in-string
+	     (setq code (replace-regexp-in-string
 			 "^[-']" ""
 			 (match-string 0 string)))
-             (setq length (length code))
-             (setq code (replace-regexp-in-string " +" "" code))
-             (if mark-active
+	     (setq length (length code))
+	     (setq code (replace-regexp-in-string " +" "" code))
+	     (if mark-active
 		 (delete-region (region-beginning) (region-end))
-               (when (> length 0)
+	       (when (> length 0)
 		 (delete-char (- 0 length))))
-             (when (> length 0)
-               (setq unread-command-events
-                     (append (listify-key-sequence code)
-                             unread-command-events))))
-            (t (message "`+rime-convert-string-at-point' did nothing.")))))
+	     (when (> length 0)
+	       (setq unread-command-events
+		     (append (listify-key-sequence code)
+			     unread-command-events))))
+	    (t (message "`+rime-convert-string-at-point' did nothing.")))))
 
   (unless (fboundp 'rime--posframe-display-content)
     (error "Function `rime--posframe-display-content' is not available."))
@@ -156,11 +159,9 @@ input scheme to convert to Chinese."
 格，以解决 `posframe' 偶尔吃字的问题。"
     (cl-destructuring-bind (content) args
       (let ((newresult (if (string-blank-p content)
-                           content
-                         (concat content "　"))))
-        (list newresult))))
-
-  (load! "+rime-predicates"))
+			   content
+			 (concat content "　"))))
+	(list newresult)))))
 
 
 ;; Support pinyin in Ivy
@@ -175,41 +176,41 @@ input scheme to convert to Chinese."
     (defun ivy--regex-pinyin (str)
       "The regex builder wrapper to support pinyin."
       (or (pinyin-to-utf8 str)
-          (and (fboundp '+ivy-prescient-non-fuzzy)
-               (+ivy-prescient-non-fuzzy str))
-          (ivy--regex-plus str)))
+	  (and (fboundp '+ivy-prescient-non-fuzzy)
+	       (+ivy-prescient-non-fuzzy str))
+	  (ivy--regex-plus str)))
 
     (defun my-pinyinlib-build-regexp-string (str)
       "Build a pinyin regexp sequence from STR."
       (cond ((equal str ".*") ".*")
-            (t (pinyinlib-build-regexp-string str t))))
+	    (t (pinyinlib-build-regexp-string str t))))
 
     (defun my-pinyin-regexp-helper (str)
       "Construct pinyin regexp for STR."
       (cond ((equal str " ") ".*")
-            ((equal str "") nil)
-            (t str)))
+	    ((equal str "") nil)
+	    (t str)))
 
     (defun pinyin-to-utf8 (str)
       "Convert STR to UTF-8."
       (cond ((equal 0 (length str)) nil)
-            ((equal (substring str 0 1) ";")
-             (mapconcat
-              #'my-pinyinlib-build-regexp-string
-              (remove nil (mapcar
-                           #'my-pinyin-regexp-helper
-                           (split-string
-                            (replace-regexp-in-string ";" "" str)
-                            "")))
-              ""))
-            (t nil)))
+	    ((equal (substring str 0 1) ";")
+	     (mapconcat
+	      #'my-pinyinlib-build-regexp-string
+	      (remove nil (mapcar
+			   #'my-pinyin-regexp-helper
+			   (split-string
+			    (replace-regexp-in-string ";" "" str)
+			    "")))
+	      ""))
+	    (t nil)))
 
     (mapcar
      (lambda (item)
        (let ((key (car item))
-             (value (cdr item)))
-         (when (member value '(+ivy-prescient-non-fuzzy
-                               ivy--regex-plus))
-           (setf (alist-get key ivy-re-builders-alist)
-                 #'ivy--regex-pinyin))))
+	     (value (cdr item)))
+	 (when (member value '(+ivy-prescient-non-fuzzy
+			       ivy--regex-plus))
+	   (setf (alist-get key ivy-re-builders-alist)
+		 #'ivy--regex-pinyin))))
      ivy-re-builders-alist)))

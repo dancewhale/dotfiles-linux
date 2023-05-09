@@ -34,7 +34,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
 Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   (and (> (point) (save-excursion (back-to-indentation) (point)))
        (let ((string (buffer-substring (point) (max (line-beginning-position) (- (point) 80)))))
-         (string-match-p "[@:][a-zA-Z0-9-_]*$" string))))
+	 (string-match-p "[@:][a-zA-Z0-9-_]*$" string))))
 
 (defun +rime-predicate-beancount-p ()
   "Predicate input state in `beancount-mode'.
@@ -43,26 +43,26 @@ and the cursor is in the comments or strings.
 Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   (and (derived-mode-p 'beancount-mode)
        (not (or (nth 3 (syntax-ppss))
-                (nth 4 (syntax-ppss))))))
+		(nth 4 (syntax-ppss))))))
 
 (setq-default rime-disable-predicates
-              '(+rime-predicates-basic
-                rime-predicate-after-alphabet-char-p
-                rime-predicate-prog-in-code-p
-                +rime-predicate-beancount-p))
+	      '(+rime-predicates-basic
+		rime-predicate-after-alphabet-char-p
+		rime-predicate-prog-in-code-p
+		+rime-predicate-beancount-p))
 (setq-default rime-inline-predicates
-              '(rime-predicate-current-uppercase-letter-p))
+	      '(rime-predicate-current-uppercase-letter-p))
 
 (add-hook! (text-mode)
   (setq-local rime-disable-predicates
-              '(+rime-predicates-basic
-                rime-predicate-org-in-src-block-p
-                rime-predicate-org-latex-mode-p
-                rime-predicate-punctuation-after-space-cc-p
-                rime-predicate-punctuation-after-ascii-p))
+	      '(+rime-predicates-basic
+		rime-predicate-org-in-src-block-p
+		rime-predicate-org-latex-mode-p
+		rime-predicate-punctuation-after-space-cc-p
+		rime-predicate-punctuation-after-ascii-p))
   (setq-local rime-inline-predicates
-              '(rime-predicate-current-uppercase-letter-p
-                rime-predicate-space-after-cc-p
-                rime-predicate-after-ascii-char-p)))
+	      '(rime-predicate-current-uppercase-letter-p
+		rime-predicate-space-after-cc-p
+		rime-predicate-after-ascii-char-p)))
 
 ;;; +rime-predicates.el ends here
