@@ -8,6 +8,14 @@
 (setq org-agenda-files (append (directory-files "~/Dropbox/roam/gtd" "obsolute" "\\.org$\\|\\.org_archive$")
  				 (directory-files "~/Dropbox/roam/daily" "obsolute" dailiy-agenda-view-search-file)))
 
+(setq org-refile-files (append (directory-files "~/Dropbox/roam/gtd"
+						"obsolute" "\\.org$")))
+
+(setq org-refile-targets
+ '((nil :maxlevel . 3)
+   (org-refile-files :maxlevel . 2))
+ )
+
 (load! "org-function.el")
 
 (use-package org
