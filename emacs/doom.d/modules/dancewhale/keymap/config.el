@@ -13,7 +13,6 @@
 ;;;跳转gtd文件
 (general-define-key
   :prefix "s-e"
-  "i"   'org-roam-goto-inbox
   "d"   'notdeft
   "g"   'magit
   "s-c" 'evil-yank

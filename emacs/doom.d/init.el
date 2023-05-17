@@ -80,7 +80,7 @@
        ;;eshell            ; a consistent, cross-platform shell (WIP)
        shell                    ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
-       ;;vterm             ; another terminals in Emacs
+       vterm             ; another terminals in Emacs
 
        :checkers
        syntax        ; tasing you for every semicolon you forget
@@ -101,7 +101,8 @@
        (lookup                  ; helps you navigate your code and documentation
 	+docsets)               ; ...or in Dash docsets locally
        (lsp)
-       (magit)
+       (magit
+	+forge)
        make                     ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements
@@ -214,4 +215,5 @@
        theme
        os
        lang
+       term
        )

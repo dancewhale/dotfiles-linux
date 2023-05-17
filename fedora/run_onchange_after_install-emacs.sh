@@ -9,6 +9,8 @@ sudo dnf install -y @development-tools autoconf \
   jansson jansson-devel \
   libgccjit libgccjit-devel
 
+sudo dnf install -y libtool
+
 git clone git://git.sv.gnu.org/emacs.git /tmp/emacs -b emacs-28.2 --depth 1 || true
 
 pushd /tmp/emacs
