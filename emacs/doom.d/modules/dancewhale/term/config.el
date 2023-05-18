@@ -6,3 +6,5 @@
   "i"   'vterm-toggle)
 
 (setq vterm-toggle-hide-method 'reset-window-configration)
+
+(setq vterm-toggle-fullscreen-p 't)
