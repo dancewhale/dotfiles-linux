@@ -9,6 +9,8 @@ fi
 PATH="$HOME/go/bin/:$HOME/.cargo/bin/:$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH
 
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 

@@ -2,7 +2,7 @@
 
 # build librime and lua plugin
 #
-sudo yum install librime librime-devel gcc-c++ boost boost-devel glog-devel gtest-devel \
+sudo yum install -y librime librime-devel gcc-c++ boost boost-devel glog-devel gtest-devel \
 	yaml-cpp-devel opencc-devel marisa-devel leveldb-devel luajit luajit-devel
 
 git clone https://github.com/rime/librime.git -b 1.8.5 --depth=1 /tmp/librime || true

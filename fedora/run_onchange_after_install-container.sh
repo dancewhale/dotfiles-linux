@@ -2,7 +2,7 @@
 
 # 安装k8s 相关
 
-newgrp docker
+sudo dnf install -y docker || newgrp docker
 
 sudo systemctl enable docker
 
