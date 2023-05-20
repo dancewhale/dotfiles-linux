@@ -13,7 +13,11 @@
 ;;;-------------------------------------------------
 ;; 修改默认doom的theme
 ;;;-------------------------------------------------
-(setq doom-theme 'doom-nord-aurora)
+(when (display-graphic-p)
+  (setq doom-theme 'doom-nord-aurora))
+
+(unless (display-graphic-p)
+  (setq doom-theme 'doom-dracula))
 
 ;; DONE任务划横线
 (set-face-attribute 'org-headline-done nil :strike-through t)

@@ -11,6 +11,8 @@ export PATH
 
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
+export TERM=xterm-24bit
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
