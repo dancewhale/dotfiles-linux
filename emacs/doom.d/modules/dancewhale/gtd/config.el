@@ -138,3 +138,15 @@
 
 ;; 在recent file mode 中使用Vim 按键
 (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
+
+
+;; 在agenda 中支持直接跳转链接
+(defun cao/agenda-switch-to ()
+  (interactive)
+  (let ((el (org-element-context)))
+    (if (eq (org-element-type el) 'link)
+	(org-open-at-point)
+      (org-agenda-switch-to))))
+
+
+(define-key org-agenda-mode-map (kbd "<return>") 'cao/agenda-switch-to)

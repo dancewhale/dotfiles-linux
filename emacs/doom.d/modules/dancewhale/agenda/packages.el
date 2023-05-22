@@ -5,6 +5,7 @@
 
 (package! org-super-agenda)
 
-(package! org-sql)
+(package! org-ql
+ :recipe(:host github :repo "dancewhale/org-ql"))
 
 (package! org-clock-convenience)
