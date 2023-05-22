@@ -149,4 +149,9 @@
       (org-agenda-switch-to))))
 
 
-(define-key org-agenda-mode-map (kbd "<return>") 'cao/agenda-switch-to)
+(define-key org-agenda-keymap (kbd "<return>") 'cao/agenda-switch-to)
+
+(general-define-key
+ :keymaps 'evil-org-agenda-mode-map
+ :states  'motion
+ "<return>" 'cao/agenda-switch-to)
