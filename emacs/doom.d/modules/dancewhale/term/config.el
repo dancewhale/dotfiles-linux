@@ -8,3 +8,5 @@
 (setq vterm-toggle-hide-method 'reset-window-configration)
 
 (setq vterm-toggle-fullscreen-p 't)
+
+(define-key vterm-mode-map (kbd "C-/") 'vterm-undo)
