@@ -14,7 +14,7 @@
 ;; 修改默认doom的theme
 ;;;-------------------------------------------------
 (when (display-graphic-p)
-  (setq doom-theme 'doom-nord-aurora))
+  (setq doom-theme 'doom-dracula))
 
 (unless (display-graphic-p)
   (setq doom-theme 'doom-dracula))

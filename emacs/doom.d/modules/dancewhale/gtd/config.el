@@ -149,9 +149,16 @@
       (org-agenda-switch-to))))
 
 
-(define-key org-agenda-keymap (kbd "<return>") 'cao/agenda-switch-to)
+;; TODO: 问题，该配置总是不生效
+(after! org-agenda
+  (define-key org-agenda-keymap (kbd "<return>") 'cao/agenda-switch-to)
+  ;; (general-unbind 'normal evil-org-agenda-mode-map
+  ;;   :with 'ignore
+  ;;   [remap agenda-switch-to])
 
-(general-define-key
- :keymaps 'evil-org-agenda-mode-map
- :states  'motion
- "<return>" 'cao/agenda-switch-to)
+
+  ;; (general-define-key
+  ;;  :keymaps 'evil-org-agenda-mode-map
+  ;;  :states  'motion
+  ;;  "<return>" 'cao/agenda-switch-to)
+  )
