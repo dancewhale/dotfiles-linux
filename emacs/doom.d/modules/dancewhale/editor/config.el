@@ -13,3 +13,6 @@
 	  (lambda ()
 	    (if (string-equal major-mode "org-mode")
 		(call-interactively #'save-buffer))))
+
+;; 开启helm-complete
+(define-key evil-insert-state-map (kbd "C-n") #'helm-lisp-completion-at-point)
