@@ -1,0 +1,22 @@
+# my personal bash setting.
+
+export PATH=$PATH:~/.local/bin
+export PLASMA_USE_QT_SCALING=1
+
+export TERM=xterm-24bit
+# fzf configure.
+source /usr/local/opt/fzf/shell/completion.bash 
+source /usr/local/opt/fzf/shell/key-bindings.bash
+
+# complete configure for cheat.
+export CHEAT_USE_FZF=true
+
+# setting navi
+eval "$(navi widget bash)"
+export NAVI_PATH="/Users/$(whoami)/.cheats"
+export NAVI_CONFIG="/Users/$(whoami)/.config/navi/config.yaml"
+
+# setting bash 
+export HISTSIZE=100000
+export HISEFILESIZE=100000
+

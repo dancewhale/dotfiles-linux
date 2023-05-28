@@ -7,6 +7,12 @@ sourceDir = '~/.local/share/chezmoi/manjaro'
 {{ end }}
 {{ end }}
 
+{{ if eq .chezmoi.os "darwin" }}
+sourceDir = '~/.local/share/chezmoi/macos'
+{{ end }}
+
+
+
 [diff]
     exclude = ["scripts"]
 

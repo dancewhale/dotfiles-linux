@@ -1,0 +1,2442 @@
+{
+    "Profiles": [
+        {
+        "Name": "xterm-keymap-profile",
+        "Guid": "35E25353-C3DB-4DB0-A660-3D8BDF629AA3",
+        "Dynamic Profile Parent Name": "Default",
+        "Keyboard Map" : {
+
+                "0x27-0x40000" : {
+                    "Comment" : "C-'",
+                    "Text" : "\\e[27;5;39~",
+                    "Action" : 12
+                }, 
+                "0x22-0x60000" : {
+                    "Comment" : "C-\"",
+                    "Text" : "\\e[27;6;34~",
+                    "Action" : 12
+                }, 
+                "0x27-0x80000" : {
+                    "Comment" : "M-'",
+                    "Text" : "\\e[27;3;39~",
+                    "Action" : 12
+                }, 
+                "0x22-0xa0000" : {
+                    "Comment" : "M-\"",
+                    "Text" : "\\e[27;4;34~",
+                    "Action" : 12
+                }, 
+                "0x27-0x100000" : {
+                    "Comment" : "s-'",
+                    "Text" : "\\e[27;9;39~",
+                    "Action" : 12
+                }, 
+                "0x22-0x120000" : {
+                    "Comment" : "s-\"",
+                    "Text" : "\\e[27;10;34~",
+                    "Action" : 12
+                }, 
+                "0x27-0xc0000" : {
+                    "Comment" : "C-M-'",
+                    "Text" : "\\e[27;7;39~",
+                    "Action" : 12
+                }, 
+                "0x22-0xe0000" : {
+                    "Comment" : "C-M-\"",
+                    "Text" : "\\e[27;8;34~",
+                    "Action" : 12
+                }, 
+                "0x2d-0x40000" : {
+                    "Comment" : "C--",
+                    "Text" : "\\e[27;5;45~",
+                    "Action" : 12
+                }, 
+                "0x5f-0x60000" : {
+                    "Comment" : "C-_",
+                    "Text" : "\\e[27;6;95~",
+                    "Action" : 12
+                }, 
+                "0x2d-0x80000" : {
+                    "Comment" : "M--",
+                    "Text" : "\\e[27;3;45~",
+                    "Action" : 12
+                }, 
+                "0x5f-0xa0000" : {
+                    "Comment" : "M-_",
+                    "Text" : "\\e[27;4;95~",
+                    "Action" : 12
+                }, 
+                "0x2d-0x100000" : {
+                    "Comment" : "s--",
+                    "Text" : "\\e[27;9;45~",
+                    "Action" : 12
+                }, 
+                "0x5f-0x120000" : {
+                    "Comment" : "s-_",
+                    "Text" : "\\e[27;10;95~",
+                    "Action" : 12
+                }, 
+                "0x2d-0xc0000" : {
+                    "Comment" : "C-M--",
+                    "Text" : "\\e[27;7;45~",
+                    "Action" : 12
+                }, 
+                "0x5f-0xe0000" : {
+                    "Comment" : "C-M-_",
+                    "Text" : "\\e[27;8;95~",
+                    "Action" : 12
+                }, 
+                "0x2c-0x40000" : {
+                    "Comment" : "C-,",
+                    "Text" : "\\e[27;5;44~",
+                    "Action" : 12
+                }, 
+                "0x3c-0x60000" : {
+                    "Comment" : "C-<",
+                    "Text" : "\\e[27;6;60~",
+                    "Action" : 12
+                }, 
+                "0x2c-0x80000" : {
+                    "Comment" : "M-,",
+                    "Text" : "\\e[27;3;44~",
+                    "Action" : 12
+                }, 
+                "0x3c-0xa0000" : {
+                    "Comment" : "M-<",
+                    "Text" : "\\e[27;4;60~",
+                    "Action" : 12
+                }, 
+                "0x2c-0x100000" : {
+                    "Comment" : "s-,",
+                    "Text" : "\\e[27;9;44~",
+                    "Action" : 12
+                }, 
+                "0x3c-0x120000" : {
+                    "Comment" : "s-<",
+                    "Text" : "\\e[27;10;60~",
+                    "Action" : 12
+                }, 
+                "0x2c-0xc0000" : {
+                    "Comment" : "C-M-,",
+                    "Text" : "\\e[27;7;44~",
+                    "Action" : 12
+                }, 
+                "0x3c-0xe0000" : {
+                    "Comment" : "C-M-<",
+                    "Text" : "\\e[27;8;60~",
+                    "Action" : 12
+                }, 
+                "0x2f-0x40000" : {
+                    "Comment" : "C-/",
+                    "Text" : "\\e[27;5;47~",
+                    "Action" : 12
+                }, 
+                "0x3f-0x60000" : {
+                    "Comment" : "C-?",
+                    "Text" : "\\e[27;6;63~",
+                    "Action" : 12
+                }, 
+                "0x2f-0x80000" : {
+                    "Comment" : "M-/",
+                    "Text" : "\\e[27;3;47~",
+                    "Action" : 12
+                }, 
+                "0x3f-0xa0000" : {
+                    "Comment" : "M-?",
+                    "Text" : "\\e[27;4;63~",
+                    "Action" : 12
+                }, 
+                "0x2f-0x100000" : {
+                    "Comment" : "s-/",
+                    "Text" : "\\e[27;9;47~",
+                    "Action" : 12
+                }, 
+                "0x3f-0x120000" : {
+                    "Comment" : "s-?",
+                    "Text" : "\\e[27;10;63~",
+                    "Action" : 12
+                }, 
+                "0x2f-0xc0000" : {
+                    "Comment" : "C-M-/",
+                    "Text" : "\\e[27;7;47~",
+                    "Action" : 12
+                }, 
+                "0x3f-0xe0000" : {
+                    "Comment" : "C-M-?",
+                    "Text" : "\\e[27;8;63~",
+                    "Action" : 12
+                }, 
+                "0x2e-0x40000" : {
+                    "Comment" : "C-.",
+                    "Text" : "\\e[27;5;46~",
+                    "Action" : 12
+                }, 
+                "0x3e-0x60000" : {
+                    "Comment" : "C->",
+                    "Text" : "\\e[27;6;62~",
+                    "Action" : 12
+                }, 
+                "0x2e-0x80000" : {
+                    "Comment" : "M-.",
+                    "Text" : "\\e[27;3;46~",
+                    "Action" : 12
+                }, 
+                "0x3e-0xa0000" : {
+                    "Comment" : "M->",
+                    "Text" : "\\e[27;4;62~",
+                    "Action" : 12
+                }, 
+                "0x2e-0x100000" : {
+                    "Comment" : "s-.",
+                    "Text" : "\\e[27;9;46~",
+                    "Action" : 12
+                }, 
+                "0x3e-0x120000" : {
+                    "Comment" : "s->",
+                    "Text" : "\\e[27;10;62~",
+                    "Action" : 12
+                }, 
+                "0x2e-0xc0000" : {
+                    "Comment" : "C-M-.",
+                    "Text" : "\\e[27;7;46~",
+                    "Action" : 12
+                }, 
+                "0x3e-0xe0000" : {
+                    "Comment" : "C-M->",
+                    "Text" : "\\e[27;8;62~",
+                    "Action" : 12
+                }, 
+                "0x31-0x40000" : {
+                    "Comment" : "C-1",
+                    "Text" : "\\e[27;5;49~",
+                    "Action" : 12
+                }, 
+                "0x21-0x60000" : {
+                    "Comment" : "C-!",
+                    "Text" : "\\e[27;6;33~",
+                    "Action" : 12
+                }, 
+                "0x31-0x80000" : {
+                    "Comment" : "M-1",
+                    "Text" : "\\e[27;3;49~",
+                    "Action" : 12
+                }, 
+                "0x21-0xa0000" : {
+                    "Comment" : "M-!",
+                    "Text" : "\\e[27;4;33~",
+                    "Action" : 12
+                }, 
+                "0x31-0x100000" : {
+                    "Comment" : "s-1",
+                    "Text" : "\\e[27;9;49~",
+                    "Action" : 12
+                }, 
+                "0x21-0x120000" : {
+                    "Comment" : "s-!",
+                    "Text" : "\\e[27;10;33~",
+                    "Action" : 12
+                }, 
+                "0x31-0xc0000" : {
+                    "Comment" : "C-M-1",
+                    "Text" : "\\e[27;7;49~",
+                    "Action" : 12
+                }, 
+                "0x21-0xe0000" : {
+                    "Comment" : "C-M-!",
+                    "Text" : "\\e[27;8;33~",
+                    "Action" : 12
+                }, 
+                "0x30-0x40000" : {
+                    "Comment" : "C-0",
+                    "Text" : "\\e[27;5;48~",
+                    "Action" : 12
+                }, 
+                "0x29-0x60000" : {
+                    "Comment" : "C-)",
+                    "Text" : "\\e[27;6;41~",
+                    "Action" : 12
+                }, 
+                "0x30-0x80000" : {
+                    "Comment" : "M-0",
+                    "Text" : "\\e[27;3;48~",
+                    "Action" : 12
+                }, 
+                "0x29-0xa0000" : {
+                    "Comment" : "M-)",
+                    "Text" : "\\e[27;4;41~",
+                    "Action" : 12
+                }, 
+                "0x30-0x100000" : {
+                    "Comment" : "s-0",
+                    "Text" : "\\e[27;9;48~",
+                    "Action" : 12
+                }, 
+                "0x29-0x120000" : {
+                    "Comment" : "s-)",
+                    "Text" : "\\e[27;10;41~",
+                    "Action" : 12
+                }, 
+                "0x30-0xc0000" : {
+                    "Comment" : "C-M-0",
+                    "Text" : "\\e[27;7;48~",
+                    "Action" : 12
+                }, 
+                "0x29-0xe0000" : {
+                    "Comment" : "C-M-)",
+                    "Text" : "\\e[27;8;41~",
+                    "Action" : 12
+                }, 
+                "0x33-0x40000" : {
+                    "Comment" : "C-3",
+                    "Text" : "\\e[27;5;51~",
+                    "Action" : 12
+                }, 
+                "0x23-0x60000" : {
+                    "Comment" : "C-#",
+                    "Text" : "\\e[27;6;35~",
+                    "Action" : 12
+                }, 
+                "0x33-0x80000" : {
+                    "Comment" : "M-3",
+                    "Text" : "\\e[27;3;51~",
+                    "Action" : 12
+                }, 
+                "0x23-0xa0000" : {
+                    "Comment" : "M-#",
+                    "Text" : "\\e[27;4;35~",
+                    "Action" : 12
+                }, 
+                "0x33-0x100000" : {
+                    "Comment" : "s-3",
+                    "Text" : "\\e[27;9;51~",
+                    "Action" : 12
+                }, 
+                "0x23-0x120000" : {
+                    "Comment" : "s-#",
+                    "Text" : "\\e[27;10;35~",
+                    "Action" : 12
+                }, 
+                "0x33-0xc0000" : {
+                    "Comment" : "C-M-3",
+                    "Text" : "\\e[27;7;51~",
+                    "Action" : 12
+                }, 
+                "0x23-0xe0000" : {
+                    "Comment" : "C-M-#",
+                    "Text" : "\\e[27;8;35~",
+                    "Action" : 12
+                }, 
+                "0x32-0x40000" : {
+                    "Comment" : "C-2",
+                    "Text" : "\\e[27;5;50~",
+                    "Action" : 12
+                }, 
+                "0x32-0x80000" : {
+                    "Comment" : "M-2",
+                    "Text" : "\\e[27;3;50~",
+                    "Action" : 12
+                }, 
+                "0x40-0xa0000" : {
+                    "Comment" : "M-@",
+                    "Text" : "\\e[27;4;64~",
+                    "Action" : 12
+                }, 
+                "0x32-0x100000" : {
+                    "Comment" : "s-2",
+                    "Text" : "\\e[27;9;50~",
+                    "Action" : 12
+                }, 
+                "0x40-0x120000" : {
+                    "Comment" : "s-@",
+                    "Text" : "\\e[27;10;64~",
+                    "Action" : 12
+                }, 
+                "0x32-0xc0000" : {
+                    "Comment" : "C-M-2",
+                    "Text" : "\\e[27;7;50~",
+                    "Action" : 12
+                }, 
+                "0x40-0xe0000" : {
+                    "Comment" : "C-M-@",
+                    "Text" : "\\e[27;8;64~",
+                    "Action" : 12
+                }, 
+                "0x35-0x40000" : {
+                    "Comment" : "C-5",
+                    "Text" : "\\e[27;5;53~",
+                    "Action" : 12
+                }, 
+                "0x25-0x60000" : {
+                    "Comment" : "C-%",
+                    "Text" : "\\e[27;6;37~",
+                    "Action" : 12
+                }, 
+                "0x35-0x80000" : {
+                    "Comment" : "M-5",
+                    "Text" : "\\e[27;3;53~",
+                    "Action" : 12
+                }, 
+                "0x25-0xa0000" : {
+                    "Comment" : "M-%",
+                    "Text" : "\\e[27;4;37~",
+                    "Action" : 12
+                }, 
+                "0x35-0x100000" : {
+                    "Comment" : "s-5",
+                    "Text" : "\\e[27;9;53~",
+                    "Action" : 12
+                }, 
+                "0x25-0x120000" : {
+                    "Comment" : "s-%",
+                    "Text" : "\\e[27;10;37~",
+                    "Action" : 12
+                }, 
+                "0x35-0xc0000" : {
+                    "Comment" : "C-M-5",
+                    "Text" : "\\e[27;7;53~",
+                    "Action" : 12
+                }, 
+                "0x25-0xe0000" : {
+                    "Comment" : "C-M-%",
+                    "Text" : "\\e[27;8;37~",
+                    "Action" : 12
+                }, 
+                "0x34-0x40000" : {
+                    "Comment" : "C-4",
+                    "Text" : "\\e[27;5;52~",
+                    "Action" : 12
+                }, 
+                "0x24-0x60000" : {
+                    "Comment" : "C-$",
+                    "Text" : "\\e[27;6;36~",
+                    "Action" : 12
+                }, 
+                "0x34-0x80000" : {
+                    "Comment" : "M-4",
+                    "Text" : "\\e[27;3;52~",
+                    "Action" : 12
+                }, 
+                "0x24-0xa0000" : {
+                    "Comment" : "M-$",
+                    "Text" : "\\e[27;4;36~",
+                    "Action" : 12
+                }, 
+                "0x34-0x100000" : {
+                    "Comment" : "s-4",
+                    "Text" : "\\e[27;9;52~",
+                    "Action" : 12
+                }, 
+                "0x24-0x120000" : {
+                    "Comment" : "s-$",
+                    "Text" : "\\e[27;10;36~",
+                    "Action" : 12
+                }, 
+                "0x34-0xc0000" : {
+                    "Comment" : "C-M-4",
+                    "Text" : "\\e[27;7;52~",
+                    "Action" : 12
+                }, 
+                "0x24-0xe0000" : {
+                    "Comment" : "C-M-$",
+                    "Text" : "\\e[27;8;36~",
+                    "Action" : 12
+                }, 
+                "0x37-0x40000" : {
+                    "Comment" : "C-7",
+                    "Text" : "\\e[27;5;55~",
+                    "Action" : 12
+                }, 
+                "0x26-0x60000" : {
+                    "Comment" : "C-&",
+                    "Text" : "\\e[27;6;38~",
+                    "Action" : 12
+                }, 
+                "0x37-0x80000" : {
+                    "Comment" : "M-7",
+                    "Text" : "\\e[27;3;55~",
+                    "Action" : 12
+                }, 
+                "0x26-0xa0000" : {
+                    "Comment" : "M-&",
+                    "Text" : "\\e[27;4;38~",
+                    "Action" : 12
+                }, 
+                "0x37-0x100000" : {
+                    "Comment" : "s-7",
+                    "Text" : "\\e[27;9;55~",
+                    "Action" : 12
+                }, 
+                "0x26-0x120000" : {
+                    "Comment" : "s-&",
+                    "Text" : "\\e[27;10;38~",
+                    "Action" : 12
+                }, 
+                "0x37-0xc0000" : {
+                    "Comment" : "C-M-7",
+                    "Text" : "\\e[27;7;55~",
+                    "Action" : 12
+                }, 
+                "0x26-0xe0000" : {
+                    "Comment" : "C-M-&",
+                    "Text" : "\\e[27;8;38~",
+                    "Action" : 12
+                }, 
+                "0x36-0x40000" : {
+                    "Comment" : "C-6",
+                    "Text" : "\\e[27;5;54~",
+                    "Action" : 12
+                }, 
+                "0x5e-0x60000" : {
+                    "Comment" : "C-^",
+                    "Text" : "\\e[27;6;94~",
+                    "Action" : 12
+                }, 
+                "0x36-0x80000" : {
+                    "Comment" : "M-6",
+                    "Text" : "\\e[27;3;54~",
+                    "Action" : 12
+                }, 
+                "0x5e-0xa0000" : {
+                    "Comment" : "M-^",
+                    "Text" : "\\e[27;4;94~",
+                    "Action" : 12
+                }, 
+                "0x36-0x100000" : {
+                    "Comment" : "s-6",
+                    "Text" : "\\e[27;9;54~",
+                    "Action" : 12
+                }, 
+                "0x5e-0x120000" : {
+                    "Comment" : "s-^",
+                    "Text" : "\\e[27;10;94~",
+                    "Action" : 12
+                }, 
+                "0x36-0xc0000" : {
+                    "Comment" : "C-M-6",
+                    "Text" : "\\e[27;7;54~",
+                    "Action" : 12
+                }, 
+                "0x5e-0xe0000" : {
+                    "Comment" : "C-M-^",
+                    "Text" : "\\e[27;8;94~",
+                    "Action" : 12
+                }, 
+                "0x39-0x40000" : {
+                    "Comment" : "C-9",
+                    "Text" : "\\e[27;5;57~",
+                    "Action" : 12
+                }, 
+                "0x28-0x60000" : {
+                    "Comment" : "C-(",
+                    "Text" : "\\e[27;6;40~",
+                    "Action" : 12
+                }, 
+                "0x39-0x80000" : {
+                    "Comment" : "M-9",
+                    "Text" : "\\e[27;3;57~",
+                    "Action" : 12
+                }, 
+                "0x28-0xa0000" : {
+                    "Comment" : "M-(",
+                    "Text" : "\\e[27;4;40~",
+                    "Action" : 12
+                }, 
+                "0x39-0x100000" : {
+                    "Comment" : "s-9",
+                    "Text" : "\\e[27;9;57~",
+                    "Action" : 12
+                }, 
+                "0x28-0x120000" : {
+                    "Comment" : "s-(",
+                    "Text" : "\\e[27;10;40~",
+                    "Action" : 12
+                }, 
+                "0x39-0xc0000" : {
+                    "Comment" : "C-M-9",
+                    "Text" : "\\e[27;7;57~",
+                    "Action" : 12
+                }, 
+                "0x28-0xe0000" : {
+                    "Comment" : "C-M-(",
+                    "Text" : "\\e[27;8;40~",
+                    "Action" : 12
+                }, 
+                "0x38-0x40000" : {
+                    "Comment" : "C-8",
+                    "Text" : "\\e[27;5;56~",
+                    "Action" : 12
+                }, 
+                "0x2a-0x60000" : {
+                    "Comment" : "C-*",
+                    "Text" : "\\e[27;6;42~",
+                    "Action" : 12
+                }, 
+                "0x38-0x80000" : {
+                    "Comment" : "M-8",
+                    "Text" : "\\e[27;3;56~",
+                    "Action" : 12
+                }, 
+                "0x2a-0xa0000" : {
+                    "Comment" : "M-*",
+                    "Text" : "\\e[27;4;42~",
+                    "Action" : 12
+                }, 
+                "0x38-0x100000" : {
+                    "Comment" : "s-8",
+                    "Text" : "\\e[27;9;56~",
+                    "Action" : 12
+                }, 
+                "0x2a-0x120000" : {
+                    "Comment" : "s-*",
+                    "Text" : "\\e[27;10;42~",
+                    "Action" : 12
+                }, 
+                "0x38-0xc0000" : {
+                    "Comment" : "C-M-8",
+                    "Text" : "\\e[27;7;56~",
+                    "Action" : 12
+                }, 
+                "0x2a-0xe0000" : {
+                    "Comment" : "C-M-*",
+                    "Text" : "\\e[27;8;42~",
+                    "Action" : 12
+                }, 
+                "0x3b-0x40000" : {
+                    "Comment" : "C-;",
+                    "Text" : "\\e[27;5;59~",
+                    "Action" : 12
+                }, 
+                "0x3a-0x60000" : {
+                    "Comment" : "C-:",
+                    "Text" : "\\e[27;6;58~",
+                    "Action" : 12
+                }, 
+                "0x3b-0x80000" : {
+                    "Comment" : "M-;",
+                    "Text" : "\\e[27;3;59~",
+                    "Action" : 12
+                }, 
+                "0x3a-0xa0000" : {
+                    "Comment" : "M-:",
+                    "Text" : "\\e[27;4;58~",
+                    "Action" : 12
+                }, 
+                "0x3b-0x100000" : {
+                    "Comment" : "s-;",
+                    "Text" : "\\e[27;9;59~",
+                    "Action" : 12
+                }, 
+                "0x3a-0x120000" : {
+                    "Comment" : "s-:",
+                    "Text" : "\\e[27;10;58~",
+                    "Action" : 12
+                }, 
+                "0x3b-0xc0000" : {
+                    "Comment" : "C-M-;",
+                    "Text" : "\\e[27;7;59~",
+                    "Action" : 12
+                }, 
+                "0x3a-0xe0000" : {
+                    "Comment" : "C-M-:",
+                    "Text" : "\\e[27;8;58~",
+                    "Action" : 12
+                }, 
+                "0x3d-0x40000" : {
+                    "Comment" : "C-=",
+                    "Text" : "\\e[27;5;61~",
+                    "Action" : 12
+                }, 
+                "0x2b-0x60000" : {
+                    "Comment" : "C-+",
+                    "Text" : "\\e[27;6;43~",
+                    "Action" : 12
+                }, 
+                "0x3d-0x80000" : {
+                    "Comment" : "M-=",
+                    "Text" : "\\e[27;3;61~",
+                    "Action" : 12
+                }, 
+                "0x2b-0xa0000" : {
+                    "Comment" : "M-+",
+                    "Text" : "\\e[27;4;43~",
+                    "Action" : 12
+                }, 
+                "0x3d-0x100000" : {
+                    "Comment" : "s-=",
+                    "Text" : "\\e[27;9;61~",
+                    "Action" : 12
+                }, 
+                "0x2b-0x120000" : {
+                    "Comment" : "s-+",
+                    "Text" : "\\e[27;10;43~",
+                    "Action" : 12
+                }, 
+                "0x3d-0xc0000" : {
+                    "Comment" : "C-M-=",
+                    "Text" : "\\e[27;7;61~",
+                    "Action" : 12
+                }, 
+                "0x2b-0xe0000" : {
+                    "Comment" : "C-M-+",
+                    "Text" : "\\e[27;8;43~",
+                    "Action" : 12
+                }, 
+                "0x7b-0x60000" : {
+                    "Comment" : "C-{",
+                    "Text" : "\\e[27;6;123~",
+                    "Action" : 12
+                }, 
+                "0x5b-0x80000" : {
+                    "Comment" : "M-[",
+                    "Text" : "\\e[27;3;91~",
+                    "Action" : 12
+                }, 
+                "0x7b-0xa0000" : {
+                    "Comment" : "M-{",
+                    "Text" : "\\e[27;4;123~",
+                    "Action" : 12
+                }, 
+                "0x5b-0x100000" : {
+                    "Comment" : "s-[",
+                    "Text" : "\\e[27;9;91~",
+                    "Action" : 12
+                }, 
+                "0x7b-0x120000" : {
+                    "Comment" : "s-{",
+                    "Text" : "\\e[27;10;123~",
+                    "Action" : 12
+                }, 
+                "0x5b-0xc0000" : {
+                    "Comment" : "C-M-[",
+                    "Text" : "\\e[27;7;91~",
+                    "Action" : 12
+                }, 
+                "0x7b-0xe0000" : {
+                    "Comment" : "C-M-{",
+                    "Text" : "\\e[27;8;123~",
+                    "Action" : 12
+                }, 
+                "0x7d-0x60000" : {
+                    "Comment" : "C-}",
+                    "Text" : "\\e[27;6;125~",
+                    "Action" : 12
+                }, 
+                "0x5d-0x80000" : {
+                    "Comment" : "M-]",
+                    "Text" : "\\e[27;3;93~",
+                    "Action" : 12
+                }, 
+                "0x7d-0xa0000" : {
+                    "Comment" : "M-}",
+                    "Text" : "\\e[27;4;125~",
+                    "Action" : 12
+                }, 
+                "0x5d-0x100000" : {
+                    "Comment" : "s-]",
+                    "Text" : "\\e[27;9;93~",
+                    "Action" : 12
+                }, 
+                "0x7d-0x120000" : {
+                    "Comment" : "s-}",
+                    "Text" : "\\e[27;10;125~",
+                    "Action" : 12
+                }, 
+                "0x5d-0xc0000" : {
+                    "Comment" : "C-M-]",
+                    "Text" : "\\e[27;7;93~",
+                    "Action" : 12
+                }, 
+                "0x7d-0xe0000" : {
+                    "Comment" : "C-M-}",
+                    "Text" : "\\e[27;8;125~",
+                    "Action" : 12
+                }, 
+                "0x7c-0x60000" : {
+                    "Comment" : "C-|",
+                    "Text" : "\\e[27;6;124~",
+                    "Action" : 12
+                }, 
+                "0x5c-0x80000" : {
+                    "Comment" : "M-\\",
+                    "Text" : "\\e[27;3;92~",
+                    "Action" : 12
+                }, 
+                "0x7c-0xa0000" : {
+                    "Comment" : "M-|",
+                    "Text" : "\\e[27;4;124~",
+                    "Action" : 12
+                }, 
+                "0x5c-0x100000" : {
+                    "Comment" : "s-\\",
+                    "Text" : "\\e[27;9;92~",
+                    "Action" : 12
+                }, 
+                "0x7c-0x120000" : {
+                    "Comment" : "s-|",
+                    "Text" : "\\e[27;10;124~",
+                    "Action" : 12
+                }, 
+                "0x5c-0xc0000" : {
+                    "Comment" : "C-M-\\",
+                    "Text" : "\\e[27;7;92~",
+                    "Action" : 12
+                }, 
+                "0x7c-0xe0000" : {
+                    "Comment" : "C-M-|",
+                    "Text" : "\\e[27;8;124~",
+                    "Action" : 12
+                }, 
+                "0x41-0x60000" : {
+                    "Comment" : "C-S-A",
+                    "Text" : "\\e[27;6;65~",
+                    "Action" : 12
+                }, 
+                "0x61-0x100000" : {
+                    "Comment" : "s-a",
+                    "Text" : "\\e[27;9;97~",
+                    "Action" : 12
+                }, 
+                "0x41-0x120000" : {
+                    "Comment" : "s-S-A",
+                    "Text" : "\\e[27;10;65~",
+                    "Action" : 12
+                }, 
+                "0x61-0xc0000" : {
+                    "Comment" : "C-M-a",
+                    "Text" : "\\e[27;7;97~",
+                    "Action" : 12
+                }, 
+                "0x41-0xe0000" : {
+                    "Comment" : "C-M-S-A",
+                    "Text" : "\\e[27;8;65~",
+                    "Action" : 12
+                }, 
+                "0x60-0x40000" : {
+                    "Comment" : "C-`",
+                    "Text" : "\\e[27;5;96~",
+                    "Action" : 12
+                }, 
+                "0x7e-0x60000" : {
+                    "Comment" : "C-~",
+                    "Text" : "\\e[27;6;126~",
+                    "Action" : 12
+                }, 
+                "0x60-0x80000" : {
+                    "Comment" : "M-`",
+                    "Text" : "\\e[27;3;96~",
+                    "Action" : 12
+                }, 
+                "0x7e-0xa0000" : {
+                    "Comment" : "M-~",
+                    "Text" : "\\e[27;4;126~",
+                    "Action" : 12
+                }, 
+                "0x60-0x100000" : {
+                    "Comment" : "s-`",
+                    "Text" : "\\e[27;9;96~",
+                    "Action" : 12
+                }, 
+                "0x7e-0x120000" : {
+                    "Comment" : "s-~",
+                    "Text" : "\\e[27;10;126~",
+                    "Action" : 12
+                }, 
+                "0x60-0xc0000" : {
+                    "Comment" : "C-M-`",
+                    "Text" : "\\e[27;7;96~",
+                    "Action" : 12
+                }, 
+                "0x7e-0xe0000" : {
+                    "Comment" : "C-M-~",
+                    "Text" : "\\e[27;8;126~",
+                    "Action" : 12
+                }, 
+                "0x43-0x60000" : {
+                    "Comment" : "C-S-C",
+                    "Text" : "\\e[27;6;67~",
+                    "Action" : 12
+                }, 
+                "0x63-0x100000" : {
+                    "Comment" : "s-c",
+                    "Text" : "\\e[27;9;99~",
+                    "Action" : 12
+                }, 
+                "0x43-0x120000" : {
+                    "Comment" : "s-S-C",
+                    "Text" : "\\e[27;10;67~",
+                    "Action" : 12
+                }, 
+                "0x63-0xc0000" : {
+                    "Comment" : "C-M-c",
+                    "Text" : "\\e[27;7;99~",
+                    "Action" : 12
+                }, 
+                "0x43-0xe0000" : {
+                    "Comment" : "C-M-S-C",
+                    "Text" : "\\e[27;8;67~",
+                    "Action" : 12
+                }, 
+                "0x42-0x60000" : {
+                    "Comment" : "C-S-B",
+                    "Text" : "\\e[27;6;66~",
+                    "Action" : 12
+                }, 
+                "0x62-0x100000" : {
+                    "Comment" : "s-b",
+                    "Text" : "\\e[27;9;98~",
+                    "Action" : 12
+                }, 
+                "0x42-0x120000" : {
+                    "Comment" : "s-S-B",
+                    "Text" : "\\e[27;10;66~",
+                    "Action" : 12
+                }, 
+                "0x62-0xc0000" : {
+                    "Comment" : "C-M-b",
+                    "Text" : "\\e[27;7;98~",
+                    "Action" : 12
+                }, 
+                "0x42-0xe0000" : {
+                    "Comment" : "C-M-S-B",
+                    "Text" : "\\e[27;8;66~",
+                    "Action" : 12
+                }, 
+                "0x45-0x60000" : {
+                    "Comment" : "C-S-E",
+                    "Text" : "\\e[27;6;69~",
+                    "Action" : 12
+                }, 
+                "0x65-0x100000" : {
+                    "Comment" : "s-e",
+                    "Text" : "\\e[27;9;101~",
+                    "Action" : 12
+                }, 
+                "0x45-0x120000" : {
+                    "Comment" : "s-S-E",
+                    "Text" : "\\e[27;10;69~",
+                    "Action" : 12
+                }, 
+                "0x65-0xc0000" : {
+                    "Comment" : "C-M-e",
+                    "Text" : "\\e[27;7;101~",
+                    "Action" : 12
+                }, 
+                "0x45-0xe0000" : {
+                    "Comment" : "C-M-S-E",
+                    "Text" : "\\e[27;8;69~",
+                    "Action" : 12
+                }, 
+                "0x44-0x60000" : {
+                    "Comment" : "C-S-D",
+                    "Text" : "\\e[27;6;68~",
+                    "Action" : 12
+                }, 
+                "0x64-0x100000" : {
+                    "Comment" : "s-d",
+                    "Text" : "\\e[27;9;100~",
+                    "Action" : 12
+                }, 
+                "0x44-0x120000" : {
+                    "Comment" : "s-S-D",
+                    "Text" : "\\e[27;10;68~",
+                    "Action" : 12
+                }, 
+                "0x64-0xc0000" : {
+                    "Comment" : "C-M-d",
+                    "Text" : "\\e[27;7;100~",
+                    "Action" : 12
+                }, 
+                "0x44-0xe0000" : {
+                    "Comment" : "C-M-S-D",
+                    "Text" : "\\e[27;8;68~",
+                    "Action" : 12
+                }, 
+                "0x47-0x60000" : {
+                    "Comment" : "C-S-G",
+                    "Text" : "\\e[27;6;71~",
+                    "Action" : 12
+                }, 
+                "0x67-0x100000" : {
+                    "Comment" : "s-g",
+                    "Text" : "\\e[27;9;103~",
+                    "Action" : 12
+                }, 
+                "0x47-0x120000" : {
+                    "Comment" : "s-S-G",
+                    "Text" : "\\e[27;10;71~",
+                    "Action" : 12
+                }, 
+                "0x67-0xc0000" : {
+                    "Comment" : "C-M-g",
+                    "Text" : "\\e[27;7;103~",
+                    "Action" : 12
+                }, 
+                "0x47-0xe0000" : {
+                    "Comment" : "C-M-S-G",
+                    "Text" : "\\e[27;8;71~",
+                    "Action" : 12
+                }, 
+                "0x46-0x60000" : {
+                    "Comment" : "C-S-F",
+                    "Text" : "\\e[27;6;70~",
+                    "Action" : 12
+                }, 
+                "0x66-0x100000" : {
+                    "Comment" : "s-f",
+                    "Text" : "\\e[27;9;102~",
+                    "Action" : 12
+                }, 
+                "0x46-0x120000" : {
+                    "Comment" : "s-S-F",
+                    "Text" : "\\e[27;10;70~",
+                    "Action" : 12
+                }, 
+                "0x66-0xc0000" : {
+                    "Comment" : "C-M-f",
+                    "Text" : "\\e[27;7;102~",
+                    "Action" : 12
+                }, 
+                "0x46-0xe0000" : {
+                    "Comment" : "C-M-S-F",
+                    "Text" : "\\e[27;8;70~",
+                    "Action" : 12
+                }, 
+                "0x49-0x60000" : {
+                    "Comment" : "C-S-I",
+                    "Text" : "\\e[27;6;73~",
+                    "Action" : 12
+                }, 
+                "0x69-0x100000" : {
+                    "Comment" : "s-i",
+                    "Text" : "\\e[27;9;105~",
+                    "Action" : 12
+                }, 
+                "0x49-0x120000" : {
+                    "Comment" : "s-S-I",
+                    "Text" : "\\e[27;10;73~",
+                    "Action" : 12
+                }, 
+                "0x69-0xc0000" : {
+                    "Comment" : "C-M-i",
+                    "Text" : "\\e[27;7;105~",
+                    "Action" : 12
+                }, 
+                "0x49-0xe0000" : {
+                    "Comment" : "C-M-S-I",
+                    "Text" : "\\e[27;8;73~",
+                    "Action" : 12
+                }, 
+                "0x48-0x60000" : {
+                    "Comment" : "C-S-H",
+                    "Text" : "\\e[27;6;72~",
+                    "Action" : 12
+                }, 
+                "0x68-0x100000" : {
+                    "Comment" : "s-h",
+                    "Text" : "\\e[27;9;104~",
+                    "Action" : 12
+                }, 
+                "0x48-0x120000" : {
+                    "Comment" : "s-S-H",
+                    "Text" : "\\e[27;10;72~",
+                    "Action" : 12
+                }, 
+                "0x68-0xc0000" : {
+                    "Comment" : "C-M-h",
+                    "Text" : "\\e[27;7;104~",
+                    "Action" : 12
+                }, 
+                "0x48-0xe0000" : {
+                    "Comment" : "C-M-S-H",
+                    "Text" : "\\e[27;8;72~",
+                    "Action" : 12
+                }, 
+                "0x4b-0x60000" : {
+                    "Comment" : "C-S-K",
+                    "Text" : "\\e[27;6;75~",
+                    "Action" : 12
+                }, 
+                "0x6b-0x100000" : {
+                    "Comment" : "s-k",
+                    "Text" : "\\e[27;9;107~",
+                    "Action" : 12
+                }, 
+                "0x4b-0x120000" : {
+                    "Comment" : "s-S-K",
+                    "Text" : "\\e[27;10;75~",
+                    "Action" : 12
+                }, 
+                "0x6b-0xc0000" : {
+                    "Comment" : "C-M-k",
+                    "Text" : "\\e[27;7;107~",
+                    "Action" : 12
+                }, 
+                "0x4b-0xe0000" : {
+                    "Comment" : "C-M-S-K",
+                    "Text" : "\\e[27;8;75~",
+                    "Action" : 12
+                }, 
+                "0x4a-0x60000" : {
+                    "Comment" : "C-S-J",
+                    "Text" : "\\e[27;6;74~",
+                    "Action" : 12
+                }, 
+                "0x6a-0x100000" : {
+                    "Comment" : "s-j",
+                    "Text" : "\\e[27;9;106~",
+                    "Action" : 12
+                }, 
+                "0x4a-0x120000" : {
+                    "Comment" : "s-S-J",
+                    "Text" : "\\e[27;10;74~",
+                    "Action" : 12
+                }, 
+                "0x6a-0xc0000" : {
+                    "Comment" : "C-M-j",
+                    "Text" : "\\e[27;7;106~",
+                    "Action" : 12
+                }, 
+                "0x4a-0xe0000" : {
+                    "Comment" : "C-M-S-J",
+                    "Text" : "\\e[27;8;74~",
+                    "Action" : 12
+                }, 
+                "0x4d-0x60000" : {
+                    "Comment" : "C-S-M",
+                    "Text" : "\\e[27;6;77~",
+                    "Action" : 12
+                }, 
+                "0x6d-0x100000" : {
+                    "Comment" : "s-m",
+                    "Text" : "\\e[27;9;109~",
+                    "Action" : 12
+                }, 
+                "0x4d-0x120000" : {
+                    "Comment" : "s-S-M",
+                    "Text" : "\\e[27;10;77~",
+                    "Action" : 12
+                }, 
+                "0x6d-0xc0000" : {
+                    "Comment" : "C-M-m",
+                    "Text" : "\\e[27;7;109~",
+                    "Action" : 12
+                }, 
+                "0x4d-0xe0000" : {
+                    "Comment" : "C-M-S-M",
+                    "Text" : "\\e[27;8;77~",
+                    "Action" : 12
+                }, 
+                "0x4c-0x60000" : {
+                    "Comment" : "C-S-L",
+                    "Text" : "\\e[27;6;76~",
+                    "Action" : 12
+                }, 
+                "0x6c-0x100000" : {
+                    "Comment" : "s-l",
+                    "Text" : "\\e[27;9;108~",
+                    "Action" : 12
+                }, 
+                "0x4c-0x120000" : {
+                    "Comment" : "s-S-L",
+                    "Text" : "\\e[27;10;76~",
+                    "Action" : 12
+                }, 
+                "0x6c-0xc0000" : {
+                    "Comment" : "C-M-l",
+                    "Text" : "\\e[27;7;108~",
+                    "Action" : 12
+                }, 
+                "0x4c-0xe0000" : {
+                    "Comment" : "C-M-S-L",
+                    "Text" : "\\e[27;8;76~",
+                    "Action" : 12
+                }, 
+                "0x4f-0x60000" : {
+                    "Comment" : "C-S-O",
+                    "Text" : "\\e[27;6;79~",
+                    "Action" : 12
+                }, 
+                "0x6f-0x100000" : {
+                    "Comment" : "s-o",
+                    "Text" : "\\e[27;9;111~",
+                    "Action" : 12
+                }, 
+                "0x4f-0x120000" : {
+                    "Comment" : "s-S-O",
+                    "Text" : "\\e[27;10;79~",
+                    "Action" : 12
+                }, 
+                "0x6f-0xc0000" : {
+                    "Comment" : "C-M-o",
+                    "Text" : "\\e[27;7;111~",
+                    "Action" : 12
+                }, 
+                "0x4f-0xe0000" : {
+                    "Comment" : "C-M-S-O",
+                    "Text" : "\\e[27;8;79~",
+                    "Action" : 12
+                }, 
+                "0x4e-0x60000" : {
+                    "Comment" : "C-S-N",
+                    "Text" : "\\e[27;6;78~",
+                    "Action" : 12
+                }, 
+                "0x6e-0x100000" : {
+                    "Comment" : "s-n",
+                    "Text" : "\\e[27;9;110~",
+                    "Action" : 12
+                }, 
+                "0x4e-0x120000" : {
+                    "Comment" : "s-S-N",
+                    "Text" : "\\e[27;10;78~",
+                    "Action" : 12
+                }, 
+                "0x6e-0xc0000" : {
+                    "Comment" : "C-M-n",
+                    "Text" : "\\e[27;7;110~",
+                    "Action" : 12
+                }, 
+                "0x4e-0xe0000" : {
+                    "Comment" : "C-M-S-N",
+                    "Text" : "\\e[27;8;78~",
+                    "Action" : 12
+                }, 
+                "0x51-0x60000" : {
+                    "Comment" : "C-S-Q",
+                    "Text" : "\\e[27;6;81~",
+                    "Action" : 12
+                }, 
+                "0x71-0x100000" : {
+                    "Comment" : "s-q",
+                    "Text" : "\\e[27;9;113~",
+                    "Action" : 12
+                }, 
+                "0x51-0x120000" : {
+                    "Comment" : "s-S-Q",
+                    "Text" : "\\e[27;10;81~",
+                    "Action" : 12
+                }, 
+                "0x71-0xc0000" : {
+                    "Comment" : "C-M-q",
+                    "Text" : "\\e[27;7;113~",
+                    "Action" : 12
+                }, 
+                "0x51-0xe0000" : {
+                    "Comment" : "C-M-S-Q",
+                    "Text" : "\\e[27;8;81~",
+                    "Action" : 12
+                }, 
+                "0x50-0x60000" : {
+                    "Comment" : "C-S-P",
+                    "Text" : "\\e[27;6;80~",
+                    "Action" : 12
+                }, 
+                "0x70-0x100000" : {
+                    "Comment" : "s-p",
+                    "Text" : "\\e[27;9;112~",
+                    "Action" : 12
+                }, 
+                "0x50-0x120000" : {
+                    "Comment" : "s-S-P",
+                    "Text" : "\\e[27;10;80~",
+                    "Action" : 12
+                }, 
+                "0x70-0xc0000" : {
+                    "Comment" : "C-M-p",
+                    "Text" : "\\e[27;7;112~",
+                    "Action" : 12
+                }, 
+                "0x50-0xe0000" : {
+                    "Comment" : "C-M-S-P",
+                    "Text" : "\\e[27;8;80~",
+                    "Action" : 12
+                }, 
+                "0x53-0x60000" : {
+                    "Comment" : "C-S-S",
+                    "Text" : "\\e[27;6;83~",
+                    "Action" : 12
+                }, 
+                "0x73-0x100000" : {
+                    "Comment" : "s-s",
+                    "Text" : "\\e[27;9;115~",
+                    "Action" : 12
+                }, 
+                "0x53-0x120000" : {
+                    "Comment" : "s-S-S",
+                    "Text" : "\\e[27;10;83~",
+                    "Action" : 12
+                }, 
+                "0x73-0xc0000" : {
+                    "Comment" : "C-M-s",
+                    "Text" : "\\e[27;7;115~",
+                    "Action" : 12
+                }, 
+                "0x53-0xe0000" : {
+                    "Comment" : "C-M-S-S",
+                    "Text" : "\\e[27;8;83~",
+                    "Action" : 12
+                }, 
+                "0x52-0x60000" : {
+                    "Comment" : "C-S-R",
+                    "Text" : "\\e[27;6;82~",
+                    "Action" : 12
+                }, 
+                "0x72-0x100000" : {
+                    "Comment" : "s-r",
+                    "Text" : "\\e[27;9;114~",
+                    "Action" : 12
+                }, 
+                "0x52-0x120000" : {
+                    "Comment" : "s-S-R",
+                    "Text" : "\\e[27;10;82~",
+                    "Action" : 12
+                }, 
+                "0x72-0xc0000" : {
+                    "Comment" : "C-M-r",
+                    "Text" : "\\e[27;7;114~",
+                    "Action" : 12
+                }, 
+                "0x52-0xe0000" : {
+                    "Comment" : "C-M-S-R",
+                    "Text" : "\\e[27;8;82~",
+                    "Action" : 12
+                }, 
+                "0x55-0x60000" : {
+                    "Comment" : "C-S-U",
+                    "Text" : "\\e[27;6;85~",
+                    "Action" : 12
+                }, 
+                "0x75-0x100000" : {
+                    "Comment" : "s-u",
+                    "Text" : "\\e[27;9;117~",
+                    "Action" : 12
+                }, 
+                "0x55-0x120000" : {
+                    "Comment" : "s-S-U",
+                    "Text" : "\\e[27;10;85~",
+                    "Action" : 12
+                }, 
+                "0x75-0xc0000" : {
+                    "Comment" : "C-M-u",
+                    "Text" : "\\e[27;7;117~",
+                    "Action" : 12
+                }, 
+                "0x55-0xe0000" : {
+                    "Comment" : "C-M-S-U",
+                    "Text" : "\\e[27;8;85~",
+                    "Action" : 12
+                }, 
+                "0x54-0x60000" : {
+                    "Comment" : "C-S-T",
+                    "Text" : "\\e[27;6;84~",
+                    "Action" : 12
+                }, 
+                "0x74-0x100000" : {
+                    "Comment" : "s-t",
+                    "Text" : "\\e[27;9;116~",
+                    "Action" : 12
+                }, 
+                "0x54-0x120000" : {
+                    "Comment" : "s-S-T",
+                    "Text" : "\\e[27;10;84~",
+                    "Action" : 12
+                }, 
+                "0x74-0xc0000" : {
+                    "Comment" : "C-M-t",
+                    "Text" : "\\e[27;7;116~",
+                    "Action" : 12
+                }, 
+                "0x54-0xe0000" : {
+                    "Comment" : "C-M-S-T",
+                    "Text" : "\\e[27;8;84~",
+                    "Action" : 12
+                }, 
+                "0x57-0x60000" : {
+                    "Comment" : "C-S-W",
+                    "Text" : "\\e[27;6;87~",
+                    "Action" : 12
+                }, 
+                "0x77-0x100000" : {
+                    "Comment" : "s-w",
+                    "Text" : "\\e[27;9;119~",
+                    "Action" : 12
+                }, 
+                "0x57-0x120000" : {
+                    "Comment" : "s-S-W",
+                    "Text" : "\\e[27;10;87~",
+                    "Action" : 12
+                }, 
+                "0x77-0xc0000" : {
+                    "Comment" : "C-M-w",
+                    "Text" : "\\e[27;7;119~",
+                    "Action" : 12
+                }, 
+                "0x57-0xe0000" : {
+                    "Comment" : "C-M-S-W",
+                    "Text" : "\\e[27;8;87~",
+                    "Action" : 12
+                }, 
+                "0x56-0x60000" : {
+                    "Comment" : "C-S-V",
+                    "Text" : "\\e[27;6;86~",
+                    "Action" : 12
+                }, 
+                "0x76-0x100000" : {
+                    "Comment" : "s-v",
+                    "Text" : "\\e[27;9;118~",
+                    "Action" : 12
+                }, 
+                "0x56-0x120000" : {
+                    "Comment" : "s-S-V",
+                    "Text" : "\\e[27;10;86~",
+                    "Action" : 12
+                }, 
+                "0x76-0xc0000" : {
+                    "Comment" : "C-M-v",
+                    "Text" : "\\e[27;7;118~",
+                    "Action" : 12
+                }, 
+                "0x56-0xe0000" : {
+                    "Comment" : "C-M-S-V",
+                    "Text" : "\\e[27;8;86~",
+                    "Action" : 12
+                }, 
+                "0x59-0x60000" : {
+                    "Comment" : "C-S-Y",
+                    "Text" : "\\e[27;6;89~",
+                    "Action" : 12
+                }, 
+                "0x79-0x100000" : {
+                    "Comment" : "s-y",
+                    "Text" : "\\e[27;9;121~",
+                    "Action" : 12
+                }, 
+                "0x59-0x120000" : {
+                    "Comment" : "s-S-Y",
+                    "Text" : "\\e[27;10;89~",
+                    "Action" : 12
+                }, 
+                "0x79-0xc0000" : {
+                    "Comment" : "C-M-y",
+                    "Text" : "\\e[27;7;121~",
+                    "Action" : 12
+                }, 
+                "0x59-0xe0000" : {
+                    "Comment" : "C-M-S-Y",
+                    "Text" : "\\e[27;8;89~",
+                    "Action" : 12
+                }, 
+                "0x58-0x60000" : {
+                    "Comment" : "C-S-X",
+                    "Text" : "\\e[27;6;88~",
+                    "Action" : 12
+                }, 
+                "0x78-0x100000" : {
+                    "Comment" : "s-x",
+                    "Text" : "\\e[27;9;120~",
+                    "Action" : 12
+                }, 
+                "0x58-0x120000" : {
+                    "Comment" : "s-S-X",
+                    "Text" : "\\e[27;10;88~",
+                    "Action" : 12
+                }, 
+                "0x78-0xc0000" : {
+                    "Comment" : "C-M-x",
+                    "Text" : "\\e[27;7;120~",
+                    "Action" : 12
+                }, 
+                "0x58-0xe0000" : {
+                    "Comment" : "C-M-S-X",
+                    "Text" : "\\e[27;8;88~",
+                    "Action" : 12
+                }, 
+                "0x5a-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[27;6;90~",
+                    "Action" : 12
+                }, 
+                "0x7a-0x100000" : {
+                    "Comment" : "s-z",
+                    "Text" : "\\e[27;9;122~",
+                    "Action" : 12
+                }, 
+                "0x5a-0x120000" : {
+                    "Comment" : "s-S-Z",
+                    "Text" : "\\e[27;10;90~",
+                    "Action" : 12
+                }, 
+                "0x7a-0xc0000" : {
+                    "Comment" : "C-M-z",
+                    "Text" : "\\e[27;7;122~",
+                    "Action" : 12
+                }, 
+                "0x5a-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[27;8;90~",
+                    "Action" : 12
+                }, 
+                "0xf704-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\eO5P",
+                    "Action" : 12
+                }, 
+                "0xf704-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\eO9P",
+                    "Action" : 12
+                }, 
+                "0xf704-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\eO2P",
+                    "Action" : 12
+                }, 
+                "0xf704-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\eO3P",
+                    "Action" : 12
+                }, 
+                "0xf704-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\eO6P",
+                    "Action" : 12
+                }, 
+                "0xf704-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\eO4P",
+                    "Action" : 12
+                }, 
+                "0xf704-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\eO7P",
+                    "Action" : 12
+                }, 
+                "0xf704-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\eO8P",
+                    "Action" : 12
+                }, 
+                "0xf705-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\eO5Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\eO9Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\eO2Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\eO3Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\eO6Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\eO4Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\eO7Q",
+                    "Action" : 12
+                }, 
+                "0xf705-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\eO8Q",
+                    "Action" : 12
+                }, 
+                "0xf703-0x240000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x300000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x220000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x280000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x260000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x2a0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x2c0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7C",
+                    "Action" : 12
+                }, 
+                "0xf703-0x2e0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8C",
+                    "Action" : 12
+                }, 
+                "0xf707-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\eO5S",
+                    "Action" : 12
+                }, 
+                "0xf707-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\eO9S",
+                    "Action" : 12
+                }, 
+                "0xf707-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\eO2S",
+                    "Action" : 12
+                }, 
+                "0xf707-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\eO3S",
+                    "Action" : 12
+                }, 
+                "0xf707-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\eO6S",
+                    "Action" : 12
+                }, 
+                "0xf707-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\eO4S",
+                    "Action" : 12
+                }, 
+                "0xf707-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\eO7S",
+                    "Action" : 12
+                }, 
+                "0xf707-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\eO8S",
+                    "Action" : 12
+                }, 
+                "0xf708-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[15;5~",
+                    "Action" : 12
+                }, 
+                "0xf708-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[15;9~",
+                    "Action" : 12
+                }, 
+                "0xf708-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[15;2~",
+                    "Action" : 12
+                }, 
+                "0xf708-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[15;3~",
+                    "Action" : 12
+                }, 
+                "0xf708-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[15;6~",
+                    "Action" : 12
+                }, 
+                "0xf708-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[15;4~",
+                    "Action" : 12
+                }, 
+                "0xf708-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[15;7~",
+                    "Action" : 12
+                }, 
+                "0xf708-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[15;8~",
+                    "Action" : 12
+                }, 
+                "0xf709-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[17;5~",
+                    "Action" : 12
+                }, 
+                "0xf709-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[17;9~",
+                    "Action" : 12
+                }, 
+                "0xf709-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[17;2~",
+                    "Action" : 12
+                }, 
+                "0xf709-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[17;3~",
+                    "Action" : 12
+                }, 
+                "0xf709-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[17;6~",
+                    "Action" : 12
+                }, 
+                "0xf709-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[17;4~",
+                    "Action" : 12
+                }, 
+                "0xf709-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[17;7~",
+                    "Action" : 12
+                }, 
+                "0xf709-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[17;8~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[18;5~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[18;9~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[18;2~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[18;3~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[18;6~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[18;4~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[18;7~",
+                    "Action" : 12
+                }, 
+                "0xf70a-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[18;8~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[19;5~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[19;9~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[19;2~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[19;3~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[19;6~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[19;4~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[19;7~",
+                    "Action" : 12
+                }, 
+                "0xf70b-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[19;8~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[20;5~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[20;9~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[20;2~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[20;3~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[20;6~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[20;4~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[20;7~",
+                    "Action" : 12
+                }, 
+                "0xf70c-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[20;8~",
+                    "Action" : 12
+                }, 
+                "0xf701-0x240000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x300000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x220000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x280000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x260000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x2a0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x2c0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7B",
+                    "Action" : 12
+                }, 
+                "0xf701-0x2e0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8B",
+                    "Action" : 12
+                }, 
+                "0xf706-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\eO5R",
+                    "Action" : 12
+                }, 
+                "0xf706-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\eO9R",
+                    "Action" : 12
+                }, 
+                "0xf706-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\eO2R",
+                    "Action" : 12
+                }, 
+                "0xf706-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\eO3R",
+                    "Action" : 12
+                }, 
+                "0xf706-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\eO6R",
+                    "Action" : 12
+                }, 
+                "0xf706-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\eO4R",
+                    "Action" : 12
+                }, 
+                "0xf706-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\eO7R",
+                    "Action" : 12
+                }, 
+                "0xf706-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\eO8R",
+                    "Action" : 12
+                }, 
+                "0x9-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[27;5;9~",
+                    "Action" : 12
+                }, 
+                "0x9-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[27;9;9~",
+                    "Action" : 12
+                }, 
+                "0x19-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[27;2;9~",
+                    "Action" : 12
+                }, 
+                "0x9-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[27;3;9~",
+                    "Action" : 12
+                }, 
+                "0x19-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[27;6;9~",
+                    "Action" : 12
+                }, 
+                "0x19-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[27;4;9~",
+                    "Action" : 12
+                }, 
+                "0x9-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[27;7;9~",
+                    "Action" : 12
+                }, 
+                "0x19-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[27;8;9~",
+                    "Action" : 12
+                }, 
+                "0xf729-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5H",
+                    "Action" : 12
+                }, 
+                "0xf729-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9H",
+                    "Action" : 12
+                }, 
+                "0xf729-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2H",
+                    "Action" : 12
+                }, 
+                "0xf729-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3H",
+                    "Action" : 12
+                }, 
+                "0xf729-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6H",
+                    "Action" : 12
+                }, 
+                "0xf729-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4H",
+                    "Action" : 12
+                }, 
+                "0xf729-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7H",
+                    "Action" : 12
+                }, 
+                "0xf729-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8H",
+                    "Action" : 12
+                }, 
+                "0xf72b-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7F",
+                    "Action" : 12
+                }, 
+                "0xf72b-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8F",
+                    "Action" : 12
+                }, 
+                "0xf72d-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[6;5~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[6;9~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[6;2~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[6;3~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[6;6~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[6;4~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[6;7~",
+                    "Action" : 12
+                }, 
+                "0xf72d-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[6;8~",
+                    "Action" : 12
+                }, 
+                "0xd-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[27;5;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[27;9;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[27;2;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[27;3;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[27;6;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[27;4;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[27;7;13~",
+                    "Action" : 12
+                }, 
+                "0xd-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[27;8;13~",
+                    "Action" : 12
+                }, 
+                "0xf727-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[2;5~",
+                    "Action" : 12
+                }, 
+                "0xf727-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[2;9~",
+                    "Action" : 12
+                }, 
+                "0xf727-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[2;2~",
+                    "Action" : 12
+                }, 
+                "0xf727-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[2;3~",
+                    "Action" : 12
+                }, 
+                "0xf727-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[2;6~",
+                    "Action" : 12
+                }, 
+                "0xf727-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[2;4~",
+                    "Action" : 12
+                }, 
+                "0xf727-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[2;7~",
+                    "Action" : 12
+                }, 
+                "0xf727-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[2;8~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[23;5~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[23;9~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[23;2~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[23;3~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[23;6~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[23;4~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[23;7~",
+                    "Action" : 12
+                }, 
+                "0xf70e-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[23;8~",
+                    "Action" : 12
+                }, 
+                "0xf700-0x240000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x300000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x220000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x280000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x260000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x2a0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x2c0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7A",
+                    "Action" : 12
+                }, 
+                "0xf700-0x2e0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8A",
+                    "Action" : 12
+                }, 
+                "0xf72c-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[5;5~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[5;9~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[5;2~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[5;3~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[5;6~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[5;4~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[5;7~",
+                    "Action" : 12
+                }, 
+                "0xf72c-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[5;8~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[24;5~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[24;9~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[24;2~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[24;3~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[24;6~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[24;4~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[24;7~",
+                    "Action" : 12
+                }, 
+                "0xf70f-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[24;8~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[21;5~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[21;9~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[21;2~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[21;3~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[21;6~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[21;4~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[21;7~",
+                    "Action" : 12
+                }, 
+                "0xf70d-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[21;8~",
+                    "Action" : 12
+                }, 
+                "0xf702-0x240000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[1;5D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x300000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[1;9D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x220000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[1;2D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x280000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[1;3D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x260000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[1;6D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x2a0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[1;4D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x2c0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[1;7D",
+                    "Action" : 12
+                }, 
+                "0xf702-0x2e0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[1;8D",
+                    "Action" : 12
+                }, 
+                "0xf728-0x40000" : {
+                    "Comment" : "C-Z",
+                    "Text" : "\\e[3;5~",
+                    "Action" : 12
+                }, 
+                "0xf728-0x100000" : {
+                    "Comment" : "s-Z",
+                    "Text" : "\\e[3;9~",
+                    "Action" : 12
+                }, 
+                "0xf728-0x20000" : {
+                    "Comment" : "S-Z",
+                    "Text" : "\\e[3;2~",
+                    "Action" : 12
+                }, 
+                "0xf728-0x80000" : {
+                    "Comment" : "M-Z",
+                    "Text" : "\\e[3;3~",
+                    "Action" : 12
+                }, 
+                "0xf728-0x60000" : {
+                    "Comment" : "C-S-Z",
+                    "Text" : "\\e[3;6~",
+                    "Action" : 12
+                }, 
+                "0xf728-0xa0000" : {
+                    "Comment" : "M-S-Z",
+                    "Text" : "\\e[3;4~",
+                    "Action" : 12
+                }, 
+                "0xf728-0xc0000" : {
+                    "Comment" : "C-M-Z",
+                    "Text" : "\\e[3;7~",
+                    "Action" : 12
+                }, 
+                "0xf728-0xe0000" : {
+                    "Comment" : "C-M-S-Z",
+                    "Text" : "\\e[3;8~",
+                    "Action" : 12
+                } 
+            }
+        }
+    ]
+}

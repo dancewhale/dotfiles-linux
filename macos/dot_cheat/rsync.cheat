@@ -1,0 +1,3 @@
+% rsync
+# like copy
+rsync -ar  --exclude=test/test1  test/  old-running/

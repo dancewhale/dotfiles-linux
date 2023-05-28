@@ -1,0 +1,63 @@
+syntax on
+set clipboard=unnamed
+set tabstop=4
+set softtabstop=4
+set backspace=2
+set hlsearch
+set incsearch
+set shiftwidth=4
+set autoindent
+set pastetoggle=
+set cindent
+set tags=tags;/
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set ruler
+set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
+
+
+"设置vundle
+set nocompatible              " be iMproved
+filetype off                  " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Plugin 'scrooloose/nerdtree'  "文件浏览
+Plugin 'majutsushi/tagbar'    "代码符号
+Plugin 'wesleyche/SrcExpl'    "类似sourceInsight的代码预览窗口
+
+
+filetype  plugin indent on     " required!
+"vundle设置完毕
+
+syntax on
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_left = 1
+nnoremap <F3> :TagbarToggle<CR>
+let NERDTreeWinPos='right'
+nnoremap <F2> :NERDTreeToggle<CR>
+nmap <F4> :SrcExplToggle<CR>
+let g:Srcexpl_winHeight = 8
+" // Set 100 ms for refreshing the Source Explorer
+let g:SrcExpl_refreshTime = 100
+
+" // Set "Enter" key to jump into the exact definition context
+let g:SrcExpl_jumpKey = "<ENTER>"
+
+" // Set "Space" key for back from the definition context
+let g:SrcExpl_gobackKey = "<SPACE>"
+
+let g:SrcExpl_pluginList = [
+         \ "__Tag_List__",
+                 \ "_NERD_tree_"
+                    \ ]
+nmap <C-H> <C-W>h 
+nmap <C-J> <C-W>j 
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
+

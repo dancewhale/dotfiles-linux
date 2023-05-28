@@ -1,0 +1,73 @@
+% git
+# To enable color:
+git config --global color.ui true
+
+# To apply any stash from the list of stashes. This does not remove the stash
+# from the stash list
+git stash apply stash@{6}
+
+# Git commit in the past
+git commit --date="`date --date='2 day ago'`"
+
+# Git commit in day
+git commit --date="Jun 13 18:30:25 IST 2015"
+
+# To go back 2 commits back
+git reset --hard HEAD~2
+
+# To remove untracked files
+git clean -f -d
+
+# To remove untracked and ignored files
+git clean -f -d -x
+
+# To see who commited which line in a file
+git blame filename
+
+# Commit history of a set of files
+git log --pretty=email --patch-with-stat --reverse --full-index -- Admin\*.py > Sripts.patch
+
+# Import commits from another repo
+git --git-dir=../some_other_repo/.git format-patch -k -1 --stdout <commit SHA> | git am -3 -k
+
+# View commits that will be pushed
+git log @{u}..
+
+# View changes that are new on a feature branch
+git log -p feature --not master; git diff master...feature
+
+# Interactive rebase for the last 7 commits
+git rebase -i @~7
+
+# Diff files WITHOUT considering them a part of git,This can be used to diff files that are not in a git repo!
+git diff --no-index path/to/file/A path/to/file/B
+
+# Update all your submodules
+git submodule update --init --recursive
+
+# Perform a shallow clone to only get latest commits (helps save data when cloning large repos)
+git clone --depth 1 <remote-url>
+
+# To unshallow a clone
+git pull --unshallow
+
+# Create a bare branch (one that has no commits on it)
+git checkout --orphan branch_name
+
+# Remove all stale branches (ones that have been deleted on remote)
+git remote prune origin
+
+# The following can be used to prune all remotes at once
+git remote prune $(git remote | tr '\n' ' ')
+
+# Revisions can also be identified with :/text;  So, this will show the first commit that has "cool" in their message body
+git show :/cool
+
+# Undo parts of last commit in a specific file
+git checkout -p HEAD^ -- /path/to/file
+
+# Revert a commit and keep the history of the reverted change as a separate revert commit
+git revert <commit SHA>
+
+# Pich a commit from a branch to current branch. This is different than merge as this just applies a single commit from a branch to current branch
+git cherry-pick <commit SHA1>

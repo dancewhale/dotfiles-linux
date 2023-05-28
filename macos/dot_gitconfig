@@ -1,0 +1,18 @@
+[user]
+	email = 542727233@qq.com
+	name = caoyuanzhi
+[core]
+	editor = vim
+[gitlab "gitlab.kylincloud.org/api/v4"]
+	user = caoyuanzhi
+[github]
+	user = dancewhale
+[init]
+	defaultBranch = master
+[color]
+	ui = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

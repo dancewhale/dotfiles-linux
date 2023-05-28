@@ -1,0 +1,17 @@
+% skopeo
+# copy from registry to another
+skopeo copy docker://quay.io/skopeo/stable:latest docker://registry.example.com/skopeo:latest
+
+# copy from registry to local dir
+skopeo copy docker://nginx:latest dir:/root/nginx
+
+
+# copy from registry to local archive file like docker save.
+skopeo copy docker://nginx:latest docker-archive:/nginx.tar.gz
+
+
+# copy from registry to local docker daemon.
+skopeo copy docker://nginx:latest docker-daemon:nginx:latest-dev
+
+# copy from registry to local oci path.
+skopeo copy docker://nginx:latest oci:nginx:latest-dev

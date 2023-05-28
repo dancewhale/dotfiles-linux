@@ -1,0 +1,21 @@
+Host *
+KexAlgorithms +diffie-hellman-group1-sha1
+ServerAliveInterval 60
+Host manjaro
+  HostName 172.20.16.92
+  User whale
+Host dev-arm64
+  HostName 172.20.188.121
+  User debian
+Host dev-amd64
+  HostName 172.20.16.92
+  User whale
+Host bwg
+  HostName 67.230.186.218
+  User root
+Host tripod
+  HostName 107.148.246.87
+  User root
+Host hw
+  HostName 114.116.248.206
+  User root
