@@ -7,9 +7,9 @@
 
 (when IS-MAC
   (progn  (setq rime-librime-root
-		(file-truename "~/Dropbox/emacs/lib/librime/"))
+		(file-truename "~/Dropbox/emacs/librime/dist/"))
 	  (setq rime-emacs-module-header-root
-		(file-truename "/Applications/Emacs.app/Contents/Resources/include/"))
+		(file-truename "/opt/homebrew/opt/emacs-mac/include/"))
 	  ))
 
 
