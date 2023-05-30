@@ -3,8 +3,6 @@
 
 (package! cnfonts)
 
-(package! ox-hugo)
-
 (package! command-log-mode)
 
 (package! notdeft
@@ -26,3 +24,7 @@
 (package! org-ref)
 
 (package! org-sidebar)
+
+(package! origami)
+
+(package! highlight-indent-guides)

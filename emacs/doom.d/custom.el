@@ -9,6 +9,7 @@
    '("7ea883b13485f175d3075c72fceab701b5bf76b2076f024da50dff4107d0db25" "6f4421bf31387397f6710b6f6381c448d1a71944d9e9da4e0057b3fe5d6f2fad" default))
  '(exwm-floating-border-color "#242530")
  '(fci-rule-color "#6272a4")
+ '(highlight-indent-guides-method 'character)
  '(highlight-tail-colors
    ((("#2c3e3c" "#2a3b2e" "green")
      . 0)
