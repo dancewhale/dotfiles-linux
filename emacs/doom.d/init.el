@@ -92,7 +92,7 @@
        :tools
        tree-sitter
        ansible
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
@@ -102,7 +102,7 @@
        ;;gist              ; interacting with github gists
        (lookup                  ; helps you navigate your code and documentation
 	+docsets)               ; ...or in Dash docsets locally
-       (lsp)
+       (lsp +peek)
        (magit
 	+forge)
        make                     ; run make tasks from Emacs
