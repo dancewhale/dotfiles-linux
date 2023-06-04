@@ -111,10 +111,9 @@ Uses `current-date-time-format' for the formatting the date/time."
   (interactive)
   (counsel-ag nil default-directory))
 
-(general-define-key
- :prefix "s-e"
- "s-e g"   'cao-emacs-magit
- "s-e s-f" 'cao-emacs-counsel-ag)
+(map! :prefix "s-e"
+      "s-e g"    #'cao-emacs-magit
+      "s-e s-f"  #'cao-emacs-counsel-ag)
 
 (eval-after-load 'org '(add-hook 'org-mode-hook (lambda () (org-define-scheme-url))))
 

@@ -11,12 +11,12 @@
 ;; 增加全局快捷键
 ;;;-------------------------------------------------
 ;;;跳转gtd文件
-(general-define-key
+(map!
   :prefix "s-e"
-  "d"   'notdeft
-  "g"   'magit
-  "s-c" 'evil-yank
-  "h k" 'general-describe-keybindings)
+  "d"   #'notdeft
+  "g"   #'magit
+  "s-c" #'evil-yank
+  "h k" #'general-describe-keybindings)
 
 ;;; 跳转roam的index文件
 (defun org-roam-goto-inbox ()
@@ -24,19 +24,19 @@
   (evil-edit (car (org-roam-id-find "a3370c7f-db40-4461-99e8-10ad583bef61"))))
 
 ;;; 设置roam相关快捷键
-( general-define-key
+(map!
   :prefix "s-e"
-  "n" 'org-narrow-to-subtree
-  "w" 'widen)
+  "n" #'org-narrow-to-subtree
+  "w" #'widen)
 
-(general-define-key
+(map!
  :prefix "C-c"
- "d t" 'org-roam-dailies-goto-today
- "d y" 'org-roam-dailies-goto-yesterday
- "d t" 'org-roam-dailies-goto-tomorrow
- "d n" 'org-roam-dailies-goto-next-note
- "d p" 'org-roam-dailies-goto-previous-note
- "d d" 'org-roam-dailies-goto-date)
+ "d t" #'org-roam-dailies-goto-today
+ "d y" #'org-roam-dailies-goto-yesterday
+ "d t" #'org-roam-dailies-goto-tomorrow
+ "d n" #'org-roam-dailies-goto-next-note
+ "d p" #'org-roam-dailies-goto-previous-note
+ "d d" #'org-roam-dailies-goto-date)
 
 
 
@@ -44,9 +44,9 @@
 ;;  my code of chezmoi.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq chezmoi-dir "~/.local/share/chezmoi/")
-(general-define-key
+(map!
  :prefix "s-e"
- "s-f"   'doom/find-file-in-private-config)
+ "s-f"   #'doom/find-file-in-private-config)
 
 
 ;;;-------------------------------------------------
@@ -64,10 +64,10 @@
 ;;;-------------------------------------------------
 ;; lispy配置快捷键
 ;;;-------------------------------------------------
-(general-define-key
+(map!
   :prefix "s-e"
-  "s-["   'sp-unwrap-sexp
-  "s-]"   'sp-wrap-round)
+  "s-["   #'sp-unwrap-sexp
+  "s-]"   #'sp-wrap-round)
 
 ;;;-------------------------------------------------
 ;; system setting

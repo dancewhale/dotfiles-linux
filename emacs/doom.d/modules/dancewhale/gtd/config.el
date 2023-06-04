@@ -116,12 +116,12 @@
 	))
 
 
-(general-define-key
+(map!
  :prefix "s-e"
- "a a"   'org-ql-view
- "a r"   'org-agenda-refile
- "o r"   'org-starter-refile-by-key
- "j"     'org-starter-find-file-by-key)
+ "a a"   #'org-ql-view
+ "a r"   #'org-agenda-refile
+ "o r"   #'org-starter-refile-by-key
+ "j"     #'org-starter-find-file-by-key)
 
 ;; 遇到 minor-mode 的情况，可以通过
 ;; (add-hook 'org-agenda-mode-hook 'evil-normalize-keymaps)
@@ -150,15 +150,5 @@
 
 
 ;; TODO: 问题，该配置总是不生效
-(after! org-agenda
-  (define-key org-agenda-keymap (kbd "<return>") 'cao/agenda-switch-to)
-  ;; (general-unbind 'normal evil-org-agenda-mode-map
-  ;;   :with 'ignore
-  ;;   [remap agenda-switch-to])
-
-
-  ;; (general-define-key
-  ;;  :keymaps 'evil-org-agenda-mode-map
-  ;;  :states  'motion
-  ;;  "<return>" 'cao/agenda-switch-to)
-  )
+(map! :map  (org-agenda-mode-map evil-org-agenda-mode-map)
+      :nm  "<return>"   #'cao/agenda-switch-to)
