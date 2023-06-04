@@ -85,3 +85,5 @@
 
 
 (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
+
+(map! :map yaml-mode-map :desc "tab in yaml" :n [tab] #'hs-toggle-hiding)
