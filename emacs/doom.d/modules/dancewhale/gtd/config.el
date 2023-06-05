@@ -149,6 +149,6 @@
       (org-agenda-switch-to))))
 
 
-;; TODO: 问题，该配置总是不生效
-(map! :map  (org-agenda-mode-map evil-org-agenda-mode-map)
-      :nm  "<return>"   #'cao/agenda-switch-to)
+(after! evil-org-agenda
+  (map! :map   evil-org-agenda-mode-map
+	:nm    "<return>"   #'cao/agenda-switch-to))
