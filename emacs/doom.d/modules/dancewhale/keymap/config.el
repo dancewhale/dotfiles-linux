@@ -65,9 +65,22 @@
 ;; lispy配置快捷键
 ;;;-------------------------------------------------
 (map!
-  :prefix "s-e"
-  "s-["   #'sp-unwrap-sexp
-  "s-]"   #'sp-wrap-round)
+ :prefix "s-e"  :mode lispy-mode
+ "s-["   #'sp-unwrap-sexp
+ "s-]"   #'sp-wrap-round)
+
+
+;;;-------------------------------------------------
+;;  跳转切换配置快捷键
+;;;-------------------------------------------------
+(map!
+ (:prefix "s-e"
+  :desc "窗口撤回" :g "[" #'winner-undo
+  :desc "窗口恢复" :g "]" #'winner-redo)
+ :desc "前一个buffer"  :g  "C-c ["  #'previous-buffer
+ :desc "后一个buffer"  :g  "C-c ]"  #'next-buffer
+ )
+
 
 ;;;-------------------------------------------------
 ;; system setting
@@ -78,6 +91,14 @@
 ;;;-------------------------------------------------
 ;; projectile setting
 ;;;-------------------------------------------------
+(map! :leader
+      :desc "open project root dire" :nmg "pjr" #'projectile-dired
+      :desc "select open project root dire" :nmg "pp"  #'cao/switch-project-dired
+      :desc "treemacs select window" :nmg "oo"  #'treemacs-select-window
+      )
 
-(evil-define-key 'normal  'global (kbd "SPC p j r") 'projectile-dired)
-(evil-define-key 'normal  'global (kbd "SPC o o") 'treemacs-select-window)
+(defun cao/switch-project-dired ()
+  "Switch to projectile root dired."
+  (interactive)
+  (counsel-projectile-switch-project "D")
+  )

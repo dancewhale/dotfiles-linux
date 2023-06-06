@@ -197,10 +197,11 @@
 (map!
  (:prefix "s-e"                   :desc "vterm undo"   :g  "i" #'vterm-toggle)
  (:map vterm-mode-map
-  :desc "vterm go end of buffer"  :n  "G"       #'vterm-eob)
+  :desc "vterm go end of buffer"  :n  "G"       #'vterm-eob
   :desc "vterm clear"             :ni "C-l"     #'vterm-clear
   :desc "vterm ctrl-g"            :ni "C-g"     #'vterm-ctrl-g
   :desc "vterm input method"      :i  "C-\\"    #'toggle-input-method
+  :desc "vterm undo"              :in "C-/"     #'vterm-undo)
  (:map vterm-mode-map
   :desc "vterm shell"             :e "C-c C-e"  #'compilation-shell-minor-mode
   :desc "vterm send key"          :e "C-q"      #'vterm-send-next-key
@@ -216,6 +217,4 @@
   :desc "vterm edit action"       :e "C-x e"    #'vterm-edit-command-action
   :desc "vterm undo"              :e "C-/"      #'vterm-undo)
  (:map vterm-copy-mode-map
-  :desc "vterm Cancel"            :e "C-c C-c"    #'vterm--self-insert)
- )
-
+  :desc "vterm Cancel"            :e "C-c C-c"    #'vterm--self-insert))
