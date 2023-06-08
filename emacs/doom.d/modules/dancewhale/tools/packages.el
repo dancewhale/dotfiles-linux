@@ -28,3 +28,5 @@
 (package! origami)
 
 (package! highlight-indent-guides)
+
+(package! leetcode)

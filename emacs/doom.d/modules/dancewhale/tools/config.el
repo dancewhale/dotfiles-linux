@@ -87,3 +87,7 @@
 (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
 
 (map! :map yaml-mode-map :desc "tab in yaml" :n [tab] #'ts-fold-toggle)
+
+;; setting leetcode
+(setq leetcode-prefer-language "go")
+(setq leetcode-prefer-sql "mysql")
