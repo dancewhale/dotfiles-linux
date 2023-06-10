@@ -30,3 +30,9 @@
 (package! highlight-indent-guides)
 
 (package! leetcode)
+
+(package! eaf
+  :recipe (:host github :repo "emacs-eaf/emacs-application-framework" :branch "master"))
+
+(package! chezmoi
+  :recipe (:host github :repo "tuh8888/chezmoi.el" :branch "main"))

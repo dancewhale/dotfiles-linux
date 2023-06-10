@@ -89,5 +89,7 @@
 (map! :map yaml-mode-map :desc "tab in yaml" :n [tab] #'ts-fold-toggle)
 
 ;; setting leetcode
-(setq leetcode-prefer-language "go")
+(setq leetcode-prefer-language "golang")
 (setq leetcode-prefer-sql "mysql")
+
+(require 'chezmoi)
