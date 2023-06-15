@@ -27,8 +27,9 @@
 ;; (setq vterm-toggle-hide-method 'bury-all-vterm-buffer)
 ;; 使用 swith-to-buffer 来 hide vterm,以确保使用共同的 window,与 tabline 更好的兼容
 ;; 主要是维护 buffer-list,以确保下次切回来，仍是最近使用的 vterm
-(add-hook 'vterm-toggle-hide-hook #'(lambda() (switch-to-buffer (current-buffer))))
-(setq vterm-toggle-hide-method nil)
+;; 我个人没有使用tabline
+;; (add-hook 'vterm-toggle-hide-hook #'(lambda() (switch-to-buffer (current-buffer))))
+;; (setq vterm-toggle-hide-method nil)
 
 
 (defun vterm-ctrl-g ()
