@@ -33,7 +33,8 @@ export CC=/usr/bin/gcc CXX=/usr/bin/gcc
   --with-threads              --with-x-toolkit=gtk3 \
   --with-xwidgets             --with-gif \
   --with-xml2                 --with-pop \
-  --without-compress-install  --with-native-compilation
+  --without-compress-install  --with-native-compilation \
+  --with-pgtk
 
 make -j5
 
