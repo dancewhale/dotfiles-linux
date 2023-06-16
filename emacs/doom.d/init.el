@@ -21,8 +21,9 @@
 
        :completion
        ;; company           ; the ultimate code completion backend
-       (helm
-	+childframe)             ; the *other* search engine for love and life
+       ;;(helm
+       ;;	+childframe)
+					; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (ivy
 	+childframe)                              ; a search engine for love and life
