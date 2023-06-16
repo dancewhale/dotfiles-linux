@@ -94,15 +94,16 @@
 
 (require 'chezmoi)
 
-(require 'eaf)
-(require 'eaf-pdf-viewer)
-(require 'eaf-browser)
-(require 'eaf-terminal)
-(require 'eaf-pyqterminal)
-;; (require 'eaf-file-browser)
-;; (require 'eaf-file-manager)
-(setq eaf-webengine-default-zoom 2)
-(setq eaf-pdf-zoom-step 2)
+(when IS-LINUX
+  (require 'eaf)
+  (require 'eaf-pdf-viewer)
+  (require 'eaf-browser)
+  (require 'eaf-terminal)
+  (require 'eaf-pyqterminal)
+  ;; (require 'eaf-file-browser)
+  ;; (require 'eaf-file-manager)
+  (setq eaf-webengine-default-zoom 2)
+  (setq eaf-pdf-zoom-step 2)
 
-(setq eaf-terminal-font-size 18)
-(setq eaf-pyqterminal-font-size 18)
+  (setq eaf-terminal-font-size 18)
+  (setq eaf-pyqterminal-font-size 18))
