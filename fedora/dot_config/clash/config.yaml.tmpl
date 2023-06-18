@@ -1,3 +1,4 @@
+---
 #---------------------------------------------------#
 ## 配置文件需要放置在 $HOME/.config/clash/*.yaml
 
@@ -13,7 +14,7 @@ socks-port: 7891
 redir-port: 7892
 tproxy-port: 7893
 
-ipv6:   false
+ipv6: false
 
 allow-lan: true
 bind-address: "*"
@@ -31,16 +32,16 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
   nameserver:
-    - 'https://doh.pub/dns-query'
-    - 'https://dns.alidns.com/dns-query'
-    - 'tls://dns.rubyfish.cn:853'
+    - "https://doh.pub/dns-query"
+    - "https://dns.alidns.com/dns-query"
+    - "tls://dns.rubyfish.cn:853"
   fallback:
-    - 'https://dns.google/dns-query'
-    - 'https://1.1.1.1/dns-query'
-    - 'tls://1.1.1.1:853'
-    - 'tcp://1.1.1.1:53'
-    - 'tcp://208.67.222.222:443'
-    - 'tls://dns.google'
+    - "https://dns.google/dns-query"
+    - "https://1.1.1.1/dns-query"
+    - "tls://1.1.1.1:853"
+    - "tcp://1.1.1.1:53"
+    - "tcp://208.67.222.222:443"
+    - "tls://dns.google"
   fallback-filter:
     geoip: true
     ipcidr:
@@ -61,9 +62,19 @@ dns:
 proxies:
   - name: "bwg"
     type: trojan
-    server: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").serverbwg.value }}
+    server:
+      {
+        {
+          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").serverbwg.value,
+        },
+      }
     port: 443
-    password: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passbwg.value }}
+    password:
+      {
+        {
+          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passbwg.value,
+        },
+      }
     sni: ""
     alpn:
       - h2
@@ -72,15 +83,24 @@ proxies:
 
   - name: "tripod"
     type: trojan
-    server: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").servertripod.value }}
+    server:
+      {
+        {
+          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").servertripod.value,
+        },
+      }
     port: 443
-    password: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passtripod.value }}
+    password:
+      {
+        {
+          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passtripod.value,
+        },
+      }
     sni: ""
     alpn:
       - h2
       - http/1.1
     skip-cert-verify: true
-
 
 proxy-groups:
   # select is used for selecting proxy or proxy group
