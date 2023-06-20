@@ -118,3 +118,21 @@
   (org-journal-encrypt-journal t)
   (org-journal-enable-cache t)
   (org-journal-carryover-items nil))
+
+
+;; devel package
+(use-package delve
+  :after (org-roam)
+  ;; this is necessary if use-package-always-defer is true
+  :demand t
+  :bind
+  ;; the main entry point, offering a list of all stored collections
+  ;; and of all open Delve buffers:
+  (("<f12>" . delve))
+  :config
+  ;; set meaningful tag names for the dashboard query
+  (setq delve-dashboard-tags '("Tag1" "Tag2"))
+  ;; optionally turn on compact view as default
+  (add-hook #'delve-mode-hook #'delve-compact-view-mode)
+ ;; turn on delve-minor-mode when Org Roam file is opened:
+  (delve-global-minor-mode))
