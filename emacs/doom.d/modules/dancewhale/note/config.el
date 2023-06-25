@@ -136,3 +136,11 @@
   (add-hook #'delve-mode-hook #'delve-compact-view-mode)
  ;; turn on delve-minor-mode when Org Roam file is opened:
   (delve-global-minor-mode))
+
+
+(use-package vulpea
+  :ensure t
+  ;; hook into org-roam-db-autosync-mode you wish to enable
+  ;; persistence of meta values (see respective section in README to
+  ;; find out what meta means)
+  :hook ((org-roam-db-autosync-mode . vulpea-db-autosync-enable)))

@@ -117,4 +117,18 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 (eval-after-load 'org '(add-hook 'org-mode-hook (lambda () (org-define-scheme-url))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  my code of chezmoi.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq chezmoi-dir "~/.local/share/chezmoi/")
+(map!
+ :prefix "s-e"
+ "s-f"   #'cao/find-file-re)
+
+(defun cao/find-file-re ()
+  "Search for a file in `doom-user-dir'."
+  (interactive)
+  (doom-project-find-file default-directory))
+
+
 ;;; function.el

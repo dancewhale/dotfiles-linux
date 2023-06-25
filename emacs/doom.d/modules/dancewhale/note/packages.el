@@ -16,3 +16,5 @@
 
 (package!  delve-show
   :recipe (:host github :repo "natask/delve-show" :branch "master" :files ("*.el")))
+
+(package! vulpea)
