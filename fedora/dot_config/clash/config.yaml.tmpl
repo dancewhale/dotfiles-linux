@@ -62,40 +62,9 @@ dns:
 proxies:
   - name: "bwg"
     type: trojan
-    server:
-      {
-        {
-          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").serverbwg.value,
-        },
-      }
+    server: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").serverbwg.value }}
     port: 443
-    password:
-      {
-        {
-          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passbwg.value,
-        },
-      }
-    sni: ""
-    alpn:
-      - h2
-      - http/1.1
-    skip-cert-verify: true
-
-  - name: "tripod"
-    type: trojan
-    server:
-      {
-        {
-          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").servertripod.value,
-        },
-      }
-    port: 443
-    password:
-      {
-        {
-          (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passtripod.value,
-        },
-      }
+    password:  {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passbwg.value }}
     sni: ""
     alpn:
       - h2
@@ -110,7 +79,6 @@ proxy-groups:
     # disable-udp: true
     proxies:
       - bwg
-      - tripod
 
 rule-providers:
   reject:
