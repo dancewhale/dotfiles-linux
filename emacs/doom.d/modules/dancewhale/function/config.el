@@ -120,6 +120,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  my code of chezmoi.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'chezmoi)
 (setq chezmoi-dir "~/.local/share/chezmoi/")
 (map!
  :prefix "s-e"
