@@ -63,7 +63,7 @@ proxies:
   - name: "bwg"
     type: trojan
     server: {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").serverbwg.value }}
-    port: 443
+    port: 32443
     password:  {{ (bitwardenFields "item" "1265a458-7d78-4ecf-a98f-ad88008cc274").passbwg.value }}
     sni: ""
     alpn:

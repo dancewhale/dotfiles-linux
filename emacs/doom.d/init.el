@@ -115,7 +115,7 @@
        ;; taskrunner       ; integates taskrunner
        terraform  ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
-       ;;upload            ; map local to remote projects via ssh/ftp
+       upload            ; map local to remote projects via ssh/ftp
 
        :os
        (tty +osc)

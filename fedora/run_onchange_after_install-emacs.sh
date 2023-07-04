@@ -13,9 +13,11 @@ sudo dnf install -y @development-tools autoconf \
 
 sudo dnf install -y libtool
 
-git clone git://git.sv.gnu.org/emacs.git /tmp/emacs -b emacs-28.2 --depth 1 || true
+mkdir -p ~/cache
 
-pushd /tmp/emacs
+git clone https://github.com/emacs-mirror/emacs.git ~/cache/emacs -b emacs-29 --depth 1 || true
+
+pushd ~/cache/emacs
 
 ./autogen.sh
 
