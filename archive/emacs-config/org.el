@@ -48,3 +48,13 @@
          (org-ql-block '(and (todo "TODO")
                               (tags "task"))
                        ((org-ql-block-header "SOMEDAY :Emacs: High-priority")))))))
+
+ ;; support marginnote open
+(defun marginnote3-open-ext (note-id)
+  (shell-command (concat "open marginnote3app://" note-id)))
+
+
+(defun org-define-scheme-url ()
+  (progn (org-add-link-type "marginnote3app" 'marginnote3-open-ext)))
+
+(eval-after-load 'org '(add-hook 'org-mode-hook (lambda () (org-define-scheme-url))))

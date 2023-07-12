@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: arch
+# key: arch
+# condition: t
+# --
+
+MACHINE=\`uname -m\`
+
+if [ ! "\$\{ARCH\}" ]; then
+	if [ "$\{MACHINE\}" == "x86_64" ]; then
+		ARCH=amd64
+	elif [ "\$\{MACHINE\}" == "aarch64" ]; then
+		ARCH=arm64
+	else
+		echo "Unknown machine" && exit 1
+	fi
+fi

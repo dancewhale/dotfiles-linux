@@ -95,13 +95,6 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert (format-time-string current-time-format (current-time)))
        (insert "\n"))
 
-(defun marginnote3-open-ext (note-id)
-  (shell-command (concat "open marginnote3app://" note-id)))
-
-
-(defun org-define-scheme-url ()
-  (progn (org-add-link-type "marginnote3app" 'marginnote3-open-ext)))
-
 (defun cao-emacs-magit ()
   (interactive)
   (magit-status-setup-buffer "~/.doom.d"))
@@ -115,7 +108,6 @@ Uses `current-date-time-format' for the formatting the date/time."
       "s-e g"    #'cao-emacs-magit
       "s-e s-f"  #'cao-emacs-counsel-ag)
 
-(eval-after-load 'org '(add-hook 'org-mode-hook (lambda () (org-define-scheme-url))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  my code of chezmoi.
