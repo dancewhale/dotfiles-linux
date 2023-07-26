@@ -5,6 +5,9 @@ sourceDir = '~/.local/share/chezmoi/fedora'
 {{ if eq .chezmoi.osRelease.id "manjaro" }}
 sourceDir = '~/.local/share/chezmoi/manjaro'
 {{ end }}
+{{ if eq .chezmoi.osRelease.id "archarm" }}
+sourceDir = '~/.local/share/chezmoi/arch'
+{{ end }}
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}

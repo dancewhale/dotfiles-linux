@@ -1,0 +1,15 @@
+[Unit]
+Description=Seafile client daemon.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/seaf-daemon -c %h/.ccnet -d %h/.config/seafile-data -w %h/.config/seafile
+WorkingDirectory=%h/.config/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target

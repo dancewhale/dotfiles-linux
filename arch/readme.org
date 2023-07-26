@@ -1,0 +1,12 @@
+#+title: Readme
+
+* fedora in vmware 需要注意的点
+默认的共享卷挂载，需要增加如下内容到/etc/fstab中
+#+begin_src shell
+.host:/ /mnt/  fuse.vmhgfs-fuse  defaults,allow_other 0 0
+#+end_src
+
+* fedora 安装seafile
+seaf-cli download -l "3440279a-fd36-4e94-bc0e-d3da402a1e58"  -s "http://file.主域名:2080" -d ~/  -u "我的邮箱"
+
+seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58"  -s "http://file.主域名:2080" -d ~/Dropbox  -u "我的邮箱"
