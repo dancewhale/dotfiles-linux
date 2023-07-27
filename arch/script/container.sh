@@ -2,13 +2,6 @@
 
 # 安装k8s 相关
 
-sudo dnf install -y docker || newgrp docker
+pacman -S docker kubectl
 
-sudo systemctl enable docker
-
-sudo systemctl start docker
-
-sudo dnf install -y kubernetes-client
-
-groups | grep docker || sudo gpasswd -a $USER docker
-
+#groups | grep docker || sudo gpasswd -a $USER docker

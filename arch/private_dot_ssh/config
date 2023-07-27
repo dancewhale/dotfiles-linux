@@ -1,3 +1,6 @@
+Host *
+  SetEnv TERM=xterm-256color
+
 Host kylin
  User caoyuanzhi
  Hostname  gitlab.kylincloud.org
@@ -13,3 +16,7 @@ Host harbor-amd64
 Host dell
  User whale
  Hostname  172.20.16.90
+
+Host zm
+ User root
+ Hostname 172.20.41.161

@@ -3,9 +3,15 @@
 # build emacs from source
 
 sudo pacman -S imagemagick webkitgtk webkitgtk2 libpng libjpeg-turbo libtiff xaw3d \
-    zlib libice libsm libx11 libxext libxi libxmu libxpm libxrandr libxt \
-    libxtst libxv librsvg libtiff libxft gpm wxgtk wxsqlite3 sqlite3
+  zlib libice libsm libx11 libxext libxi libxmu libxpm libxrandr libxt \
+  libxtst libxv librsvg libtiff libxft gpm wxgtk wxsqlite3 sqlite3
 
+# 其它文泉驿字体
+sudo pacman --noconfirm -S wqy-microhei-lite wqy-bitmapfont ttf-sarasa-gothic \
+  wqy-zenhei ttf-iosevka ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
+# 选用字体
+sudo pacman --noconfirm -S adobe-source-han-sans-cn-fonts \
+  adobe-source-han-serif-cn-fonts fontconfig
 
 mkdir -p ~/cache
 
@@ -18,20 +24,21 @@ pushd ~/cache/emacs
 export CC=/usr/bin/gcc CXX=/usr/bin/gcc
 
 ./configure \
-  --with-native-compilation   --with-json \
-  --with-cairo                --with-harfbuzz \
-  --with-modules              --with-mailutils \
-  --with-imagemagick          --with-png \
-  --with-tiff                 --with-jpeg \
-  --with-xpm                  --with-zlib \
-  --with-rsvg                 --with-included-regex \
-  --with-threads              --with-x-toolkit=gtk3 \
-  --with-xwidgets             --with-gif \
-  --with-xml2                 --with-pop \
-  --without-compress-install  --with-native-compilation \
-  --with-pgtk
+  --with-native-compilation --with-json \
+  --with-cairo --with-harfbuzz \
+  --with-modules --with-mailutils \
+  --with-imagemagick --with-png \
+  --with-tiff --with-jpeg \
+  --with-xpm --with-zlib \
+  --with-rsvg --with-included-regex \
+  --with-threads --with-x-toolkit=gtk3 \
+  --with-xwidgets --with-gif \
+  --with-xml2 --with-pop \
+  --without-compress-install --with-native-compilation \
+  --with-pgtk --with-be-app --with-be-cairo \
+  --with-tree-sitter
 
-make -j5
+make -j4
 
 sudo make install
 

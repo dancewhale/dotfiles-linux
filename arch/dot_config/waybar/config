@@ -10,8 +10,7 @@
 {
   "include": "~/.config/waybar/modules",
   "layer": "top",
-  "output": "eDP-1",
-//"output": "DP-2",
+  "output": "Virtual-1",
   "exclusive": true,
   "passthrough": false,
   "height": 38,

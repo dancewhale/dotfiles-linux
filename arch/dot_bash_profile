@@ -18,6 +18,10 @@ fi
   export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
   # 使用qt5ct软件配置QT程序外观
   export QT_QPA_PLATFORMTHEME=qt5ct
+  # mouse disapper
+  export WLR_NO_HARDWARE_CURSORS=1
+  export WLR_RENDERER_ALLOW_SOFTWARE=1
+  export  MOZ_ENABLE_WAYLAND=1
 
   # 一些游戏使用wayland
   export SDL_VIDEODRIVER=wayland
