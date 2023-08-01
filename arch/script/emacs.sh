@@ -2,15 +2,15 @@
 
 # build emacs from source
 
-sudo pacman -S imagemagick webkitgtk webkitgtk2 libpng libjpeg-turbo libtiff xaw3d \
-  zlib libice libsm libx11 libxext libxi libxmu libxpm libxrandr libxt \
-  libxtst libxv librsvg libtiff libxft gpm wxgtk wxsqlite3 sqlite3
+sudo pacman -S --noconfirm --needed imagemagick libpng libjpeg-turbo libtiff xaw3d \
+  zlib libice libsm libx11 libxext libxi libxmu libxpm libxrandr libxt libgccjit tree-sitter \
+  libxtst libxv librsvg libtiff libxft gpm wxsqlite3 sqlite3 webkitgtk-6.0  webkit2gtk-4.1 webkit2gtk
 
 # 其它文泉驿字体
-sudo pacman --noconfirm -S wqy-microhei-lite wqy-bitmapfont ttf-sarasa-gothic \
-  wqy-zenhei ttf-iosevka ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
+sudo pacman --noconfirm -S --needed wqy-microhei-lite wqy-bitmapfont ttf-sarasa-gothic \
+  wqy-zenhei ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
 # 选用字体
-sudo pacman --noconfirm -S adobe-source-han-sans-cn-fonts \
+sudo pacman --noconfirm -S --needed adobe-source-han-sans-cn-fonts \
   adobe-source-han-serif-cn-fonts fontconfig
 
 mkdir -p ~/cache
@@ -44,20 +44,20 @@ sudo make install
 
 popd
 
-# https://gist.github.com/algal/9fc1d9a1b3f35f84e94937eef90887c7
-pushd $(mktemp -d)
-cat <<EOF >terminfo-24bit.src
-xterm-species|xterm with 24-bit color for Emacs (ISO8613-6 format),
-  use=xterm-256color,
-  setb24=\E[48\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%dm,
-  setf24=\E[38\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%dm,
-xterm-24bit|xterm with 24-bit color for Emacs (legacy format),
-  use=xterm-256color,
-  sitm=\E[3m,
-  ritm=\E[23m,
-  setb24=\E[48;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
-  setf24=\E[38;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
-EOF
-
-tic -x -o ~/.terminfo terminfo-24bit.src
-rm terminfo-24bit.src
+## https://gist.github.com/algal/9fc1d9a1b3f35f84e94937eef90887c7
+#pushd $(mktemp -d)
+#cat <<EOF >terminfo-24bit.src
+#xterm-species|xterm with 24-bit color for Emacs (ISO8613-6 format),
+#  use=xterm-256color,
+#  setb24=\E[48\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%dm,
+#  setf24=\E[38\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%dm,
+#xterm-24bit|xterm with 24-bit color for Emacs (legacy format),
+#  use=xterm-256color,
+#  sitm=\E[3m,
+#  ritm=\E[23m,
+#  setb24=\E[48;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+#  setf24=\E[38;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+#EOF
+#
+#tic -x -o ~/.terminfo terminfo-24bit.src
+#rm terminfo-24bit.src

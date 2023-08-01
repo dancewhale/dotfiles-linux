@@ -2,6 +2,6 @@
 
 # 安装k8s 相关
 
-pacman -S docker kubectl
+sudo pacman -S docker kubectl
 
-#groups | grep docker || sudo gpasswd -a $USER docker
+groups | grep docker || sudo gpasswd -a $USER docker

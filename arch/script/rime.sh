@@ -16,5 +16,3 @@ XMODIFIERS=@im=fcitx5' | sudo tee -a /etc/environment
 
 # 系统安装 rime 输入方案
 paru -Sy rime-ice-git
-
-ceshi
