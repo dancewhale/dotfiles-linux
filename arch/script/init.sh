@@ -138,19 +138,6 @@ GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS=@im=fcitx5' | sudo tee -a /etc/environment
 
-    # Setting seafile
-    # 安装并启动seafile
-    mkdir ~/Dropbox
-
-    session=$(bw unlock |grep export)
-    eval ${session:2}
-
-    surl=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").url.value }}' | chezmoi execute-template)
-    suser=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").user.value }}' | chezmoi execute-template)
-    spass=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").password.value }}' | chezmoi execute-template)
-
-    seaf-cli status | grep Dropbox || seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58" -s $surl -d ~/Dropbox -u $suser -p $spass
-
 
 }
 
@@ -461,6 +448,21 @@ check-results() {
 
 post-install-message() {
     printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Post-Installation:"
+    printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Start setting seafile."
+    # Setting seafile
+    # 安装并启动seafile
+    mkdir ~/Dropbox
+
+    session=$(bw unlock |grep export)
+    eval ${session:2}
+
+    surl=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").url.value }}' | chezmoi execute-template)
+    suser=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").user.value }}' | chezmoi execute-template)
+    spass=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").password.value }}' | chezmoi execute-template)
+
+    seaf-cli status | grep Dropbox || seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58" -s $surl -d ~/Dropbox -u $suser -p $spass
+
+
 }
 
 
