@@ -14,6 +14,7 @@ cava
 chezmoi
 chrony
 cliphist
+cmake
 cyberchef-electron
 dkms
 dnsmasq
@@ -119,6 +120,7 @@ ripgrep
 sbcl
 sddm-theme-astronaut
 shfmt
+shellcheck
 slurp
 socat
 songrec
@@ -147,7 +149,6 @@ wget
 wildmidi
 wireplumber
 wl-clipboard
-wlogout
 wofi
 wqy-zenhei
 xapian-core

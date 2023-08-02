@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 main() {
     init-constants
     update-system
@@ -10,7 +9,6 @@ main() {
     set-user-groups
     enable-services
     set-leftovers
-    check-results
     post-install-message
 }
 
@@ -37,7 +35,6 @@ init-constants() {
     #printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}"
 }
 
-
 update-system() {
     sudo pacman --noconfirm -Syu
 }
@@ -48,8 +45,8 @@ install-paru() {
 
     mkdir -p ~/cache
     # Install paru package manager from AUR
-    git clone https://aur.archlinux.org/paru.git  ~/cache/paru || true
-    pushd  ~/cache/paru
+    git clone https://aur.archlinux.org/paru.git ~/cache/paru || true
+    pushd ~/cache/paru
     makepkg --noconfirm -si
 
     # Clean up unused dependencies
@@ -57,21 +54,21 @@ install-paru() {
 
     # Check if paru is installed
     if paru --version &>/dev/null; then
-      printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "paru package manager installed successfully."
+        printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "paru package manager installed successfully."
     else
-      printf '%b%s%b\n' "${FX_BOLD}${FG_RED}" "Installation of paru package manager failed."
+        printf '%b%s%b\n' "${FX_BOLD}${FG_RED}" "Installation of paru package manager failed."
     fi
+    popd
 }
-
 
 install-packages() {
     # Start packages installation - paclist
     printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Starting Packages Installation from paclist..."
-    sudo pacman -S --needed $(cat ./paclist)
+    sudo pacman -S --needed $(cat ${PWD}/paclist)
     printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Installation of packages from paclist has finished succesfully."
     # parulist
     printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Starting Packages Installation from parulist..."
-    paru -S --needed $(cat ./parulist)
+    paru -S --needed $(cat ${PWD}/parulist)
     printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Installation of packages from parulist has finished succesfully."
 
     # Installing plugins for nnn file manager if not installled
@@ -115,7 +112,7 @@ install-packages() {
 
     # Export default PATH to zsh config
     zshenv_file="/etc/zsh/zshenv"
-    line_to_append='export ZDOTDIR="$HOME"/.config/zsh'
+    line_to_append="export ZDOTDIR=$HOME/.config/zsh"
 
     if [ ! -f "$zshenv_file" ]; then
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating $zshenv_file..."
@@ -127,77 +124,75 @@ install-packages() {
 
     # Setting clash-meta config
     printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Copy clash config to etc dir."
-    sudo cp -r ~/.config/clash/*  /etc/clash-meta/
+    sudo cp -r ~/.config/clash/* /etc/clash-meta/
 
     # Setting ficti5
     imsettings-switch fcitx5
     sudo alternatives --config xinputrc
     sudo grep "fcitx5" /etc/environment ||
-    echo 'INPUT_METHOD=fcitx5
+        echo 'INPUT_METHOD=fcitx5
 GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
 XMODIFIERS=@im=fcitx5' | sudo tee -a /etc/environment
 
-
 }
-
 
 set-user-groups() {
     # Razer, audit and sddm autologin group
     add_groups=(
-     plugdev
-     audit
-     autologin
+        plugdev
+        audit
+        autologin
     )
 
     for group in "${add_groups[@]}"; do
-      if ! getent group "$group" >/dev/null; then
-        printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating group '$group'..."
-        sudo groupadd "$group"
-      else
-        printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Group '$group' already exists."
-      fi
+        if ! getent group "$group" >/dev/null; then
+            printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating group '$group'..."
+            sudo groupadd "$group"
+        else
+            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Group '$group' already exists."
+        fi
     done
 
     # Libvirtd groups (for virt-manager)
     usermod_groups=(
-      libvirt
-      libvirt-qemu
-      kvm
-      input
-      disk
-      docker
+        libvirt
+        libvirt-qemu
+        kvm
+        input
+        disk
+        docker
     )
 
     gpasswd_groups=(
-      audit
-      autologin
-      plugdev
-      mpd
-      docker
+        audit
+        autologin
+        plugdev
+        mpd
+        docker
     )
 
     username="$(whoami)"
 
     # Adding user to groups using usermod
     for group in "${usermod_groups[@]}"; do
-      if ! groups "$username" | grep -q "\<$group\>"; then
-        printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Adding user '$username' to group '$group'..."
-        sudo usermod -aG "$group" "$username"
-      else
-        printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "User '$username' is already a member of group '$group'."
-      fi
+        if ! groups "$username" | grep -q "\<$group\>"; then
+            printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Adding user '$username' to group '$group'..."
+            sudo usermod -aG "$group" "$username"
+        else
+            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "User '$username' is already a member of group '$group'."
+        fi
     done
 
     # Adding user to groups using gpasswd
     for group in "${gpasswd_groups[@]}"; do
-      if ! groups "$username" | grep -q "\<$group\>"; then
-        printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Adding user '$username' to group '$group'..."
-        sudo gpasswd -a "$username" "$group"
-        sudo chmod 710 "/home/$(whoami)"      # needed for mpd group
-      else
-        printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "User '$username' is already a member of group '$group'."
-      fi
+        if ! groups "$username" | grep -q "\<$group\>"; then
+            printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Adding user '$username' to group '$group'..."
+            sudo gpasswd -a "$username" "$group"
+            sudo chmod 710 "/home/$(whoami)" # needed for mpd group
+        else
+            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "User '$username' is already a member of group '$group'."
+        fi
     done
 }
 
@@ -219,27 +214,14 @@ install-go-packages() {
     go install github.com/go-delve/delve/cmd/dlv@latest
 }
 
-
 enable-services() {
     local services=(
         sddm
-        apparmor
-        firewalld
-        irqbalance
-        chronyd
-        systemd-oomd
-        systemd-resolve
-        paccache.timer      # enable weekly pkg cache cleaning
-        ananicy             # enable ananicy daemon (CachyOS has it built in)
-        nohang-desktop
-        vnstat              # network traffic monitor
-        libvirtd            # enable qemu/virt manager daemon
         docker
         clash-meta
     )
 
     local users=(
-        clash-meta
         waynergy
         seafile
     )
@@ -272,16 +254,13 @@ enable-services() {
         fi
     done
 
-
-
     # Call the check_enabled_services function and pass the services array as an argument
     check-results "${services[@]}"
 
     # Other services
-    hblock                               # block ads and malware domains
+    hblock # block ads and malware domains
     #playerctld daemon                   # if it doesn't work try installing volumectl
 }
-
 
 set-leftovers() {
     # Disable the systemd-boot startup entry if systemd-boot is installed
@@ -325,16 +304,16 @@ set-leftovers() {
     fi
 
     # Create Hyprland desktop entry if Hyprland is installed
-    if command -v hyprland >/dev/null; then
+    if command -v Hyprland >/dev/null; then
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating Hyprland desktop entry..."
 
-        sudo bash -c 'cat > /usr/share/wayland-sessions/hyprland.desktop' <<-'EOF'
-        [Desktop Entry]
-        Name=Hyprland
-        Comment=hyprland
-        Exec="$HOME/.config/hypr/scripts/starth"   # IF CRASHES TRY: bash -c "$HOME/.config/hypr/scripts/starth"
-        Type=Application
-        EOF
+        sudo bash -c "cat <<EOF > /usr/share/wayland-sessions/hyprland.desktop
+        [Desktop Entry]\n
+        Name=Hyprland\n
+        Comment=hyprland\n
+        Exec=\"$HOME/.config/hypr/scripts/starth\"   # IF CRASHES TRY: bash -c \"$HOME/.config/hypr/scripts/starth\"\n
+        Type=Application\n
+        EOF"
 
         printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Hyprland desktop entry created."
     else
@@ -345,7 +324,7 @@ set-leftovers() {
     if command -v sddm >/dev/null; then
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating /etc/sddm.conf file..."
 
-        sudo bash -c 'cat > /etc/sddm.conf' <<-'EOF'
+        sudo bash -c 'cat <<EOF > /etc/sddm.conf
         # Use autologin if have problems with sddm
         #[Autologin]
         #Session=hyprland
@@ -357,7 +336,7 @@ set-leftovers() {
         CursorTheme=Numix-Cursor-Light
         Font=JetBrains Mono
         ThemeDir=/usr/share/sddm/themes
-        EOF
+        EOF'
 
         printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "/etc/sddm.conf file created."
     else
@@ -372,79 +351,14 @@ set-leftovers() {
 
     # Compare the current value with the desired value using an if statement
     if [ "$current_button_layout" != "$desired_button_layout" ]; then
-      # If they don't match, update the button layout using the gsettings command
-      gsettings set org.gnome.desktop.wm.preferences button-layout "$desired_button_layout"
-      printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Button layout has been updated."
+        # If they don't match, update the button layout using the gsettings command
+        gsettings set org.gnome.desktop.wm.preferences button-layout "$desired_button_layout"
+        printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Button layout has been updated."
     else
-      # If they match, display a message indicating that the value is already as desired
-      printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Button layout is already set as desired."
+        # If they match, display a message indicating that the value is already as desired
+        printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Button layout is already set as desired."
     fi
 }
-
-check-results() {
-    # Check if all packages from paclist and yayllist has been installed
-    package_list_file="./paclist"
-    package_list_file_2="./parulist"
-    missing_packages=()
-
-    # Function to check if a package is missing and add it to the missing_packages array
-    local package="$1"
-    if ! pacman -Qs "$package" > /dev/null ; then
-        missing_packages+=("$package")
-    fi
-
-    # Check packages from the paclist
-    while IFS= read -r package
-    do
-        check_package "$package"
-    done < "$package_list_file"
-
-    # Check packages from the yaylist
-    while IFS= read -r package
-    do
-        check_package "$package"
-    done < "$package_list_file_2"
-
-    if [ ${#missing_packages[@]} -eq 0 ]; then
-        printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "All packages are installed!"
-    else
-        printf '%b%s%b\n' "${FX_BOLD}${FG_RED}" "The following packages are not installed:"
-        for package in "${missing_packages[@]}"
-        do
-            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "$package"
-        done
-    fi
-
-    # Check if services are enabled
-    local services=("$@")
-
-    printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Checking service status..."
-
-    for service in "${services[@]}"
-    do
-        if systemctl is-enabled "$service" >/dev/null 2>&1; then
-            printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Service $service is enabled."
-        else
-            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Service %s is not enabled:\n" "$service"
-        fi
-    done
-
-    # Check if user services are enabled
-    local users=("$@")
-
-    printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Checking user service status..."
-
-    for service in "${users[@]}"
-    do
-        if systemctl is-enabled "$service" >/dev/null 2>&1; then
-            printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Service $service is enabled."
-        else
-            printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "Service %s is not enabled:\n" "$service"
-        fi
-    done
-
-}
-
 
 post-install-message() {
     printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Post-Installation:"
@@ -453,7 +367,7 @@ post-install-message() {
     # 安装并启动seafile
     mkdir ~/Dropbox
 
-    session=$(bw unlock |grep export)
+    session=$(bw unlock | grep export)
     eval ${session:2}
 
     surl=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").url.value }}' | chezmoi execute-template)
@@ -462,9 +376,6 @@ post-install-message() {
 
     seaf-cli status | grep Dropbox || seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58" -s $surl -d ~/Dropbox -u $suser -p $spass
 
-
 }
-
-
 
 main "$@"
