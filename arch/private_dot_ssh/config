@@ -13,7 +13,7 @@ Host harbor-amd64
  User kylin
  Hostname  172.20.120.75
 
-Host dell
+Host arch
  User whale
  Hostname  172.20.16.90
 

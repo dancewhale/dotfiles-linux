@@ -19,7 +19,7 @@ sudo pacman -S --noconfirm --needed   noto-fonts noto-fonts-cjk noto-fonts-emoji
 
 which paru || install_paru
 
-paru -Sy  hyprland-git  waybar-hyprland-git  waynergy-git  synergy3-bin
+paru -Sy  hyprland-git  waybar-hyprland-git  waynergy-git wlogout
 
 paru -Sy rofi-lbonn-wayland-only-git
 
