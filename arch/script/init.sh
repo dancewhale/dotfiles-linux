@@ -308,11 +308,11 @@ set-leftovers() {
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating Hyprland desktop entry..."
 
         sudo bash -c "cat <<EOF > /usr/share/wayland-sessions/hyprland.desktop
-        [Desktop Entry]\n
-        Name=Hyprland\n
-        Comment=hyprland\n
-        Exec=\"$HOME/.config/hypr/scripts/starth\"   # IF CRASHES TRY: bash -c \"$HOME/.config/hypr/scripts/starth\"\n
-        Type=Application\n
+        [Desktop Entry]
+        Name=Hyprland
+        Comment=hyprland
+        Exec=bash -c \"$HOME/.config/hypr/scripts/starth\"
+        Type=Application
         EOF"
 
         printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Hyprland desktop entry created."
