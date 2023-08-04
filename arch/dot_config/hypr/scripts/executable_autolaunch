@@ -1,0 +1,15 @@
+#! /bin/sh
+
+###### class name && binary name ######
+## workspace 1
+hyprctl keyword windowrule "workspace 1 silent,casual-kitty" && hyprctl dispatch exec "kitty -1 -T casual-kitty --class casual-kitty --session ~/.config/kitty/ws-1-session"
+
+# workspace 2
+hyprctl keyword windowrule "workspace 2 silent,emacs" && sleep 5 && hyprctl dispatch exec "emacsclient -c -a emacs"   # sleep 5 waits for emacs --daemon from autstart.conf to start
+
+
+sleep 10      # wait untill apps run
+
+# unset by class name
+hyprctl keyword windowrule "unset,casual-kitty"
+hyprctl keyword windowrule "unset,emacs"
