@@ -103,7 +103,8 @@
 ;;  )
 
 (after! org
-  (setq org-tags-column -70))
+  (setq org-tags-column -70)
+  (require 'ucs-normalize))
 
 ;; Org Journal config
 (use-package org-journal

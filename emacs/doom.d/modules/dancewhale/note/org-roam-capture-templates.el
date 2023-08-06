@@ -20,7 +20,7 @@
 
 (setq org-roam-capture-templates
       `(("d" "default" plain "%?"
-	 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"  "${title}
+	 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"  "#+TITLE: ${title}
 #+CREATED: %u\n#+MODIFIED:\n#+FILETAGS:\n* ${title}"):unnarrowed t)
 	("r" "res" plain "%?"
 	 :target (file+head  ,(concat roam_path "/res/%<%Y%m%d%H%M%S>-${slug}.org")
