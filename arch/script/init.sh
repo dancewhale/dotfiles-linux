@@ -308,12 +308,12 @@ set-leftovers() {
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating Hyprland desktop entry..."
 
         sudo bash -c "cat <<EOF > /usr/share/wayland-sessions/hyprland.desktop
-        [Desktop Entry]
-        Name=Hyprland
-        Comment=hyprland
-        Exec=bash -c \"$HOME/.config/hypr/scripts/starth\"
-        Type=Application
-        EOF"
+[Desktop Entry]
+Name=Hyprland
+Comment=hyprland
+Exec=bash -c \"$HOME/.config/hypr/scripts/starth\"
+Type=Application
+"
 
         printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "Hyprland desktop entry created."
     else
@@ -325,18 +325,18 @@ set-leftovers() {
         printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Creating /etc/sddm.conf file..."
 
         sudo bash -c 'cat <<EOF > /etc/sddm.conf
-        # Use autologin if have problems with sddm
-        #[Autologin]
-        #Session=hyprland
-        #User=twilight
+# Use autologin if have problems with sddm
+#[Autologin]
+#Session=hyprland
+#User=twilight
 
-        [Theme]
-        Current=astronaut
-        CursorSize=24
-        CursorTheme=Numix-Cursor-Light
-        Font=JetBrains Mono
-        ThemeDir=/usr/share/sddm/themes
-        EOF'
+[Theme]
+Current=astronaut
+CursorSize=24
+CursorTheme=Numix-Cursor-Light
+Font=JetBrains Mono
+ThemeDir=/usr/share/sddm/themes
+'
 
         printf '%b%s%b\n' "${FX_BOLD}${FG_GREEN}" "/etc/sddm.conf file created."
     else
