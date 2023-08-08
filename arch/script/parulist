@@ -38,6 +38,7 @@ seafile-client
 shellcheck-bin
 swaylock-effects
 sysz
+kind-bin
 tabbed-git
 tty-clock-git
 udev-block-notify-git

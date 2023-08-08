@@ -45,6 +45,7 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 hblock
+helm
 hub
 imagemagick
 inetutils
@@ -53,6 +54,7 @@ irqbalance
 jq
 keepassxc
 kitty
+kubectl
 libgccjit
 libguestfs
 libnotify
