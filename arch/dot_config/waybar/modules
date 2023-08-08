@@ -57,7 +57,7 @@
 
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
   "clock": {
-    "timezone": "Europe/Warsaw",
+    "timezone": "Asia/Shanghai",
     "interval": 60,
     "align": 0,
     "rotate": 0,
