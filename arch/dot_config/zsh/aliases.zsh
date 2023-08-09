@@ -34,6 +34,7 @@ alias kill='killall -q'
 alias kgnome='killall -3 gnome-shell'
 alias sv="sudo nvim"
 alias v="nvim"
+alias vim="nvim"
 alias tr="trash"
 alias fetch='clear && neofetch && fortune ~/.config/fortune/quotes'
 alias nfetch='clear && neofetch --kitty ~/pictures/bateman.png && fortune ~/.config/fortune/quotes'

@@ -20,7 +20,7 @@
        ;; layout
 
        :completion
-       ;; company           ; the ultimate code completion backend
+       company           ; the ultimate code completion backend
        ;;(helm
        ;;	+childframe)
 					; the *other* search engine for love and life
