@@ -10,3 +10,5 @@ metadata:
   name: ${1:myapp}
 data:
   ${2:key}: ${3:value}
+  fileName: |
+    ${4:content}
