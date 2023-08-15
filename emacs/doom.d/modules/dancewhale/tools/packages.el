@@ -39,3 +39,5 @@
   :recipe (:host github :repo "tuh8888/chezmoi.el" :branch "main"))
 
 (package! kubedoc)
+
+(package! xterm-color)
