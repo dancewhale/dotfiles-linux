@@ -107,3 +107,5 @@
 ;
 ;  (setq eaf-terminal-font-size 18)
 ;  (setq eaf-pyqterminal-font-size 18))
+
+(require 'xterm-color)
