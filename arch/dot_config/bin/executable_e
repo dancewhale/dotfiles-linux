@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash
 if [ -z "$1" ]; then
     TMP="$(mktemp /tmp/stdin-XXX)"
     cat >$TMP

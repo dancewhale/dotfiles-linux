@@ -23,6 +23,14 @@ mode: Rule
 log-level: info
 external-controller: 127.0.0.1:9090
 
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - 'any:53'
+  auto-route: true
+  auto-detect-interface: true
+
 dns:
   enable: true
   listen: 0.0.0.0:1053
