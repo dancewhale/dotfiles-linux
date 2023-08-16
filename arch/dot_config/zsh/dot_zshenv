@@ -9,7 +9,7 @@ export XDG_STATE_HOME="$HOME/.local/state"           # For state files
 # User-specific environment variables (system-wide are located in /etc/environment)
 export EDITOR="emacsclient -c -a emacs"
 export ALTERNATE_EDITOR=""
-#export EDITOR="nvim"
+export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="kitty -1"
 export BROWSER="cachy-browser"
@@ -85,6 +85,9 @@ export NNN_PLUG='b:bulknew;o:fzopen;c:fzcd;j:autojump;p:preview-tui;i:imgview;u:
 #export NNN_FCOLORS='00000E6310000000000000000'
 export NNN_FIFO='/tmp/nnn.fifo'
 export SPLIT='v'
+
+# PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin/:$PATH"
 
 # Payloads vars
 export PAYLOADS="/usr/share/payloads"
