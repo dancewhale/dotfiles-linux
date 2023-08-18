@@ -3,7 +3,7 @@ if [ -z "$1" ]; then
     TMP="$(mktemp /tmp/stdin-XXX)"
     cat >$TMP
     # fix ansi escape error, replace : to ;
-    sed -i "s/\([0-9m]*\):\([0-9m]*\):\([0-9m]*\)/\1;\2;\3/g" $TMP
+    sed -i "s/\([0-9m]*\):\([0-9]*\):\([0-9]*m\)/\1;\2;\3/g" $TMP
 
     emacsclient -nw -a emacs -e "(progn (find-file \"$TMP\")(xterm-color-colorize-buffer))"
 
