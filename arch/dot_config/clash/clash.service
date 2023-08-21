@@ -10,9 +10,9 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 Restart=on-failure
 
-ExecStartPre=+/usr/bin/bash /etc/clash/clean.sh
-ExecStart=/usr/local/bin/clash -d /etc/clash
-ExecStartPost=+/usr/bin/bash /etc/clash/iptables.sh
+ExecStartPre=+/usr/bin/bash /home/whale/.config/clash/clean.sh
+ExecStart=/usr/local/bin/clash -d /home/whale/.config/clash
+ExecStartPost=+/usr/bin/bash /home/whale/.config/clash/iptables.sh
 
 ExecStopPost=+/usr/bin/bash /etc/clash/clean.sh
 

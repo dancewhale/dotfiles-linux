@@ -122,10 +122,6 @@ install-packages() {
         printf '%b%s%b\n' "${FX_BOLD}${FG_YELLOW}" "$zshenv_file already exists."
     fi
 
-    # Setting clash-meta config
-    printf '%b%s%b\n' "${FX_BOLD}${FG_CYAN}" "Copy clash config to etc dir."
-    sudo cp -r ~/.config/clash/* /etc/clash-meta/
-
     # Setting ficti5
     imsettings-switch fcitx5
     sudo alternatives --config xinputrc
