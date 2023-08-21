@@ -5,7 +5,6 @@ apparmor
 base-devel
 bash-completion
 bat
-bitwarden-cli
 bridge-utils
 brightnessctl
 calibre

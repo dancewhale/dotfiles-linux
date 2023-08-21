@@ -106,3 +106,6 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # setting for emacs
 source ~/.config/zsh/emacs.zsh
+
+# TO import some password generate after init.
+[[ ! -f ~/.config/zsh/passwd ]] || source ~/.config/zsh/passwd
