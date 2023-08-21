@@ -17,7 +17,7 @@ finder:
 
 cheats:
   paths:
-    - ~/workspace/cheats
+    - /home/whale/.config/cheats
 # - /path/to/another/dir
 # path: /path/to/some/dir # (DEPRECATED) equivalent to the --path option
 

@@ -1,0 +1,14 @@
+% kubectl script
+
+# reset mysql-pods
+
+kubectl delete -f flyway-example.yaml
+
+kubectl delete pods -l batch.kubernetes.io/job-name=flyway 
+
+kubectl apply -f flyway-example.yaml
+
+sleep 2s
+
+kubectl fuzzy logs -f
+
