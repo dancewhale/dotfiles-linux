@@ -2,6 +2,8 @@
 
 (setq roam_path (file-truename "~/Dropbox/roam"))
 (setq journal_path (file-truename "~/Dropbox/roam/daily"))
+(setq worklog_path (file-truename "~/Dropbox/worklog"))
+
 
 ;;;-------------------------------------------------
 ;; roam 的配置
@@ -86,40 +88,36 @@
 	       (window-height . fit-window-to-buffer)))
 
 
+(after! org
+  (setq org-tags-column -70)
+  (require 'ucs-normalize))
+
 
 ;;;-------------------------------------------------
 ;;; org-journal的个人配置,该包主要用于工作学习日志
 ;;;-------------------------------------------------
 (require 'org-journal)
 
-;; (use-package org-journal
-;;   :bind
-;;   ("C-c n j" . org-journal-new-date-entry)
-;;   :custom
-;;   (org-journal-date-prefix  "#+title: ")
-;;   (org-journal-file-format "%Y-%m-%d.org")
-;;   (org-journal-dir roam_path)
-;;   (org-journal-date-format "%A, %d %B %Y")
-;;  )
-
-(after! org
-  (setq org-tags-column -70)
-  (require 'ucs-normalize))
-
 ;; Org Journal config
-(use-package org-journal
-  :defer t
-  :custom
-  (org-journal-dir journal_path)
-  (org-journal-file-type 'yearly)
-  ; (org-extend-today-until 01)
-  (org-journal-file-format "journal-%Y.org")
-  (org-journal-date-format "%Y-%m-%d %a")
-  (org-journal-created-property-timestamp-format "%Y-%m-%d")
-  (org-journal-encrypt-journal t)
-  (org-journal-enable-cache t)
-  (org-journal-carryover-items nil))
+(setq org-journal-dir worklog_path)
+;; (setq org-journal-file-type 'weekly)
+(setq org-journal-file-type 'monthly)
+(setq org-journal-file-format "%Y-%m-%d.org")
+(setq org-journal-date-format "%A, %x")
+(setq org-journal-date-prefix "* ")
+(setq org-journal-encrypt-journal nil)
+(setq org-journal-enable-cache t)
 
+;; (defun org-journal-file-header-func (time)
+;;   "Custom function to create journal header."
+;;   (concat
+;;     (pcase org-journal-file-type
+;;       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
+;;       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
+;;       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
+;;       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
+
+(setq org-journal-file-header 'org-journal-file-header-func)
 
 ;; devel package
 (use-package delve

@@ -34,6 +34,7 @@ fzf
 gcc
 git
 gnome-calculator
+gnuplot
 go
 graphviz
 grex
@@ -123,6 +124,10 @@ swappy
 swaybg
 swayidle
 taskell
+texlive-bin
+texlive-core
+texlive-latexextra
+texlive-science
 the_silver_searcher
 timidity++
 tokei

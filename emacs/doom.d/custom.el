@@ -19,10 +19,6 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#1E2029" "#50fa7b"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1E2029" "#565761"))
  '(objed-cursor-color "#ffffff")
- '(org-journal-date-format "%A, %d %B %Y" nil nil "Customized with use-package org-journal")
- '(org-journal-date-prefix "#+title: " nil nil "Customized with use-package org-journal")
- '(org-journal-dir "~/Dropbox/roam/" nil nil "Customized with use-package org-journal")
- '(org-journal-file-format "%Y-%m-%d.org" nil nil "Customized with use-package org-journal")
  '(package-selected-packages '(sis peep-dired docker))
  '(pdf-view-midnight-colors (cons "#f8f8f2" "#282a36"))
  '(rustic-ansi-faces
