@@ -24,7 +24,7 @@ pushd ~/cache/emacs
 export CC=/usr/bin/gcc CXX=/usr/bin/gcc
 
 ./configure \
-  --with-native-compilation --with-json \
+  --with-json \
   --with-cairo --with-harfbuzz \
   --with-modules --with-mailutils \
   --with-imagemagick --with-png \
@@ -34,7 +34,7 @@ export CC=/usr/bin/gcc CXX=/usr/bin/gcc
   --with-threads --with-x-toolkit=gtk3 \
   --with-xwidgets --with-gif \
   --with-xml2 --with-pop \
-  --without-compress-install --with-native-compilation \
+  --without-compress-install \
   --with-pgtk --with-be-app --with-be-cairo \
   --with-tree-sitter
 

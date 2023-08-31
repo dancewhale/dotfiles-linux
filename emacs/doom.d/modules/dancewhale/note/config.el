@@ -108,14 +108,10 @@
 (setq org-journal-encrypt-journal nil)
 (setq org-journal-enable-cache t)
 
-;; (defun org-journal-file-header-func (time)
-;;   "Custom function to create journal header."
-;;   (concat
-;;     (pcase org-journal-file-type
-;;       (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
-;;       (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
-;;       (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
-;;       (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
+;; change org-level-2 color.
+(add-hook 'org-journal-mode-hook
+  (lambda ()
+    (face-remap-add-relative 'org-level-2 '(:foreground "white" :weight 'normal))))
 
 (setq org-journal-file-header 'org-journal-file-header-func)
 

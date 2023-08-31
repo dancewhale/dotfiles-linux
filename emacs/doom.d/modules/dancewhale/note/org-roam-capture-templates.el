@@ -15,7 +15,7 @@
 
 
 (setq org-roam-dailies-capture-templates
-      '(("d" "default" entry "* %T %?" :target  (file+datetree "%<%Y-%m>.org" day))))
+      '(("d" "default" entry "*  %?" :target  (file+datetree "%<%Y-%m>.org" day))))
 
 
 (setq org-roam-capture-templates

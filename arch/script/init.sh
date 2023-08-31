@@ -370,7 +370,7 @@ post-install-message() {
     suser=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").user.value }}' | chezmoi execute-template)
     spass=$(echo '{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").password.value }}' | chezmoi execute-template)
 
-    seaf-cli status | grep Dropbox || seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58" -s $surl -d ~/Dropbox -u $suser -p $spass
+    seaf-cli status | grep Dropbox || seaf-cli sync -l "838a54d5-3992-4a1e-9948-67d5c4d1a903" -s $surl -d ~/Dropbox -u $suser -p $spass
 
 }
 
