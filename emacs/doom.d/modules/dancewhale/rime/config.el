@@ -97,9 +97,10 @@ unwanted space when exporting org-mode to hugo markdown."
 	rime-sidewindow-style 'simple
 	rime-inline-ascii-trigger 'shift-l)
 
-  (when (string-match-p "ARCH" operating-system-release)
-    (setq rime-share-data-dir "/usr/share/rime-data/")
-    )
+  (let ((case-fold-search nil))
+    (when (string-match-p "ARCH" operating-system-release)
+      (setq rime-share-data-dir "/usr/share/rime-data/")
+      ))
 
   (setq rime-translate-keybindings
 	'("C-f" "C-b" "C-n" "C-p" "C-g" "C-h" "<left>" "<tab>" "C-<tab>" "C-d"
