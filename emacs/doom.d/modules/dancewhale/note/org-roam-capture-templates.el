@@ -13,10 +13,10 @@
 ;;
 ;;; Code:
 
-
 (setq org-roam-dailies-capture-templates
-      '(("d" "default" entry "*  %?" :target  (file+datetree "%<%Y-%m>.org" day))))
-
+      '(("d" "default" entry  "* %?"
+	 :target (file+head "%<%Y-%m-%d>.org"
+			    "#+title: %<%Y-%m-%d>\n"))))
 
 (setq org-roam-capture-templates
       `(("d" "default" plain "%?"
