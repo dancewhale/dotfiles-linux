@@ -91,7 +91,7 @@ unwanted space when exporting org-mode to hugo markdown."
   (setq default-input-method "rime"
 	rime-share-data-dir (file-truename "~/.local/share/rime/ice")
 	rime-user-data-dir (file-truename "~/Dropbox/rimeSync")
-	rime-show-candidate 'popup 	;posframe 中文输入法 过快会导致emacs 崩溃。
+	rime-show-candidate 'posframe 	;posframe 中文输入法 过快会导致emacs 崩溃。
 	rime-posframe-style 'simple
 	rime-popup-style 'simple
 	rime-sidewindow-style 'simple

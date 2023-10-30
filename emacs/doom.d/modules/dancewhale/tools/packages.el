@@ -11,7 +11,7 @@
 (package! keyfreq)
 
 (package! anki-editor
-  :recipe (:host github :repo "louietan/anki-editor" :branch "master"))
+  :recipe (:host github :repo "orgtre/anki-editor" :branch "master"))
 
 (package! doom-snippets :ignore t)
 
