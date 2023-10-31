@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: anki
+# key: aa
+# type: snippet
+# --
+
+:PROPERTIES:
+:ANKI_DECK: elisp
+:ANKI_NOTE_TYPE: Basic
+:END:

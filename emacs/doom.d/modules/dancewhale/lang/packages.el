@@ -10,3 +10,5 @@
 
 (package! dui
   :recipe (:host github :repo "alezost/bui.el" :branch "master"))
+
+(package! org :pin "ca873f7")
