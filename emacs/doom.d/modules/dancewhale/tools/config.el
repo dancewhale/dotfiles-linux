@@ -16,9 +16,10 @@
 (when IS-MAC
   (progn
     (setq envpath (concat emacs_dep_path "mac/" os-arch))
+    (setq  rime-emacs-module-header-root "/opt/homebrew/opt/emacs-plus/include")
     (message "config for darwin.")
+    )
   )
-)
 
 (when IS-LINUX
   (progn
