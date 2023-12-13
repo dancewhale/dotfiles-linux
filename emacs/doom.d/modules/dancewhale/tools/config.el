@@ -25,9 +25,9 @@
   (progn
     (setq envpath (concat emacs_dep_path "linux/" os-arch))
     (message "config for linux.")
+    )
   )
-)
- 
+
 ;; 打开日志，开发者才需要
 ;; (setq lsp-bridge-enable-log t)
 
@@ -71,18 +71,18 @@
   (global-origami-mode)
   :bind
   (:map origami-mode-map
-   ("o" . origami-open-node)
-   ("O" . origami-open-node-recursively)
-   ("c" . origami-close-node)
-   ("C" . origami-close-node-recursively)
-   ("a" . origami-toggle-node)
-   ("A" . origami-recursively-toggle-node)
-   ("R" . origami-open-all-nodes)
-   ("M" . origami-close-all-nodes)
-   ("v" . origami-show-only-node)
-   ("k" . origami-previous-fold)
-   ("j" . origami-forward-fold)
-   ("x" . origami-reset)))
+	("o" . origami-open-node)
+	("O" . origami-open-node-recursively)
+	("c" . origami-close-node)
+	("C" . origami-close-node-recursively)
+	("a" . origami-toggle-node)
+	("A" . origami-recursively-toggle-node)
+	("R" . origami-open-all-nodes)
+	("M" . origami-close-all-nodes)
+	("v" . origami-show-only-node)
+	("k" . origami-previous-fold)
+	("j" . origami-forward-fold)
+	("x" . origami-reset)))
 
 
 (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
@@ -95,18 +95,19 @@
 
 (require 'chezmoi)
 
-;(when IS-LINUX
-;  (require 'eaf)
-;  (require 'eaf-pdf-viewer)
-;  (require 'eaf-browser)
-;  (require 'eaf-terminal)
-;  (require 'eaf-pyqterminal)
-;  ;; (require 'eaf-file-browser)
-;  ;; (require 'eaf-file-manager)
-;  (setq eaf-webengine-default-zoom 2)
-;  (setq eaf-pdf-zoom-step 2)
-;
-;  (setq eaf-terminal-font-size 18)
-;  (setq eaf-pyqterminal-font-size 18))
+					;(when IS-LINUX
+					;  (require 'eaf)
+					;  (require 'eaf-demo)
+					;  (require 'eaf-pdf-viewer)
+					;  (require 'eaf-browser)
+					;  (require 'eaf-terminal)
+					;  (require 'eaf-pyqterminal)
+					;  ;; (require 'eaf-file-browser)
+					;  ;; (require 'eaf-file-manager)
+					;  (setq eaf-webengine-default-zoom 2)
+					;  (setq eaf-pdf-zoom-step 2)
+					;
+					;  (setq eaf-terminal-font-size 18)
+					;  (setq eaf-pyqterminal-font-size 18))
 
 (require 'xterm-color)
