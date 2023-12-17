@@ -7,6 +7,8 @@
 :PROPERTIES:
 :ANKI_DECK: elisp
 :ANKI_NOTE_TYPE: Basic
+:CARD_TYPE: elisp
+:CARD_LINK: $0
 :END:
 
 #+BEGIN_SRC emacs-lisp

@@ -1,28 +1,49 @@
 ;;; learn/config.el -*- lexical-binding: t; -*-
 
-(setq self-learn-package-dir (file-truename "~/.doom.d/modules/learn/learn"))
+(setq learnify-source-dir (file-truename "~/.doom.d/modules/learn/learn"))
 
-(setq self-learn-resource-dir (file-truename "~/Dropbox/book"))
+(setq learnify-book-dir (file-truename "~/Dropbox/book"))
 
-(setq self-learn-output-dir (file-truename "~/Dropbox/anki"))
+(setq learnify-anki-dir (file-truename "~/Dropbox/anki"))
 
-(defun self-learn-open-resource-dir ()
+(defun learnify-open-book-dir ()
   (interactive)
-  (dired self-learn-resource-dir))
+  (dired learnify-book-dir))
 
-(defun self-learn-open-package-dir ()
+(defun learnify-open-source-dir ()
   (interactive)
-  (dired self-learn-package-dir))
+  (dired learnify-source-dir))
 
-(defun self-learn-open-output-dir ()
+(defun learnify-open-anki-dir ()
   (interactive)
-  (dired self-learn-output-dir))
+  (dired learnify-anki-dir))
 
+(setq learnify-property-card-type "CARD_TYPE")
+(setq learnify-property-card-link "CARD_LINK")
+
+(defun learnify-org-property ()
+  "Prompt for a property name and return its value for the current Org headline."
+  (interactive)
+  (let ((property (read-string "Enter property name: ")))
+    (message "%s" (org-entry-get (point) property))))
+
+(defun learnify-card-OpenLink ()
+  "Open link for card"
+  (interactive)
+  (let* ((learnify-current-card-type (org-entry-get (point) learnify-property-card-type))
+	 (learnify-current-card-link (org-entry-get (point) learnify-property-card-link))
+	 (learnify-link-open-function (intern (concat "learnify-" learnify-current-card-type "-link-open"))))
+    (funcall learnify-link-open-function learnify-current-card-link)))
+
+(defun learnify-elisp-link-open (link)
+  (info-lookup-symbol link 'lisp-mode)
+  )
 
 (map!
- (:prefix "s-e h"      :desc "Open self learn package dire."      :g  "h" #'self-learn-open-package-dir)
- (:prefix "s-e h"      :desc "Open self learn output dire."       :g  "a" #'self-learn-open-output-dir)
- (:prefix "s-e h"      :desc "Open self learn resource dire."     :g  "r" #'self-learn-open-resource-dir)
+ (:prefix "s-e l h"      :desc "Open learnify source code dire."      :g  "s" #'learnify-open-source-dir)
+ (:prefix "s-e l h"      :desc "Open learnify anki card dire."       :g  "a" #'learnify-open-anki-dir)
+ (:prefix "s-e l h"      :desc "Open learnify book resource dire."     :g  "b" #'learnify-open-book-dir)
+ (:prefix "s-e l l"      :desc "Open learnify reference Link."     :g  "r" #'learnify-card-OpenLink)
  (:map anki-editor-mode-map
   :desc "Push entrypoint at point."  :leader  "m p"       #'anki-editor-push-note-at-point
   :desc "Helpful open symbol at point." :leader "m h h" #'helpful-at-point
