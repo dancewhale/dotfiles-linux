@@ -11,6 +11,9 @@ sourceDir = '~/.local/share/chezmoi/arch'
 {{ if eq .chezmoi.osRelease.id "arch" }}
 sourceDir = '~/.local/share/chezmoi/arch'
 {{ end }}
+{{ if eq .chezmoi.osRelease.id "endeavouros" }}
+sourceDir = '~/.local/share/chezmoi/endeavouros'
+{{ end }}
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
