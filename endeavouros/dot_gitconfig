@@ -1,0 +1,14 @@
+[user]
+	email = 542727233@qq.com
+	name = dancewhale
+[core]
+	editor = vim
+[github]
+	user = dancewhale
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[init]
+	defaultBranch = master
