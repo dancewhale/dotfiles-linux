@@ -1,0 +1,14 @@
+[Unit]
+Description=Waynergy client daemon.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kmonad ./kmonad/gpdmax2.kbd
+WorkingDirectory=%h/.config/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=default.target
