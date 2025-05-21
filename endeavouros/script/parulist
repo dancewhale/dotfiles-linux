@@ -32,6 +32,7 @@ perl-checkupdates-aur
 python-epc
 python-sexpdata
 rime-ice-git
+fcitx5-rime
 rofi-lbonn-wayland-only-git
 sddm-git
 seafile-client

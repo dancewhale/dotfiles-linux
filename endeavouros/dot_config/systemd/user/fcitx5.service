@@ -1,0 +1,14 @@
+[Unit]
+Description=Fcitx5 chinese input method.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/fcitx5
+WorkingDirectory=%h/.config/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=default.target
