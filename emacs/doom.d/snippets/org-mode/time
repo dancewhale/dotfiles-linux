@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: time
-# key: tt
-# type: command
-# --
-(insert (format-time-string "%H:%M " (current-time)))
