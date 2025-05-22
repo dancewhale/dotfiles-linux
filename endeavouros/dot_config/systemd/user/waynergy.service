@@ -1,14 +1,13 @@
 [Unit]
 Description=Waynergy client daemon.
-After=network.target
+After=graphical-session.target
 
 [Service]
-Type=simple
+Type=exec
+#ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=/usr/bin/waynergy
 WorkingDirectory=%h/.config/
-ExecReload=/bin/kill -HUP $MAINPID
-KillMode=process
-Restart=always
+Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
