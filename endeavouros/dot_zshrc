@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/software/GoLand-2025.1.1/bin/:$PATH
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -34,3 +34,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
+
+# set for clash
+source /opt/clash/script/common.sh && source /opt/clash/script/clashctl.sh && watch_proxy
+
+# set for goland
+export XCURSOR_SIZE=14
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
