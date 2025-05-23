@@ -1,0 +1,14 @@
+[Unit]
+Description=Pypr daemon for hyprland.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pypr
+WorkingDirectory=%h/.config/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=default.target
