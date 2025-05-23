@@ -90,7 +90,7 @@ EOF
 }
 
 takes() {
-  hyprctl dispatch togglespecialworkspace "special:$default_scratchpad_name"
+  hyprctl dispatch togglespecialworkspace "$default_scratchpad_name"
   exit 0
 }
 
