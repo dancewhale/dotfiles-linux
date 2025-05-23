@@ -21,3 +21,12 @@ class = "kitty-dropterm"
 size = "75% 60%"
 max_size = "1920px 100%"
 margin = 50
+
+[scratchpads.emacs]
+animation = "fromTop"
+command = "/home/whale/.config/hypr/UserScripts/EmacsClient.sh"
+match_by = "title"
+title = "EmacsDrop"
+size = "75% 60%"
+max_size = "1920px 100%"
+margin = 50
