@@ -23,7 +23,7 @@ GDK_BACKEND=$BACKEND yad \
     --column=Description: \
     --column=Command: \
     --timeout-indicator=bottom \
-"ESC" "close this app" "" " = " "SUPER KEY (Windows Key Button)" "(SUPER KEY)" \
+"ESC" "close this app" "" " =  CTRL" "SUPER KEY (Windows Key Button) + CTRL" "(SUPER KEY) + CTRL" \
 " SHIFT K" "Searchable Keybinds" "(Search all Keybinds via rofi)" \
 " SHIFT E" "KooL Hyprland Settings Menu" "" \
 "" "" "" \
