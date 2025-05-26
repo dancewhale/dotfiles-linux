@@ -4,7 +4,6 @@ After=graphical-session.target
 
 [Service]
 Type=exec
-#ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=/usr/bin/waynergy
 WorkingDirectory=%h/.config/
 Restart=on-failure
