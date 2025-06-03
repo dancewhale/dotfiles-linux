@@ -49,6 +49,9 @@ if [ ! -f "$HOME/.config/hypr/.initial_startup_done" ]; then
     # initiate kvantum theme
     kvantummanager --set "$kvantum_theme" > /dev/null 2>&1 &
 
+    # initiate emacs
+    emacs --daemon
+
     # initiate the kb_layout (for some reason) waybar cant launch it
     "$scriptsDir/SwitchKeyboardLayout.sh" > /dev/null 2>&1 &
 

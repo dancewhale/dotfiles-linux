@@ -24,7 +24,7 @@ margin = 50
 
 [scratchpads.emacs]
 animation = "fromTop"
-command = "/home/whale/.config/hypr/UserScripts/EmacsClient.sh"
+command = "/home/whale/.config/hypr/UserScripts/EmacsClient.sh --drop"
 match_by = "title"
 title = "EmacsDrop"
 size = "75% 60%"
