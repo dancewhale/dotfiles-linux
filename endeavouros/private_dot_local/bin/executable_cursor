@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+#
+# Cursor IDE AppImage Launcher v0.4.0
+#
+# Launches Cursor IDE with proper path handling and logging.
+#
+# 2025-03-10 0.0.4: Support for uppercase C in AppImage added.
+# 2025-03-01 0.0.3: Support for wait flag added.
+# 2025-02-21 0.0.2: Created by monnef and Claude 3.6 Sonnet via Perplexity + AIlin and Cursor
+#
+# License: GPLv3
+# AIlin: cursor
+
+# Color definitions - using constants as requested
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+DARK_GRAY='\033[0;90m'
+NC='\033[0m' # No Color
+
+# Determine color support (default to enabled)
+use_colors=1
+
+# Check if USE_COLORS is explicitly set (handle all variants)
+if [ -n "$USE_COLORS" ]; then
+    case "$USE_COLORS" in
+        0|false|False|FALSE|off|Off|OFF|no|No|NO)
+            use_colors=0
+            ;;
+        *)
+            use_colors=1 # Force colors if truthy value specified
+            ;;
+    esac
+elif ! [ -t 1 ]; then
+    # Not a terminal, disable colors
+    use_colors=0
+else
+    # Check terminal color support
+    colors_supported=$(tput colors 2>/dev/null || echo 0)
+    if [ -z "$colors_supported" ] || [ "$colors_supported" -lt 8 ]; then
+        use_colors=0
+    fi
+fi
+
+# Clear color variables if colors are disabled
+if [ "$use_colors" -eq 0 ]; then
+    RED=""
+    GREEN=""
+    YELLOW=""
+    BLUE=""
+    CYAN=""
+    DARK_GRAY=""
+    NC=""
+fi
+
+APPIMAGE_DIR="$HOME/Applications"
+
+# Enable error handling
+set -e
+trap 'echo "Error occurred at line $LINENO" >&2' ERR
+
+# Setup logging
+LOGFILE="/tmp/cursor.log"
+exec 1> >(tee -a "$LOGFILE") 2>&1
+
+log() {
+    local level="INFO"
+    local level_color="$CYAN"
+    
+    # Process log level flags
+    if [[ "$1" == "--error" ]]; then
+        level="ERROR"
+        level_color="$RED"
+        shift
+    elif [[ "$1" == "--warn" ]] || [[ "$1" == "--warning" ]]; then
+        level="WARNING"
+        level_color="$YELLOW"
+        shift
+    elif [[ "$1" == "--success" ]]; then
+        level="SUCCESS"
+        level_color="$GREEN"
+        shift
+    elif [[ "$1" == "--debug" ]]; then
+        level="DEBUG"
+        level_color="$BLUE"
+        shift
+    fi
+    
+    # Format timestamp with dark gray, only color the level text (not brackets)
+    echo -e "${DARK_GRAY}[$(date '+%Y-%m-%d %H:%M:%S')]${NC} [${level_color}${level}${NC}] $*"
+}
+
+log --success "📝 Logging to $LOGFILE"
+
+CURSOR_APPIMAGE=$(ls -t "$APPIMAGE_DIR"/[cC]ursor-*.AppImage | head -n 1)
+
+if [ -z "$CURSOR_APPIMAGE" ]; then
+    log --error "❌ Error: Cursor AppImage not found in $APPIMAGE_DIR"
+    exit 1
+fi
+log --success "🔍 Found Cursor AppImage: $CURSOR_APPIMAGE"
+
+# Convert all file arguments to absolute paths
+args=()
+for arg in "$@"; do
+    if [ -e "$arg" ]; then
+        args+=("$(realpath "$arg")")
+        log "📁 Converting path: $arg -> $(realpath "$arg")"
+    else
+        args+=("$arg")
+        log "📎 Keeping argument as-is: $arg"
+    fi
+done
+
+# Check if --wait is in the arguments
+if [[ " ${args[*]} " == *" --wait "* ]]; then
+    log "🕒 Running in foreground due to --wait flag"
+    "$CURSOR_APPIMAGE" --no-sandbox --ozone-platform=wayland --enable-wayland-ime "${args[@]}" >> "$LOGFILE" 2>&1
+    exit $?
+else
+    log "🚀 Launching in background"
+    "$CURSOR_APPIMAGE" --no-sandbox --ozone-platform=wayland --enable-wayland-ime "${args[@]}" >> "$LOGFILE" 2>&1 &
+    CURSOR_PID=$!
+    
+    # Verify process started successfully
+    sleep 1
+    if ! kill -0 "$CURSOR_PID" 2>/dev/null; then
+        log --error "❌ Error: Cursor failed to start"
+        exit 1
+    fi
+    
+    log --success "✨ Cursor launched successfully (PID: $CURSOR_PID)"
+    disown "$CURSOR_PID"
+fi
+
