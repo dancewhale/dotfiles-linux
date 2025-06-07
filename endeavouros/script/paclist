@@ -143,6 +143,7 @@ udiskie
 usbutils
 vde2
 vim
+nvim
 virt-manager
 virt-viewer
 vnstat
