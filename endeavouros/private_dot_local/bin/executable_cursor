@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Cursor IDE AppImage Launcher v0.4.0
 #
@@ -121,7 +121,7 @@ if [[ " ${args[*]} " == *" --wait "* ]]; then
     exit $?
 else
     log "🚀 Launching in background"
-    "$CURSOR_APPIMAGE" --no-sandbox --ozone-platform=wayland --enable-wayland-ime "${args[@]}" >> "$LOGFILE" 2>&1 &
+    setsid "$CURSOR_APPIMAGE" --no-sandbox --ozone-platform=wayland --enable-wayland-ime "${args[@]}" >> "$LOGFILE" 2>&1 &
     CURSOR_PID=$!
     
     # Verify process started successfully
