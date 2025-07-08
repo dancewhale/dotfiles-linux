@@ -37,7 +37,7 @@ SAVEHIST=10000
 setopt appendhistory
 
 
-export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:$HOME/Applications/GoLand-2025.1.1/bin/:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/go/bin:$HOME/Applications/GoLand-2025.1.1/bin/:$HOME/Applications/pycharm-2025.1.2/bin/:$PATH
 
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 
