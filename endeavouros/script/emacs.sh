@@ -6,13 +6,6 @@ sudo pacman -S --noconfirm --needed imagemagick libpng libjpeg-turbo libtiff xaw
   zlib libice libsm libx11 libxext libxi libxmu libxpm libxrandr libxt libgccjit tree-sitter \
   libxtst libxv librsvg libtiff libxft gpm wxsqlite3 sqlite3 webkitgtk-6.0  webkit2gtk-4.1 webkit2gtk
 
-# 其它文泉驿字体
-sudo pacman --noconfirm -S --needed wqy-microhei-lite wqy-bitmapfont ttf-sarasa-gothic \
-  wqy-zenhei ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
-# 选用字体
-sudo pacman --noconfirm -S --needed adobe-source-han-sans-cn-fonts \
-  adobe-source-han-serif-cn-fonts fontconfig
-
 mkdir -p ~/cache
 
 git clone https://github.com/emacs-mirror/emacs.git ~/cache/emacs -b emacs-29 --depth 1 || true

@@ -13,11 +13,7 @@ ffsend-bin
 find-the-command
 gitleaks
 gitsome
-grimblast-git
-hyprland-git
-hyprpicker-git
 jump
-mesa-git
 minq-ananicy-git
 musikcube-bin
 net-snmp
@@ -26,7 +22,6 @@ nnn-nerd
 nohang-git
 nsxiv
 numix-cursor-theme
-nwg-look-bin
 ookla-speedtest-bin
 perl-checkupdates-aur
 aider-chat
@@ -47,8 +42,6 @@ aider-chat
 semgrep-bin
 rime-ice-git
 fcitx5-rime
-rofi-lbonn-wayland-only-git
-sddm-git
 seafile-client
 shellcheck-bin
 swaylock-effects
@@ -57,14 +50,7 @@ kind-bin
 tabbed-git
 tty-clock-git
 udev-block-notify-git
-waybar-hyprland-git
-waynergy-git
-wdisplays
-wl-clip-persist-git
-wlogout
-wlr-randr
 xcp
-xdg-desktop-portal-hyprland-git
 xdg-ninja-git
 yt-dlp
 zsh-theme-powerlevel10k-git

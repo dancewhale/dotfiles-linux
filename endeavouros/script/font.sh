@@ -1,11 +1,13 @@
 #!/bin/bash
-sudo pacman -Sy ttf-iosevka-nerd
-sudo pacman -Sy ttf-firacode-nerd
-sudo pacman -Sy ttf-mononoki-nerd
-sudo pacman -Sy ttf-jetbrains-mono
-sudo pacman -Sy ttf-jetbrains-mono-nerd
-sudo pacman -Sy ttf-fantasque-sans-mono
-yay -Sy ttf-lxgw-bright-code-git
-yay -Sy ttf-lxgw-wenkai-screen
-yay -Sy ttf-harmonyos-sans
-yay -Sy nerd-fonts-sarasa-term
+# 其它文泉驿字体
+sudo pacman --noconfirm -S --needed wqy-microhei-lite wqy-bitmapfont ttf-sarasa-gothic \
+  wqy-zenhei ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji
+# 选用字体
+sudo pacman --noconfirm -S --needed adobe-source-han-sans-cn-fonts \
+  adobe-source-han-serif-cn-fonts fontconfig
+
+
+sudo pacman -Sy ttf-iosevka-nerd ttf-firacode-nerd  ttf-mononoki-nerd \
+         ttf-jetbrains-mono  ttf-jetbrains-mono-nerd  ttf-fantasque-sans-mono
+
+yay -Sy ttf-lxgw-bright-code-git  ttf-lxgw-wenkai-screen ttf-harmonyos-sans nerd-fonts-sarasa-term
