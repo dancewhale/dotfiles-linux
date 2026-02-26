@@ -1,0 +1,11 @@
+#!/bin/bash
+OUTPUT_FILE=$(mktemp emacs-view-XXXXXXX.html)
+pandoc --to=html --from=gfm --output=$OUTPUT_FILE $*
+
+# Are we on a MacOS Laptop:
+if [ -d "/Library" ]
+then
+  open $OUTPUT_FILE
+else
+  firefox -new-tab $OUTPUT_FILE
+fi

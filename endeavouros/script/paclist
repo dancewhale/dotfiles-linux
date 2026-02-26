@@ -39,7 +39,6 @@ sudo pacman -S --needed ack \
                         fzf			    \
                         gcc			    \
                         git			    \
-                        gnome-calculator	    \
                         gnuplot			    \
                         go			    \
                         graphviz		    \
@@ -180,3 +179,4 @@ sudo pacman -S --needed ack \
                         zsh-completions		    \
                         kwin-11   \
 			plasma-x11-session          \
+			aspell aspell-en hunspell hunspell-en_us \
