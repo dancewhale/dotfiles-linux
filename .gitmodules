@@ -1,9 +1,6 @@
 [submodule "dotfiles"]
-	path = dotfiles
-	url = https://github.com/dancewhale/dotfiles.git
-[submodule "doomemacs"]
-	path = emacs/emacs.d
-	url = https://github.com/doomemacs/doomemacs.git
-[submodule "emacs.d"]
-	path = emacs.d
-	url = git@github.com:dancewhale/newemacs.git
+        path = dotfiles
+        url = https://github.com/dancewhale/dotfiles.git
+[submodule "newemacs"]
+        path = emacs/emacs.d
+        url = git@github.com:dancewhale/newemacs.git
