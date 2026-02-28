@@ -1,21 +1,43 @@
 Host *
 KexAlgorithms +diffie-hellman-group1-sha1
 ServerAliveInterval 60
-Host manjaro
-  HostName 172.20.16.92
-  User whale
-Host dev-arm64
-  HostName 172.20.188.121
-  User debian
-Host dev-amd64
-  HostName 172.20.16.92
+Host emacs
+	HostName 10.42.16.90
+	User kylin
+	RequestTTY yes
+	RemoteCommand emacs
+Host gpd
+  HostName 10.42.16.94
   User whale
 Host bwg
   HostName 67.230.186.218
+  Port 2817
   User root
-Host tripod
-  HostName 107.148.246.87
+Host dell
+	HostName 10.42.26.33
+	User whale
+Host home-proxy
+  HostName 192.168.123.2
+  User whale
+Host home
+  HostName czlove.fun
+  Port 28179
+  User whale
+Host derp
+  HostName 192.168.123.4
   User root
-Host hw
-  HostName 114.116.248.206
+Host master1
+  HostName 10.44.86.1
+  User root
+Host master2
+  HostName 10.44.86.2
+  User root
+Host master3
+  HostName 10.44.86.3
+  User root
+Host node1
+  HostName 10.44.86.4
+  User root
+Host node2
+  HostName 10.44.86.5
   User root
