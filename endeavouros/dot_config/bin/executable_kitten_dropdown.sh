@@ -18,7 +18,11 @@ DISPLAY_NAME=$(get_active_display)
 # 执行 kitten 命令
 kitten quick-access-terminal \
     --detach \
-    --override "output_name=${DISPLAY_NAME}"
+    --override "output_name=${DISPLAY_NAME}" \
+    -o "edge=center"  \
+    -o "margin_left=250" \
+    -o "margin_right=250" \
+    -o "margin_bottom=900" \
 
 echo "已在显示器 [$DISPLAY_NAME] 上启动下拉终端"
 
