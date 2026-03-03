@@ -46,7 +46,7 @@ get_display_margin
 kitten quick-access-terminal \
     --detach \
     --override "output_name=${DISPLAY_NAME}" \
-    -o "edge=center"  \
+    -o "edge=top"  \
     -o "margin_left=${left_px}" \
     -o "margin_right=${right_px}" \
     -o "margin_bottom=${bottom_px}" \
