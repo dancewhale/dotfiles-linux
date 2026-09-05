@@ -1,0 +1,30 @@
+services:
+  # 家里 Windows RDP
+  - name: home-rdp
+    addr: "127.0.0.1:13389"
+    handler:
+      type: tcp
+      chain: lazycat
+    listener:
+      type: tcp
+    forwarder:
+      nodes:
+        - name: home-windows
+          addr: "winvm.whale.heiyu.space:3389"
+
+chains:
+  # 所有 LazyCat 服务共用这个 31085 HTTP CONNECT 上游
+  - name: lazycat
+    hops:
+      - name: lazycat-local-proxy
+        nodes:
+          - name: lazycat-31085
+            addr: "127.0.0.1:31085"
+            connector:
+              type: http
+            dialer:
+              type: tcp
+
+# 可选：为以后 WebUI / API 管理预留
+api:
+  addr: "127.0.0.1:18080"
