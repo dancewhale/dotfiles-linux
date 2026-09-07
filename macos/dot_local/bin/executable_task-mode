@@ -1,0 +1,284 @@
+#!/bin/zsh
+
+# One launcher for all task contexts.
+#
+# Alfred calls:
+#   ~/.local/bin/task-mode journal
+#   ~/.local/bin/task-mode code
+#   ~/.local/bin/task-mode research
+#   ~/.local/bin/task-mode plan
+#
+# These values can be overridden by Alfred Workflow Environment Variables:
+#
+#   CODE_EDITOR_APP
+#   CODE_EDITOR_BUNDLE_ID
+#   CODE_PROJECT
+#   TERMINAL_APP
+#   TERMINAL_BUNDLE_ID
+#   CHROME_CODE_PROFILE
+#   CHROME_RESEARCH_PROFILE
+#   CHROME_CODE_URL
+#   CHROME_RESEARCH_URL
+#   CHROME_BIN
+#   AEROSPACE_BIN
+
+set -u
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+MODE="${1:-}"
+
+# ----------------------------
+# User-configurable defaults
+# ----------------------------
+
+CODE_EDITOR_APP="${CODE_EDITOR_APP:-Cursor}"
+CODE_EDITOR_BUNDLE_ID="${CODE_EDITOR_BUNDLE_ID:-com.todesktop.230313mzl4w4u92}"
+CODE_PROJECT="${CODE_PROJECT:-$HOME/Developer}"
+
+TERMINAL_APP="${TERMINAL_APP:-Terminal}"
+TERMINAL_BUNDLE_ID="${TERMINAL_BUNDLE_ID:-com.apple.Terminal}"
+
+CHROME_CODE_PROFILE="${CHROME_CODE_PROFILE:-Default}"
+CHROME_RESEARCH_PROFILE="${CHROME_RESEARCH_PROFILE:-Profile 1}"
+
+CHROME_CODE_URL="${CHROME_CODE_URL:-http://localhost:3000}"
+CHROME_RESEARCH_URL="${CHROME_RESEARCH_URL:-https://www.google.com/}"
+
+CHROME_BUNDLE_ID="com.google.Chrome"
+CHROME_BIN="${CHROME_BIN:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
+
+DAYONE_BUNDLE_ID="com.bloombuilt.dayone-mac"
+CALENDAR_BUNDLE_ID="com.apple.iCal"
+REMINDERS_BUNDLE_ID="com.apple.reminders"
+
+# ----------------------------
+# Utilities
+# ----------------------------
+
+notify() {
+    /usr/bin/osascript - "$1" <<'APPLESCRIPT' >/dev/null 2>&1
+on run argv
+    display notification (item 1 of argv) with title "Task Mode"
+end run
+APPLESCRIPT
+}
+
+if [[ -n "${AEROSPACE_BIN:-}" ]]; then
+    AEROSPACE="$AEROSPACE_BIN"
+else
+    AEROSPACE="$(command -v aerospace 2>/dev/null || true)"
+fi
+
+if [[ -z "$AEROSPACE" || ! -x "$AEROSPACE" ]]; then
+    notify "找不到 aerospace CLI。请确认 AeroSpace 已安装并且 aerospace 在 PATH 中。"
+    exit 1
+fi
+
+workspace_has_app() {
+    local ws="$1"
+    local bundle="$2"
+    local count
+
+    count="$("$AEROSPACE" list-windows \
+        --workspace "$ws" \
+        --app-bundle-id "$bundle" \
+        --count 2>/dev/null || echo 0)"
+
+    [[ "${count:-0}" -gt 0 ]]
+}
+
+first_window_id() {
+    local ws="$1"
+    local bundle="$2"
+
+    "$AEROSPACE" list-windows \
+        --workspace "$ws" \
+        --app-bundle-id "$bundle" \
+        --format '%{window-id}' 2>/dev/null | /usr/bin/head -n 1
+}
+
+focus_app_in_workspace() {
+    local ws="$1"
+    local bundle="$2"
+    local id
+
+    id="$(first_window_id "$ws" "$bundle")"
+    if [[ -n "$id" ]]; then
+        "$AEROSPACE" workspace "$ws" >/dev/null 2>&1
+        "$AEROSPACE" focus --window-id "$id" >/dev/null 2>&1
+        return 0
+    fi
+
+    return 1
+}
+
+wait_and_focus() {
+    local ws="$1"
+    local bundle="$2"
+    local i
+
+    for i in {1..30}; do
+        if focus_app_in_workspace "$ws" "$bundle"; then
+            return 0
+        fi
+        /bin/sleep 0.1
+    done
+
+    return 1
+}
+
+list_all_chrome_ids() {
+    "$AEROSPACE" list-windows \
+        --monitor all \
+        --app-bundle-id "$CHROME_BUNDLE_ID" \
+        --format '%{window-id}' 2>/dev/null || true
+}
+
+open_chrome_for_workspace() {
+    local ws="$1"
+    local profile="$2"
+    local url="$3"
+    local before_ids
+    local now_ids
+    local id
+    local new_id=""
+    local i
+
+    # Reuse an existing browser window in this task workspace.
+    if workspace_has_app "$ws" "$CHROME_BUNDLE_ID"; then
+        focus_app_in_workspace "$ws" "$CHROME_BUNDLE_ID"
+        return 0
+    fi
+
+    before_ids="$(list_all_chrome_ids)"
+
+    "$AEROSPACE" workspace "$ws" >/dev/null 2>&1
+
+    if [[ -x "$CHROME_BIN" ]]; then
+        "$CHROME_BIN" \
+            --profile-directory="$profile" \
+            --new-window "$url" \
+            >/dev/null 2>&1 &
+    else
+        /usr/bin/open -g -a "Google Chrome" "$url"
+    fi
+
+    # Find the newly-created Chrome window and force it into this workspace.
+    # This avoids cross-workspace surprises if another Chrome profile was
+    # already active when the command ran.
+    for i in {1..40}; do
+        /bin/sleep 0.1
+        now_ids="$(list_all_chrome_ids)"
+
+        while IFS= read -r id; do
+            [[ -z "$id" ]] && continue
+            if ! printf '%s\n' "$before_ids" | /usr/bin/grep -qx "$id"; then
+                new_id="$id"
+                break
+            fi
+        done <<< "$now_ids"
+
+        if [[ -n "$new_id" ]]; then
+            "$AEROSPACE" move-node-to-workspace \
+                --window-id "$new_id" "$ws" >/dev/null 2>&1
+            "$AEROSPACE" workspace "$ws" >/dev/null 2>&1
+            "$AEROSPACE" focus --window-id "$new_id" >/dev/null 2>&1
+            return 0
+        fi
+    done
+
+    # Fallback: if Chrome eventually appeared in the workspace, focus it.
+    focus_app_in_workspace "$ws" "$CHROME_BUNDLE_ID"
+}
+
+# ----------------------------
+# Task modes
+# ----------------------------
+
+journal_mode() {
+    "$AEROSPACE" workspace J >/dev/null 2>&1
+    /usr/bin/open -g -a "Day One"
+    wait_and_focus J "$DAYONE_BUNDLE_ID" || true
+}
+
+code_mode() {
+    "$AEROSPACE" workspace C >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace C --root h_tiles >/dev/null 2>&1
+
+    # Supporting tools first.
+    /usr/bin/open -g -a "$TERMINAL_APP"
+
+    open_chrome_for_workspace \
+        C \
+        "$CHROME_CODE_PROFILE" \
+        "$CHROME_CODE_URL" >/dev/null 2>&1 || true
+
+    # Editor last so the cursor lands where the actual work happens.
+    if [[ -d "$CODE_PROJECT" ]]; then
+        /usr/bin/open -g -a "$CODE_EDITOR_APP" "$CODE_PROJECT"
+    else
+        /usr/bin/open -g -a "$CODE_EDITOR_APP"
+    fi
+
+    wait_and_focus C "$CODE_EDITOR_BUNDLE_ID" || true
+}
+
+research_mode() {
+    "$AEROSPACE" workspace R >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace R --root h_accordion >/dev/null 2>&1
+
+    open_chrome_for_workspace \
+        R \
+        "$CHROME_RESEARCH_PROFILE" \
+        "$CHROME_RESEARCH_URL" >/dev/null 2>&1 || true
+
+    focus_app_in_workspace R "$CHROME_BUNDLE_ID" || true
+}
+
+plan_mode() {
+    "$AEROSPACE" workspace P >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace P --root h_tiles >/dev/null 2>&1
+
+    /usr/bin/open -g -a "Calendar"
+    /usr/bin/open -g -a "Reminders"
+
+    # Reminders is the final focus: it gives the mode an immediate "next action".
+    wait_and_focus P "$REMINDERS_BUNDLE_ID" || \
+        wait_and_focus P "$CALENDAR_BUNDLE_ID" || true
+}
+
+reset_mode() {
+    "$AEROSPACE" reload-config >/dev/null 2>&1
+    "$AEROSPACE" run-callback --for-every-window on-window-detected \
+        >/dev/null 2>&1 || true
+
+    "$AEROSPACE" layout --workspace J --root h_accordion >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace C --root h_tiles >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace R --root h_accordion >/dev/null 2>&1
+    "$AEROSPACE" layout --workspace P --root h_tiles >/dev/null 2>&1
+
+    notify "AeroSpace 任务环境已重新加载。"
+}
+
+case "$MODE" in
+    journal|j)
+        journal_mode
+        ;;
+    code|c)
+        code_mode
+        ;;
+    research|r)
+        research_mode
+        ;;
+    plan|p)
+        plan_mode
+        ;;
+    reset)
+        reset_mode
+        ;;
+    *)
+        notify "未知模式：${MODE:-空}。可用：journal / code / research / plan / reset"
+        exit 2
+        ;;
+esac
