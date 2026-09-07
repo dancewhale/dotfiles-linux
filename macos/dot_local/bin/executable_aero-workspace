@@ -1,0 +1,677 @@
+#!/bin/zsh
+
+# ============================================================================
+# aero-workspace
+#
+# Dynamic AeroSpace workspace manager.
+#
+# Workspace definitions live in:
+#
+#   ~/.config/aero-workspace/workspaces.zsh
+#
+# This script acts as the engine for:
+#
+#   - Alfred Script Filter
+#   - Workspace switching
+#   - Moving windows
+#   - App launching
+#   - AeroSpace on-window-detected routing
+#
+# IMPORTANT:
+#
+#   "aero-workspace alfred" must write JSON only to stdout.
+#   Debug/error output must always go to stderr.
+# ============================================================================
+
+set -u
+setopt pipefail
+setopt typesetsilent
+
+
+# ============================================================================
+# Configuration
+# ============================================================================
+
+CONFIG="${AERO_WS_CONFIG:-$HOME/.config/aero-workspace/workspaces.zsh}"
+
+if [[ ! -r "$CONFIG" ]]; then
+    print -u2 -- "Workspace config not found: $CONFIG"
+    exit 1
+fi
+
+source "$CONFIG"
+
+
+# ============================================================================
+# Find AeroSpace CLI
+#
+# Alfred does not necessarily inherit the same PATH as an interactive shell,
+# so don't rely exclusively on `command -v`.
+# ============================================================================
+
+AEROSPACE="${AEROSPACE_BIN:-}"
+
+if [[ -z "$AEROSPACE" ]]; then
+    AEROSPACE="$(command -v aerospace 2>/dev/null || true)"
+fi
+
+if [[ -z "$AEROSPACE" ]]; then
+    for candidate in \
+        /opt/homebrew/bin/aerospace \
+        /usr/local/bin/aerospace
+    do
+        if [[ -x "$candidate" ]]; then
+            AEROSPACE="$candidate"
+            break
+        fi
+    done
+fi
+
+if [[ -z "$AEROSPACE" ]]; then
+    print -u2 -- "aerospace CLI not found"
+    exit 127
+fi
+
+
+# ============================================================================
+# Helpers
+# ============================================================================
+
+log() {
+    print -u2 -- "$@"
+}
+
+
+# Escape a string so that it can safely appear inside a JSON string.
+json_escape() {
+    local s="$1"
+
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+
+    print -rn -- "$s"
+}
+
+
+# Resolve any supported user-facing name to the canonical registry key.
+#
+# Examples:
+#
+#   code       -> code
+#   C          -> code
+#   cursor     -> code
+#   Day One    -> dayone
+#   journal    -> dayone
+#
+resolve_key() {
+    local needle="${(L)1}"
+
+    local key
+    local id
+    local title
+    local aliases
+    local alias
+
+    for key in "${WS_ORDER[@]}"; do
+        id="${WS_ID[$key]}"
+        title="${WS_TITLE[$key]}"
+        aliases="${WS_ALIASES[$key]:-}"
+
+        if [[ "$needle" == "${(L)key}" ]] ||
+           [[ "$needle" == "${(L)id}" ]] ||
+           [[ "$needle" == "${(L)title}" ]]
+        then
+            print -r -- "$key"
+            return 0
+        fi
+
+        for alias in ${(s: :)aliases}; do
+            if [[ "$needle" == "${(L)alias}" ]]; then
+                print -r -- "$key"
+                return 0
+            fi
+        done
+    done
+
+    return 1
+}
+
+
+# Return number of windows currently in a workspace.
+#
+# An unknown / currently empty workspace is treated as zero.
+window_count() {
+    local workspace="$1"
+    local count
+
+    count="$(
+        "$AEROSPACE" list-windows \
+            --workspace "$workspace" \
+            --count \
+            2>/dev/null || true
+    )"
+
+    if [[ "$count" == <-> ]]; then
+        print -r -- "$count"
+    else
+        print -r -- "0"
+    fi
+}
+
+
+# Apply the workspace's preferred root layout, but only when the workspace
+# currently has no windows.
+#
+# This deliberately avoids resetting a layout that the user manually changed
+# during the current session.
+init_layout_if_empty() {
+    local key="$1"
+
+    local workspace="${WS_ID[$key]}"
+    local layout="${WS_LAYOUT[$key]:-}"
+    local count
+
+    [[ -n "$layout" ]] || return 0
+
+    count="$(window_count "$workspace")"
+
+    if [[ "$count" == "0" ]]; then
+        "$AEROSPACE" layout \
+            --workspace "$workspace" \
+            --root \
+            "$layout" \
+            >/dev/null 2>&1 || true
+    fi
+}
+
+
+# ============================================================================
+# Exclusive app ownership
+#
+# For workspaces whose WS_ROUTE is 1, the configured app is considered owned
+# by that workspace.
+#
+# Example:
+#
+#   Day One -> J
+#   Cursor  -> C
+#
+# Shared apps such as Chrome should normally use:
+#
+#   WS_ROUTE[research]='0'
+#
+# so that their windows aren't forcibly pulled away from other workspaces.
+# ============================================================================
+
+move_owned_windows() {
+    local key="$1"
+
+    local workspace="${WS_ID[$key]}"
+    local bundle="${WS_BUNDLE[$key]:-}"
+    local route="${WS_ROUTE[$key]:-0}"
+    local window_id
+
+    [[ "$route" == "1" ]] || return 0
+    [[ -n "$bundle" ]] || return 0
+
+    while IFS= read -r window_id; do
+        [[ -n "$window_id" ]] || continue
+
+        "$AEROSPACE" move-node-to-workspace \
+            --window-id "$window_id" \
+            -- "$workspace" \
+            >/dev/null 2>&1 || true
+
+    done < <(
+        "$AEROSPACE" list-windows \
+            --monitor all \
+            --app-bundle-id "$bundle" \
+            --format '%{window-id}' \
+            2>/dev/null
+    )
+}
+
+
+# ============================================================================
+# Switch workspace
+#
+# activate_app:
+#
+#   1 -> switch workspace and activate/launch its app
+#   0 -> switch workspace only
+# ============================================================================
+
+switch_workspace() {
+    local key="$1"
+    local activate_app="${2:-1}"
+
+    local workspace="${WS_ID[$key]}"
+    local bundle="${WS_BUNDLE[$key]:-}"
+    local launch="${WS_LAUNCH[$key]:-0}"
+
+    # First focus the target workspace.
+    "$AEROSPACE" workspace -- "$workspace"
+
+    # Configure the default layout only while the workspace is empty.
+    init_layout_if_empty "$key"
+
+    # Bring exclusive app windows back to their owning workspace.
+    move_owned_windows "$key"
+
+    # Optionally activate / launch the app.
+    if [[ "$activate_app" == "1" ]] &&
+       [[ "$launch" == "1" ]] &&
+       [[ -n "$bundle" ]]
+    then
+        /usr/bin/open -b "$bundle" >/dev/null 2>&1 || true
+    fi
+}
+
+
+# ============================================================================
+# Move the currently focused window
+# ============================================================================
+
+move_current_window() {
+    local key="$1"
+
+    local workspace="${WS_ID[$key]}"
+    local layout="${WS_LAYOUT[$key]:-}"
+    local before
+
+    before="$(window_count "$workspace")"
+
+    "$AEROSPACE" move-node-to-workspace \
+        --focus-follows-window \
+        -- "$workspace"
+
+    # If this was the first window moved into that workspace, initialize its
+    # preferred root layout.
+    if [[ "$before" == "0" ]] && [[ -n "$layout" ]]; then
+        "$AEROSPACE" layout \
+            --workspace "$workspace" \
+            --root \
+            "$layout" \
+            >/dev/null 2>&1 || true
+    fi
+}
+
+
+# ============================================================================
+# Alfred Script Filter
+#
+# Important design:
+#
+# Alfred receives ALL configured workspaces at once.
+# Alfred itself performs fuzzy filtering using each item's "match" field.
+#
+# Therefore the Alfred Script Filter should simply execute:
+#
+#   "$HOME/.local/bin/aero-workspace" alfred
+#
+# Do NOT pass {query} to this command.
+# ============================================================================
+
+alfred_items() {
+    local focused
+
+    local first
+    local key
+    local workspace
+    local title
+    local layout
+    local aliases
+
+    local display_title
+    local subtitle
+    local match
+
+    local e_key
+    local e_title
+    local e_subtitle
+    local e_match
+
+    focused="$(
+        "$AEROSPACE" list-workspaces \
+            --focused \
+            2>/dev/null || true
+    )"
+
+    print -n -- '{"items":['
+
+    first=1
+
+    for key in "${WS_ORDER[@]}"; do
+        workspace="${WS_ID[$key]}"
+        title="${WS_TITLE[$key]}"
+        layout="${WS_LAYOUT[$key]:-}"
+        aliases="${WS_ALIASES[$key]:-}"
+
+        display_title="$title"
+        subtitle="Workspace $workspace"
+
+        if [[ -n "$layout" ]]; then
+            subtitle="$subtitle · $layout"
+        fi
+
+        if [[ "$focused" == "$workspace" ]]; then
+            display_title="● $display_title"
+            subtitle="Current · $subtitle"
+        fi
+
+        # Alfred searches against this string.
+        #
+        # Example:
+        #
+        #   code C Code dev coding cursor c
+        #
+        # allows:
+        #
+        #   w code
+        #   w cursor
+        #   w dev
+        #   w c
+        #
+        match="$key $workspace $title $aliases"
+
+        e_key="$(json_escape "$key")"
+        e_title="$(json_escape "$display_title")"
+        e_subtitle="$(json_escape "$subtitle")"
+        e_match="$(json_escape "$match")"
+
+        if (( ! first )); then
+            print -n -- ','
+        fi
+
+        first=0
+
+        print -n -- \
+            "{\"uid\":\"aero-workspace-$e_key\","\
+"\"title\":\"$e_title\","\
+"\"subtitle\":\"$e_subtitle\","\
+"\"arg\":\"switch:$e_key\","\
+"\"autocomplete\":\"$e_key\","\
+"\"match\":\"$e_match\","\
+"\"mods\":{"\
+"\"cmd\":{"\
+"\"valid\":true,"\
+"\"arg\":\"move:$e_key\","\
+"\"subtitle\":\"Move focused window to $e_title\""\
+"},"\
+"\"alt\":{"\
+"\"valid\":true,"\
+"\"arg\":\"switch-only:$e_key\","\
+"\"subtitle\":\"Switch without activating app\""\
+"}"\
+"}"\
+"}"
+    done
+
+    print -- ']}'
+}
+
+
+# ============================================================================
+# AeroSpace dynamic routing callback
+#
+# Intended usage from ~/.aerospace.toml:
+#
+# {
+#     if = 'true',
+#     run = 'exec-and-forget "$HOME/.local/bin/aero-workspace" route-window "$AEROSPACE_WINDOW_ID"',
+# },
+#
+# AeroSpace gives on-window-detected callbacks AEROSPACE_WINDOW_ID.
+# ============================================================================
+
+route_window() {
+    local window_id="$1"
+
+    local bundle
+    local key
+    local expected
+    local route
+    local workspace
+    local layout
+    local before
+
+    [[ -n "$window_id" ]] || return 0
+
+    # Query the bundle ID of the specific newly detected window.
+    bundle="$(
+        "$AEROSPACE" echo \
+            --window-id "$window_id" \
+            -- '%{app-bundle-id}' \
+            2>/dev/null || true
+    )"
+
+    [[ -n "$bundle" ]] || return 0
+
+    for key in "${WS_ORDER[@]}"; do
+        expected="${WS_BUNDLE[$key]:-}"
+        route="${WS_ROUTE[$key]:-0}"
+
+        [[ "$route" == "1" ]] || continue
+        [[ -n "$expected" ]] || continue
+        [[ "$bundle" == "$expected" ]] || continue
+
+        workspace="${WS_ID[$key]}"
+        layout="${WS_LAYOUT[$key]:-}"
+
+        before="$(window_count "$workspace")"
+
+        "$AEROSPACE" move-node-to-workspace \
+            --window-id "$window_id" \
+            -- "$workspace" \
+            >/dev/null 2>&1 || return 0
+
+        # The newly detected window was the first window in this workspace.
+        if [[ "$before" == "0" ]] && [[ -n "$layout" ]]; then
+            "$AEROSPACE" layout \
+                --workspace "$workspace" \
+                --root \
+                "$layout" \
+                >/dev/null 2>&1 || true
+        fi
+
+        return 0
+    done
+
+    return 0
+}
+
+
+# ============================================================================
+# Action dispatcher
+#
+# Alfred sends values such as:
+#
+#   switch:code
+#   switch-only:code
+#   move:code
+# ============================================================================
+
+action() {
+    local spec="$1"
+
+    local raw
+    local key
+
+    case "$spec" in
+
+        switch:*)
+            raw="${spec#switch:}"
+
+            key="$(resolve_key "$raw")" || {
+                log "Unknown workspace: $raw"
+                return 1
+            }
+
+            switch_workspace "$key" 1
+            ;;
+
+
+        switch-only:*)
+            raw="${spec#switch-only:}"
+
+            key="$(resolve_key "$raw")" || {
+                log "Unknown workspace: $raw"
+                return 1
+            }
+
+            switch_workspace "$key" 0
+            ;;
+
+
+        move:*)
+            raw="${spec#move:}"
+
+            key="$(resolve_key "$raw")" || {
+                log "Unknown workspace: $raw"
+                return 1
+            }
+
+            move_current_window "$key"
+            ;;
+
+
+        *)
+            # Also allow direct CLI usage:
+            #
+            #   aero-workspace switch code
+            #   aero-workspace switch cursor
+            #   aero-workspace switch C
+            #
+            key="$(resolve_key "$spec")" || {
+                log "Unknown workspace: $spec"
+                return 1
+            }
+
+            switch_workspace "$key" 1
+            ;;
+    esac
+}
+
+
+# ============================================================================
+# Human-readable workspace list
+# ============================================================================
+
+list_workspaces() {
+    local key
+    local workspace
+    local title
+    local aliases
+
+    for key in "${WS_ORDER[@]}"; do
+        workspace="${WS_ID[$key]}"
+        title="${WS_TITLE[$key]}"
+        aliases="${WS_ALIASES[$key]:-}"
+
+        print -r -- "$key -> $workspace · $title · $aliases"
+    done
+}
+
+
+# ============================================================================
+# CLI
+# ============================================================================
+
+case "${1:-}" in
+
+    alfred)
+        # stdout MUST contain JSON and nothing else.
+        alfred_items
+        ;;
+
+
+    action)
+        if [[ -z "${2:-}" ]]; then
+            log "Missing action argument"
+            exit 1
+        fi
+
+        action "$2"
+        ;;
+
+
+    switch)
+        if [[ -z "${2:-}" ]]; then
+            log "Missing workspace"
+            exit 1
+        fi
+
+        action "$2"
+        ;;
+
+
+    route-window)
+        window_id="${2:-${AEROSPACE_WINDOW_ID:-}}"
+
+        if [[ -z "$window_id" ]]; then
+            log "Missing window ID"
+            exit 1
+        fi
+
+        route_window "$window_id"
+        ;;
+
+
+    list)
+        list_workspaces
+        ;;
+
+
+    help|-h|--help|"")
+        cat <<'EOF'
+Usage:
+
+  aero-workspace alfred
+
+      Output Alfred Script Filter JSON.
+
+  aero-workspace switch <workspace>
+
+      Switch to a workspace and optionally activate its configured app.
+
+      Examples:
+
+          aero-workspace switch code
+          aero-workspace switch dayone
+          aero-workspace switch cursor
+          aero-workspace switch C
+
+  aero-workspace action <action>
+
+      Execute an Alfred-style action.
+
+      Examples:
+
+          aero-workspace action switch:code
+          aero-workspace action switch-only:code
+          aero-workspace action move:code
+
+  aero-workspace route-window <window-id>
+
+      Dynamically route an AeroSpace window according to workspaces.zsh.
+
+      Normally called by AeroSpace on-window-detected.
+
+  aero-workspace list
+
+      Show configured workspaces.
+
+EOF
+        ;;
+
+
+    *)
+        log "Unknown command: $1"
+        log "Run: aero-workspace --help"
+        exit 1
+        ;;
+esac
+
