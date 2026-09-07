@@ -1,10 +1,11 @@
 # ~/.aerospace.toml
-# Task Mode setup for AeroSpace
+# Workspace pool
 #
-# J = Journal
-# C = Code
-# R = Research
-# P = Plan
+# Main monitor:      1 2 3 4 5
+# Secondary monitor: q w e r t
+#
+# Logical task -> workspace mapping lives in:
+#   ~/.config/aero-workspace/workspaces.zsh
 
 config-version = 2
 
@@ -18,17 +19,15 @@ accordion-padding = 24
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-persistent-workspaces = ['J', 'C', 'R', 'P']
-
-workspace-to-monitor-force-assignment = { '.scratchpad.1' = 1, '.scratchpad.2' = 2 }
-
-# Predictable root layout for each task.
-after-startup-command = [
-    'layout --workspace J --root h_accordion',
-    'layout --workspace C --root h_tiles',
-    'layout --workspace R --root h_accordion',
-    'layout --workspace P --root h_tiles',
+# Keep the whole workspace pool alive even when empty.
+persistent-workspaces = [
+    '1', '2', '3', '4', '5',
+    'q', 'w', 'e', 'r', 't',
 ]
+
+# Workspace-specific layouts are initialized by aero-workspace from
+# workspaces.zsh, so there is no duplicated task mapping here.
+after-startup-command = []
 
 # ---------------------------------------------------------------------------
 # App -> task routing
@@ -39,53 +38,36 @@ after-startup-command = [
 # ---------------------------------------------------------------------------
 
 on-window-detected = [
-    # Journal
     {
-        if = 'test %{app-bundle-id} = com.bloombuilt.dayone-mac',
-        run = 'move-node-to-workspace J',
-    },
-
-    # Code editors
-    {
-        if = 'test %{app-bundle-id} = com.todesktop.230313mzl4w4u92',
-        run = 'move-node-to-workspace C',
-    },
-    # Setting floating app.
-    {
-        if = 'test %{app-bundle-id} = com.apple.systempreferences',
+        if = '''
+              test %{app-bundle-id} = com.apple.systempreferences \
+              || test %{app-bundle-id} = com.tencent.xinWeChat \
+              || test %{app-bundle-id} = com.apple.finder \
+              || test %{app-bundle-id} = com.comisys.lanxin.hgo \
+              || test %{app-bundle-id} = com.agiletortoise.Drafts-OSX \
+              || test %{app-bundle-id} = org.mozilla.firefox
+        ''',
         run = 'layout floating',
+        check-further-callbacks = true,
     },
     {
-        if = 'test %{app-bundle-id} = com.tencent.xinWeChat',
-        run = 'layout floating',
-    },
-    {
-        if = 'test %{app-bundle-id} = com.apple.finder',
-        run = 'layout floating',
-    },
-    {
-        if = 'test %{app-bundle-id} = com.comisys.lanxin.hgo',
-        run = 'layout floating',
-    },
-    {
-        if = 'test %{app-bundle-id} = com.agiletortoise.Drafts-OSX',
-        run = 'layout floating',
-    },
-    {
-        if = 'test %{app-bundle-id} = org.mozilla.firefox',
-        run = 'layout floating',
+        if = 'true',
+        run = 'exec-and-forget "$HOME/.local/bin/aero-workspace" route-window "$AEROSPACE_WINDOW_ID"',
     },
 ]
 
 exec-on-workspace-change = [
-  '/bin/bash', '-c',
-  'aerospace-scratchpad hook pull-window $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE'
+    '/bin/bash', '-c',
+    '/opt/homebrew/bin/aerospace-scratchpad hook pull-window $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE'
 ]
-
 
 # ---------------------------------------------------------------------------
 # Keyboard fallback.
 # Alfred is the main launcher; these are useful for direct navigation.
+#
+# Main monitor:      alt-1..5
+# Secondary monitor: alt-q/w/e/r/t
+# Add Shift to move the focused window to that workspace.
 # ---------------------------------------------------------------------------
 
 [mode.main.binding]
@@ -110,17 +92,33 @@ alt-comma = 'layout accordion horizontal vertical'
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 
-# Task workspaces
-alt-1 = 'workspace J'
-alt-2 = 'workspace C'
-alt-3 = 'workspace R'
-alt-4 = 'workspace P'
+# Main-monitor workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
 
-# Move the current window into a task workspace
-alt-shift-1 = 'move-node-to-workspace J'
-alt-shift-2 = 'move-node-to-workspace C'
-alt-shift-3 = 'move-node-to-workspace R'
-alt-shift-4 = 'move-node-to-workspace P'
+# Secondary-monitor workspaces
+alt-q = 'workspace q'
+alt-w = 'workspace w'
+alt-e = 'workspace e'
+alt-r = 'workspace r'
+alt-t = 'workspace t'
+
+# Move the focused window to a main-monitor workspace
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+
+# Move the focused window to a secondary-monitor workspace
+alt-shift-q = 'move-node-to-workspace q'
+alt-shift-w = 'move-node-to-workspace w'
+alt-shift-e = 'move-node-to-workspace e'
+alt-shift-r = 'move-node-to-workspace r'
+alt-shift-t = 'move-node-to-workspace t'
 
 alt-tab = 'workspace-back-and-forth'
 
@@ -128,14 +126,15 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-semicolon = 'mode service'
 
 # APP show
-cmd-ctrl-f = 'exec-and-forget aerospace list-workspaces --monitor mouse --visible | aerospace workspace --stdin && aerospace-scratchpad show Firefox'
+cmd-ctrl-f = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show Firefox'
+
+
 
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main']
 f = ['layout floating tiling', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
-
 
 [gaps]
 inner.horizontal = 0
@@ -144,3 +143,26 @@ outer.left = 0
 outer.bottom = 0
 outer.top = 0
 outer.right = 0
+
+# ---------------------------------------------------------------------------
+# Workspace -> monitor assignment
+#
+# 1 2 3 4 5 -> main monitor
+# q w e r t -> secondary monitor; fall back to main when secondary is absent
+# ---------------------------------------------------------------------------
+
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+
+q = ['secondary', 'main']
+w = ['secondary', 'main']
+e = ['secondary', 'main']
+r = ['secondary', 'main']
+t = ['secondary', 'main']
+
+".scratchpad.1" = 1
+".scratchpad.2" = 2
