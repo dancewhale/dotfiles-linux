@@ -16,7 +16,7 @@ enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 accordion-padding = 24
-default-root-container-layout = 'tiles'
+default-root-container-layout = 'accordion'
 default-root-container-orientation = 'auto'
 
 # Keep the whole workspace pool alive even when empty.
@@ -42,10 +42,12 @@ on-window-detected = [
         if = '''
               test %{app-bundle-id} = com.apple.systempreferences \
               || test %{app-bundle-id} = com.tencent.xinWeChat \
+              || test %{app-bundle-id} = com.tencent.com.tencent.qq \
               || test %{app-bundle-id} = com.apple.finder \
               || test %{app-bundle-id} = com.comisys.lanxin.hgo \
               || test %{app-bundle-id} = com.agiletortoise.Drafts-OSX \
-              || test %{app-bundle-id} = org.mozilla.firefox
+              || test %{app-bundle-id} = org.mozilla.firefox \
+              || test %{app-bundle-id} = com.google.Chrome
         ''',
         run = 'layout floating',
         check-further-callbacks = true,
@@ -59,6 +61,12 @@ on-window-detected = [
 exec-on-workspace-change = [
     '/bin/bash', '-c',
     '/opt/homebrew/bin/aerospace-scratchpad hook pull-window $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+
+# Mouse follows focused monitor.
+on-focused-monitor-changed = [
+    'move-mouse monitor-lazy-center'
 ]
 
 # ---------------------------------------------------------------------------
@@ -127,6 +135,10 @@ alt-shift-semicolon = 'mode service'
 
 # APP show
 cmd-ctrl-f = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show Firefox'
+cmd-ctrl-w = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show 微信'
+cmd-ctrl-l = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show 蓝信'
+cmd-ctrl-q = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show QQ'
+cmd-ctrl-c = 'exec-and-forget /opt/homebrew/bin/aerospace-scratchpad show Google\ Chrome'
 
 
 

@@ -80,7 +80,8 @@ workspace() {
 # Slots 3/4/5 and e/r/t remain available for future tasks.
 # ---------------------------------------------------------------------------
 
-workspace dayone   1 'Day One'  h_accordion 'com.bloombuilt.dayone-mac'      1 1 'journal diary write j'
-workspace code     2 'Code'     h_tiles     'com.todesktop.230313mzl4w4u92' 1 1 'dev coding cursor c'
-workspace research q 'Research' h_accordion ''                               0 0 'research read web browser'
-workspace plan     w 'Plan'     h_tiles     ''                               0 0 'plan planning task p'
+workspace dayone   1 'Day One'   h_accordion 'com.bloombuilt.dayone-mac'      1 1 'journal diary write j'
+workspace cursor   2 'Cursor'    h_accordion 'com.todesktop.230313mzl4w4u92'  1 1 'dev coding cursor c'
+workspace term     3 'Code'      h_accordion 'com.todesktop.230313mzl4w4u92'  1 1 'dev iterm shell'
+workspace emacs    q 'Emacs'     h_accordion 'org.gnu.Emacs'                  1 1 'emacs shell code elisp'
+workspace plan     w 'Supermemo' h_accordion 'com.microsoft.rdc.macos'        1 1 'supermemo anki learn read'
