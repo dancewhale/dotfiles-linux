@@ -1,13 +1,13 @@
 #!/bin/bash -xe
 
-sudo yum install -y cargo gcc make libtool  emacs-jinx
+sudo yum install -y cargo gcc make libtool  emacs-jinx rust-libudev-devel
 
 which cargo && cargo install grex tree-sitter-cli
 
 sudo dnf install -y snapd
 sudo ln -s /var/lib/snapd/snap /snap || true
 
-sudo yum install -y jq tokei bat exa zoxide ripgrep ack the_silver_searcher
+sudo yum install -y jq tokei bat zoxide ripgrep ack the_silver_searcher
 sudo yum install -y ack fd-find calibre
 
 sudo yum install -y fzf rofi barrier docker
@@ -45,13 +45,4 @@ sudo python3 -m pip install --upgrade pip
 
 sudo yum install -y recoll xapian-core xapian-core-devel
 
-# 安装并启动seafile
-sudo dnf install -y seafile-client
-
 systemctl --user daemon-reload
-systemctl --user enable seafile
-systemctl --user start seafile
-
-mkdir -p ~/Dropbox
-
-seaf-cli status | grep Dropbox || seaf-cli sync -l "3440279a-fd36-4e94-bc0e-d3da402a1e58" -s "{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").url.value }}" -d ~/Dropbox -u "{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").user.value }}" -p "{{ (bitwardenFields "item" "b27f7204-9341-4396-804e-aff9002a478a").password.value }}"
