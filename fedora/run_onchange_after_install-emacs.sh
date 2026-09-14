@@ -15,33 +15,6 @@ sudo dnf install -y libtool
 
 mkdir -p ~/cache
 
-git clone https://github.com/emacs-mirror/emacs.git ~/cache/emacs -b emacs-29 --depth 1 || true
-
-pushd ~/cache/emacs
-
-./autogen.sh
-
-export CC=/usr/bin/gcc CXX=/usr/bin/gcc
-
-#    --with-pgtk  no wayland for clipboard share bug \
-./configure \
-  --with-native-compilation   --with-json \
-  --with-cairo                --with-harfbuzz \
-  --with-modules              --with-mailutils \
-  --with-imagemagick          --with-png \
-  --with-tiff                 --with-jpeg \
-  --with-xpm                  --with-zlib \
-  --with-rsvg                 --with-included-regex \
-  --with-threads              --with-x-toolkit=gtk3 \
-  --with-xwidgets             --with-gif \
-  --with-xml2                 --with-pop \
-  --without-compress-install  --with-native-compilation \
-  --with-pgtk
-
-make -j5
-
-sudo make install
-
 popd
 
 # https://gist.github.com/algal/9fc1d9a1b3f35f84e94937eef90887c7
