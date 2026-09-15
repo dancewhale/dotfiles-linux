@@ -1,2 +1,5 @@
 super + space
     rofi -show window
+
+super + ctrl + e
+    emacsclient -e '(quake-frame-toggle)'
