@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=pkexec /usr/bin/swhkd -c %h/.config/swhkd/swhkdrc
+ExecStart=/usr/bin/swhkd -c %h/.config/swhkd/swhkdrc
 WorkingDirectory=%h/.config/swhkd
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
