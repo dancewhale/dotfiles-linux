@@ -1,0 +1,789 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PROGRAM="${0##*/}"
+
+# 所有由这个脚本管理的 token 都放在这个 namespace 下。
+#
+# bw-token add claude/api-token
+#
+# 实际创建：
+#
+# dotfiles/claude/api-token
+#
+PREFIX="${BW_TOKEN_PREFIX:-dotfiles/}"
+
+# 如果本脚本自己执行了 bw unlock，
+# 退出时会自动 bw lock。
+AUTO_LOCK=0
+
+# 用于保存当前正在处理的 token。
+TOKEN=""
+
+
+# ============================================================
+# 基础函数
+# ============================================================
+
+usage() {
+  cat <<EOF
+Usage:
+  $PROGRAM add <name>
+  $PROGRAM update <name|id>
+  $PROGRAM get <name|id>
+  $PROGRAM info <name|id>
+  $PROGRAM list [keyword]
+  $PROGRAM delete <name|id> [--yes]
+  $PROGRAM help
+
+Examples:
+  $PROGRAM add claude/api-token
+  $PROGRAM add codex/api-token
+
+  $PROGRAM update claude/api-token
+
+  $PROGRAM info claude/api-token
+  $PROGRAM get claude/api-token
+
+  $PROGRAM list
+  $PROGRAM list claude
+
+  $PROGRAM delete claude/api-token
+
+Notes:
+  - Short names are automatically prefixed with:
+      $PREFIX
+
+  - 'get' prints the secret to stdout.
+    Other query commands do NOT print the secret.
+
+  - 'delete' moves the item to Bitwarden Trash.
+    It does NOT permanently delete it.
+
+  - Set BW_TOKEN_PREFIX to change the namespace.
+EOF
+}
+
+
+die() {
+  printf 'error: %s\n' "$*" >&2
+  exit 1
+}
+
+
+require_cmd() {
+  command -v "$1" >/dev/null 2>&1 \
+    || die "required command not found: $1"
+}
+
+
+# ============================================================
+# 清理
+# ============================================================
+
+cleanup() {
+  local rc=$?
+
+  # 尽可能清除 shell 中保存的 token。
+  TOKEN=""
+  unset TOKEN || true
+
+  # 如果是这个脚本自己 unlock 的，
+  # 那么结束后重新 lock。
+  if [[ "${AUTO_LOCK:-0}" -eq 1 ]]; then
+    bw lock >/dev/null 2>&1 || true
+  fi
+
+  return "$rc"
+}
+
+trap cleanup EXIT
+
+
+# ============================================================
+# Bitwarden session
+# ============================================================
+
+ensure_session() {
+  local status_json
+  local status
+
+  if ! status_json="$(bw status 2>/dev/null)"; then
+    die "unable to read Bitwarden status"
+  fi
+
+  status="$(
+    printf '%s' "$status_json" |
+      jq -r '.status // empty'
+  )"
+
+  case "$status" in
+
+    unlocked)
+      # 已经存在可用 BW_SESSION。
+      ;;
+
+    locked)
+      printf 'Bitwarden vault is locked; unlocking...\n' >&2
+
+      BW_SESSION="$(bw unlock --raw)" \
+        || die "failed to unlock Bitwarden"
+
+      export BW_SESSION
+
+      # 标记这是本脚本自己创建的 session。
+      AUTO_LOCK=1
+      ;;
+
+    unauthenticated)
+      die "Bitwarden CLI is not logged in; run: bw login"
+      ;;
+
+    *)
+      die "unknown Bitwarden status: ${status:-<empty>}"
+      ;;
+
+  esac
+}
+
+
+# ============================================================
+# 名称处理
+# ============================================================
+
+normalize_name() {
+  local raw="$1"
+
+  [[ -n "$raw" ]] \
+    || die "name cannot be empty"
+
+  case "$raw" in
+
+    "$PREFIX"*)
+      printf '%s\n' "$raw"
+      ;;
+
+    *)
+      printf '%s%s\n' "$PREFIX" "$raw"
+      ;;
+
+  esac
+}
+
+
+is_uuid() {
+  [[ "$1" =~ ^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$ ]]
+}
+
+
+# ============================================================
+# 查找 item
+# ============================================================
+
+#
+# 精确按名字查找。
+#
+# 注意：
+#
+# bw list items --search
+#
+# 本身是搜索，而不是严格的 == 比较。
+#
+# 所以这里再通过 jq：
+#
+# .name == $name
+#
+# 做一次严格过滤。
+#
+find_exact_by_name() {
+  local name="$1"
+
+  bw list items --search "$name" |
+    jq -c \
+      --arg name "$name" '
+        [
+          .[]
+          | select(
+              .type == 1
+              and .name == $name
+              and .login.username == "api-token"
+            )
+          | {
+              id,
+              name,
+              type,
+              revisionDate
+            }
+        ]
+      '
+}
+
+
+#
+# 根据：
+#
+#   name
+#
+# 或：
+#
+#   UUID
+#
+# 找到对应 Bitwarden item。
+#
+# 这里故意只返回 metadata，
+# 不返回 login.password。
+#
+resolve_meta() {
+  local ref="$1"
+
+  local item
+  local name
+  local matches
+  local count
+
+
+  # ----------------------------------------------------------
+  # 输入看起来是 UUID
+  # ----------------------------------------------------------
+
+  if is_uuid "$ref"; then
+
+    if ! item="$(bw get item "$ref" 2>/dev/null)"; then
+      die "Bitwarden item not found: $ref"
+    fi
+
+    #
+    # 即使用户提供 UUID，
+    # 我们仍然检查这个 item 是否属于本脚本管理的范围：
+    #
+    # type == Login
+    # username == api-token
+    # name startswith dotfiles/
+    #
+    if ! printf '%s' "$item" |
+      jq -ce \
+        --arg prefix "$PREFIX" '
+          select(
+            .type == 1
+            and .login.username == "api-token"
+            and (.name | startswith($prefix))
+          )
+          | {
+              id,
+              name,
+              type,
+              revisionDate
+            }
+        '
+    then
+      die "item exists, but is not a managed bw-token item: $ref"
+    fi
+
+    return
+  fi
+
+
+  # ----------------------------------------------------------
+  # 按 name 查找
+  # ----------------------------------------------------------
+
+  name="$(normalize_name "$ref")"
+
+  matches="$(find_exact_by_name "$name")"
+
+  count="$(
+    printf '%s' "$matches" |
+      jq 'length'
+  )"
+
+
+  case "$count" in
+
+    0)
+      die "token item not found: $name"
+      ;;
+
+    1)
+      printf '%s' "$matches" |
+        jq -c '.[0]'
+      ;;
+
+    *)
+      die "multiple items have the exact same name: $name; resolve duplicates in Bitwarden first"
+      ;;
+
+  esac
+}
+
+
+# ============================================================
+# 安全读取 secret
+# ============================================================
+
+read_secret() {
+  local label="$1"
+  local secret
+
+  #
+  # 如果 stdin 是 terminal：
+  #
+  # 隐藏输入。
+  #
+  if [[ -t 0 ]]; then
+
+    printf 'Token for %s: ' "$label" >&2
+
+    IFS= read -r -s secret || true
+
+    printf '\n' >&2
+
+  else
+
+    #
+    # stdin 来自 pipe：
+    #
+    # pbpaste | bw-token add ...
+    #
+    secret="$(cat)"
+
+  fi
+
+
+  [[ -n "$secret" ]] \
+    || die "token cannot be empty"
+
+
+  printf '%s' "$secret"
+}
+
+
+# ============================================================
+# add
+# ============================================================
+
+cmd_add() {
+  [[ $# -eq 1 ]] \
+    || die "usage: $PROGRAM add <name>"
+
+
+  local name
+  local matches
+  local count
+
+
+  name="$(normalize_name "$1")"
+
+
+  # ----------------------------------------------------------
+  # 防止重复创建
+  # ----------------------------------------------------------
+
+  matches="$(find_exact_by_name "$name")"
+
+  count="$(
+    printf '%s' "$matches" |
+      jq 'length'
+  )"
+
+
+  [[ "$count" -eq 0 ]] \
+    || die "item already exists: $name (use '$PROGRAM update ...' to rotate its token)"
+
+
+  # ----------------------------------------------------------
+  # 读取 token
+  # ----------------------------------------------------------
+
+  TOKEN="$(read_secret "$name")"
+
+
+  # ----------------------------------------------------------
+  # 创建 Bitwarden Login item
+  # ----------------------------------------------------------
+
+  printf '%s' "$TOKEN" |
+
+    jq -Rs \
+      --arg name "$name" \
+      --slurpfile item <(bw get template item) \
+      --slurpfile login <(bw get template item.login) '
+
+        # stdin 中的 token
+        . as $token
+
+        # 使用 Bitwarden item template
+        | $item[0]
+
+        # item 名字
+        | .name = $name
+
+        # type=1 表示 Login
+        | .type = 1
+
+        # 加入 Login 子对象
+        | .login = $login[0]
+
+        # 用 username 作为我们自己的 marker
+        | .login.username = "api-token"
+
+        # 真正的 secret
+        | .login.password = $token
+
+        # 普通说明信息
+        | .notes = "Managed by bw-token for chezmoi"
+
+      ' |
+
+    bw encode |
+
+    bw create item |
+
+    #
+    # bw create item 会返回整个 item，
+    # 里面包含 password。
+    #
+    # 所以绝对不要直接输出。
+    #
+    # 我们只输出安全字段。
+    #
+    jq -r '"created\t\(.id)\t\(.name)"'
+
+
+  TOKEN=""
+  unset TOKEN
+}
+
+
+# ============================================================
+# update
+# ============================================================
+
+cmd_update() {
+  [[ $# -eq 1 ]] \
+    || die "usage: $PROGRAM update <name|id>"
+
+
+  local meta
+  local id
+  local name
+
+
+  meta="$(resolve_meta "$1")"
+
+  id="$(
+    printf '%s' "$meta" |
+      jq -r '.id'
+  )"
+
+  name="$(
+    printf '%s' "$meta" |
+      jq -r '.name'
+  )"
+
+
+  TOKEN="$(read_secret "$name")"
+
+
+  # ----------------------------------------------------------
+  # 更新 password
+  #
+  # 这里不会创建新的 item，
+  # 因此 UUID 保持不变。
+  # ----------------------------------------------------------
+
+  bw get item "$id" |
+
+    jq \
+      --rawfile token <(printf '%s' "$TOKEN") '
+        .login.password = $token
+      ' |
+
+    bw encode |
+
+    bw edit item "$id" |
+
+    #
+    # edit 同样会返回完整 item，
+    # 因此只输出安全字段。
+    #
+    jq -r '"updated\t\(.id)\t\(.name)"'
+
+
+  TOKEN=""
+  unset TOKEN
+}
+
+
+# ============================================================
+# get
+# ============================================================
+
+cmd_get() {
+  [[ $# -eq 1 ]] \
+    || die "usage: $PROGRAM get <name|id>"
+
+
+  local meta
+  local id
+
+
+  meta="$(resolve_meta "$1")"
+
+  id="$(
+    printf '%s' "$meta" |
+      jq -r '.id'
+  )"
+
+
+  #
+  # 这是唯一默认会把真正 token 输出到 stdout 的命令。
+  #
+  bw get password "$id"
+}
+
+
+# ============================================================
+# info
+# ============================================================
+
+cmd_info() {
+  [[ $# -eq 1 ]] \
+    || die "usage: $PROGRAM info <name|id>"
+
+
+  #
+  # resolve_meta 本身就不会返回 password。
+  #
+  resolve_meta "$1" |
+    jq .
+}
+
+
+# ============================================================
+# list
+# ============================================================
+
+cmd_list() {
+  [[ $# -le 1 ]] \
+    || die "usage: $PROGRAM list [keyword]"
+
+
+  local keyword="${1:-}"
+
+
+  bw list items --search "${keyword:-$PREFIX}" |
+
+    jq -r \
+      --arg prefix "$PREFIX" \
+      --arg keyword "$keyword" '
+
+        [
+          .[]
+
+          | select(
+
+              .type == 1
+
+              and
+
+              .login.username == "api-token"
+
+              and
+
+              (.name | startswith($prefix))
+
+              and
+
+              (
+                ($keyword == "")
+                or
+                (.name | contains($keyword))
+              )
+            )
+
+          | {
+              id,
+              name,
+              revisionDate
+            }
+        ]
+
+        | sort_by(.name)
+
+        |
+
+        (
+          ["ID", "NAME", "UPDATED"]
+          | @tsv
+        ),
+
+        (
+          .[]
+          |
+          [
+            .id,
+            .name,
+            (.revisionDate // "")
+          ]
+          | @tsv
+        )
+
+      '
+}
+
+
+# ============================================================
+# delete
+# ============================================================
+
+cmd_delete() {
+  [[ $# -ge 1 && $# -le 2 ]] \
+    || die "usage: $PROGRAM delete <name|id> [--yes]"
+
+
+  local ref="$1"
+  local yes=0
+
+  local meta
+  local id
+  local name
+  local answer
+
+
+  if [[ "${2:-}" == "--yes" || "${2:-}" == "-y" ]]; then
+
+    yes=1
+
+  elif [[ $# -eq 2 ]]; then
+
+    die "unknown option: $2"
+
+  fi
+
+
+  meta="$(resolve_meta "$ref")"
+
+
+  id="$(
+    printf '%s' "$meta" |
+      jq -r '.id'
+  )"
+
+
+  name="$(
+    printf '%s' "$meta" |
+      jq -r '.name'
+  )"
+
+
+  # ----------------------------------------------------------
+  # 默认需要确认
+  # ----------------------------------------------------------
+
+  if [[ "$yes" -ne 1 ]]; then
+
+    [[ -t 0 ]] \
+      || die "refusing interactive delete without a terminal; pass --yes if intentional"
+
+
+    printf \
+      'Move this item to Bitwarden Trash?\n  name: %s\n  id:   %s\nType yes to continue: ' \
+      "$name" \
+      "$id" \
+      >&2
+
+
+    IFS= read -r answer
+
+
+    [[ "$answer" == "yes" ]] \
+      || die "delete cancelled"
+
+  fi
+
+
+  # ----------------------------------------------------------
+  # Bitwarden 默认是软删除：
+  #
+  # 进入 Trash，而不是 permanent delete。
+  # ----------------------------------------------------------
+
+  bw delete item "$id" >/dev/null
+
+
+  printf \
+    'deleted (moved to Trash)\t%s\t%s\n' \
+    "$id" \
+    "$name"
+}
+
+
+# ============================================================
+# main
+# ============================================================
+
+main() {
+  require_cmd bw
+  require_cmd jq
+
+
+  local command="${1:-help}"
+
+
+  # help 不需要 unlock vault。
+  case "$command" in
+
+    help|-h|--help)
+      usage
+      exit 0
+      ;;
+
+  esac
+
+
+  ensure_session
+
+
+  case "$command" in
+
+    add)
+      shift
+      cmd_add "$@"
+      ;;
+
+    update)
+      shift
+      cmd_update "$@"
+      ;;
+
+    get)
+      shift
+      cmd_get "$@"
+      ;;
+
+    info)
+      shift
+      cmd_info "$@"
+      ;;
+
+    list)
+      shift
+      cmd_list "$@"
+      ;;
+
+    delete|rm)
+      shift
+      cmd_delete "$@"
+      ;;
+
+    *)
+      usage >&2
+      die "unknown command: $command"
+      ;;
+
+  esac
+}
+
+
+main "$@"
