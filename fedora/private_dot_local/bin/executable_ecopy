@@ -1,0 +1,28 @@
+#!/bin/bash
+TMP="$(mktemp /tmp/kitty-scrollback.XXXXXX)"
+cat >$TMP
+# fix ansi escape error, replace : to ;
+sed -i "s/\([0-9m]*\):\([0-9]*\):\([0-9]*m\)/\1;\2;\3/g" $TMP
+
+emacsclient -nw -a emacs -e "(progn (find-file \"$TMP\")(xterm-color-colorize-buffer))"
+
+rm $TMP
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+TMP="$(mktemp /tmp/kitty-scrollback.XXXXXX)"
+trap 'rm -f "$TMP"' EXIT
+
+# Read Kitty scrollback (including ANSI sequences).
+cat > "$TMP"
+
+# Keep your existing ANSI SGR compatibility fix.
+sed -i \
+  's/\([0-9m]*\):\([0-9]*\):\([0-9]*m\)/\1;\2;\3/g' \
+  "$TMP"
+
+# Open in the existing GUI Emacs.
+emacsclient --eval \
+  "(my/ecopy-open \"$TMP\")" \
+  >/dev/null

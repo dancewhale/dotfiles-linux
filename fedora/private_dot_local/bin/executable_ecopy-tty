@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TMP="$(mktemp /tmp/kitty-ecopy-XXXXXX)"
+trap 'rm -f -- "$TMP"' EXIT
+
+# Receive formatted Kitty scrollback.
+cat > "$TMP"
+
+# Preserve your existing ANSI compatibility fix.
+sed -i \
+  's/\([0-9m]*\):\([0-9]*\):\([0-9]*m\)/\1;\2;\3/g' \
+  "$TMP"
+
+# Restore interactive terminal input after reading stdin.
+exec </dev/tty
+
+# Open a terminal frame connected to the existing Emacs server.
+# This must remain attached to the Kitty terminal.
+emacsclient -nw "$TMP"
